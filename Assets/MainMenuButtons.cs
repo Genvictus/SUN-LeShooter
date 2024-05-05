@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class MainMenuButtons : MonoBehaviour
 {
     public void NewGame()
     {
-        SceneManager.LoadSceneAsync("Main");
-        SceneManager.UnloadSceneAsync("MainMenu");
+        SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
         SceneManager.LoadSceneAsync("Level01", LoadSceneMode.Additive);
     }
 
