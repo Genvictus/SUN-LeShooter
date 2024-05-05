@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour, IMobs
+public class EnemyHealth : MonoBehaviour, IMobs, IDamageAble
 {
     public float Health { get; set; }
     public EnemyManager enemyManager;
@@ -28,5 +28,10 @@ public class EnemyHealth : MonoBehaviour, IMobs
     {
         enemyManager.EnemyDefeated();
         Destroy(gameObject);
+    }
+
+    public void Damage(float damage)
+    {
+        TakeDamage(damage);
     }
 }

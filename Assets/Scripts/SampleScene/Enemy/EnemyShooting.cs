@@ -37,18 +37,18 @@ public class EnemyShoot : MonoBehaviour
 
     void AttackPlayer()
     {
-        agent.SetDestination(transform.position);
-        transform.LookAt(player);
+        // agent.SetDestination(transform.position);
+        // transform.LookAt(player);
 
-        Vector3 bulletSpawnPostion = transform.position + transform.forward * 1.5f;
+        // Vector3 bulletSpawnPostion = transform.position + transform.forward * 1.5f;
 
-        Rigidbody rb = Instantiate(projectile, bulletSpawnPostion, Quaternion.identity).GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-        rb.AddForce(transform.up * 4f, ForceMode.Impulse);
-        attackTimer = timeBetweenAttacks;
+        // Rigidbody rb = Instantiate(projectile, bulletSpawnPostion, Quaternion.identity).GetComponent<Rigidbody>();
+        // rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+        // rb.AddForce(transform.up * 4f, ForceMode.Impulse);
+        // attackTimer = timeBetweenAttacks;
 
-        Destroy(rb.gameObject, 2f);
+        // Destroy(rb.gameObject, 2f);
 
-        Debug.Log("Enemy has shot");
+        // Debug.Log("Enemy has shot");
     }
 }

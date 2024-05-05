@@ -37,6 +37,7 @@ namespace Nightmare
             if (timer <= 0f)
             {
                 Spawn();
+                spawned += 1;
                 timer = spawnTime;
             }
         }
