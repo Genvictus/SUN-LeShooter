@@ -38,11 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: a7bed68887a07e34394d4191b3081359, type: 3}
   m_Sun: {fileID: 0}
-<<<<<<< HEAD
-  m_IndirectSpecularColor: {r: 0.10003871, g: 0.118095554, b: 0.11640027, a: 1}
-=======
   m_IndirectSpecularColor: {r: 0.13346997, g: 0.18373775, b: 0.26000538, a: 1}
->>>>>>> 33d17c8 (Attack and heal pet)
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -102,11 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000038, guid: 5928175ff34494e439798bf4f7ed3596, type: 2}
-<<<<<<< HEAD
-  m_LightingSettings: {fileID: 1887799900}
-=======
   m_LightingSettings: {fileID: 4890085278179872738, guid: 66d1d63dcd670ae4d90426361f0f4b14, type: 2}
->>>>>>> 33d17c8 (Attack and heal pet)
 --- !u!196 &5
 NavMeshSettings:
   serializedVersion: 2
@@ -1604,14 +1596,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664994689}
   m_CullTransparentMesh: 1
-<<<<<<< HEAD
-=======
 --- !u!1 &672565384 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100006, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
   m_PrefabInstance: {fileID: 1641232233}
   m_PrefabAsset: {fileID: 0}
->>>>>>> 33d17c8 (Attack and heal pet)
 --- !u!1 &692873477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1706,11 +1695,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-<<<<<<< HEAD
-        m_CallState: 2
-=======
         m_CallState: 1
->>>>>>> 33d17c8 (Attack and heal pet)
 --- !u!114 &692873480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3933,8 +3918,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: 4e5a0d387dc27394b81600988ad0216f, type: 3}
   m_PrefabInstance: {fileID: 1641232233}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-=======
 --- !u!1001 &8895893730688143117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3992,7 +3975,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e830930959cf7649a994c907abcded6, type: 3}
->>>>>>> 33d17c8 (Attack and heal pet)
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4003,8 +3985,5 @@ SceneRoots:
   - {fileID: 244922607}
   - {fileID: 1796129603}
   - {fileID: 68121383}
-<<<<<<< HEAD
-=======
   - {fileID: 8895893730688143117}
   - {fileID: 500987581}
->>>>>>> 33d17c8 (Attack and heal pet)
