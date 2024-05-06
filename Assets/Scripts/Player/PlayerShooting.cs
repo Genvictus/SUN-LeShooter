@@ -141,6 +141,7 @@ namespace Nightmare
                 if(enemyHealth != null)
                 {
                     // ... the enemy should take damage.
+                    Debug.Log("enemy take damage: " +  enemyHealth.CurrentHealth());
                     enemyHealth.TakeDamage (damagePerShot, shootHit.point);
                 }
 
