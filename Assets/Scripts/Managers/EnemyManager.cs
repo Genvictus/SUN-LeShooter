@@ -15,11 +15,11 @@ namespace Nightmare
         void Start ()
         {
             timer = spawnTime;
+            playerHealth = FindObjectOfType<PlayerHealth>();
         }
 
         void OnEnable()
         {
-            playerHealth = FindObjectOfType<PlayerHealth>();
             StartPausible();
         }
 

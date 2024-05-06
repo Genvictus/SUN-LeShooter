@@ -2,28 +2,35 @@
 using UnityEngine;
 using UnitySampleAssets.CrossPlatformInput;
 
+
 namespace Nightmare
 {
+    [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : PausibleObject
     {
         public Camera playerCamera;
-        public float speed = 6f;            // The speed that the player will move at.
+        public float speed = 6f;
+        public float walkSpeed = 6f;
+        public float runSpeed = 12f;
+        public float jumpPower = 7f;
+        public float gravity = 10f;
 
+        public float lookSpeed = 2f;
+        public float lookXLimit = 45f;
 
-        // Vector3 movement;                   // The vector to store the direction of the player's movement.
-        Animator anim;                      // Reference to the animator component.
-        Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
-#if !MOBILE_INPUT
-        int floorMask;                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
-        // float camRayLength = 100f;          // The length of the ray from the camera into the scene.
-#endif
+        Vector3 moveDirection = Vector3.zero;
+        float rotationX = 0;
+
+        public bool canMove = true;
+
+        CharacterController characterController;
+        Animator anim;
+        Rigidbody playerRigidbody;
+        int floorMask;
 
         void Awake()
         {
-#if !MOBILE_INPUT
-            // Create a layer mask for the floor layer.
             floorMask = LayerMask.GetMask("Floor");
-#endif
 
             // Set up references.
             anim = GetComponent<Animator>();
@@ -34,6 +41,7 @@ namespace Nightmare
 
         void Start()
         {
+            characterController = GetComponent<CharacterController>();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -43,60 +51,63 @@ namespace Nightmare
             StopPausible();
         }
 
-        void FixedUpdate()
+        void Update()
         {
-            if (isPaused)
+            if (isPaused || !enabled)
                 return;
 
-            // Store the input axes.
-            float h = CrossPlatformInputManager.GetAxisRaw("Horizontal");
-            float v = CrossPlatformInputManager.GetAxisRaw("Vertical");
+            float h = Input.GetAxis("Horizontal");
+            float v = Input.GetAxis("Vertical");
 
-            // Move the player around the scene.
             Move(h, v);
-
-            // Turn the player to face the mouse cursor.
-            Turning();
-
-            // Animate the player.
             Animating(h, v);
         }
 
-        void Move(float h, float v)
-        {
-            Quaternion rotation = transform.rotation;
-            Vector3 movementDirection = rotation * new Vector3(h, 0f, v);
-            movementDirection = movementDirection.normalized;
-            Vector3 movement = speed * Time.deltaTime * movementDirection;
-            playerRigidbody.MovePosition(transform.position + movement);
-        }
+        void Move(float h, float v) {
+            #region Handles Movement
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 right = transform.TransformDirection(Vector3.right);
 
-        void Turning()
-        {
-#if !MOBILE_INPUT
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * 2f, 0);
-#else
+            // Press Left Shift to run
+            bool isRunning = Input.GetKey(KeyCode.LeftShift);
+            float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * v : 0;
+            float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * h : 0;
+            float movementDirectionY = moveDirection.y;
+            moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-            Vector3 turnDir = new Vector3(CrossPlatformInputManager.GetAxisRaw("Mouse X") , 0f , CrossPlatformInputManager.GetAxisRaw("Mouse Y"));
+            #endregion
 
-            if (turnDir != Vector3.zero)
+            #region Handles Jumping
+            if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
             {
-                // Create a vector from the player to the point on the floor the raycast from the mouse hit.
-                Vector3 playerToMouse = (transform.position + turnDir) - transform.position;
-
-                // Ensure the vector is entirely along the floor plane.
-                playerToMouse.y = 0f;
-
-                // Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
-                Quaternion newRotatation = Quaternion.LookRotation(playerToMouse);
-
-                // Set the player's rotation to this new rotation.
-                playerRigidbody.MoveRotation(newRotatation);
+                moveDirection.y = jumpPower;
             }
-#endif
+            else
+            {
+                moveDirection.y = movementDirectionY;
+            }
+
+            if (!characterController.isGrounded)
+            {
+                moveDirection.y -= gravity * Time.deltaTime;
+            }
+
+            #endregion
+
+            #region Handles Rotation
+            characterController.Move(moveDirection * Time.deltaTime);
+
+            if (canMove)
+            {
+                rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+                rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+                playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+                transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+            }
+
+            #endregion
         }
-
-
+        
         void Animating(float h, float v)
         {
             // Create a boolean that is true if either of the input axes is non-zero.

@@ -28,7 +28,7 @@ namespace Nightmare
         void Update()
         {
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            Debug.Log(enemies.Length);
+            // Debug.Log(enemies.Length);
             if (enemies.Length == 0)
             {
                 GameObject player = GameObject.FindGameObjectWithTag("Player"); 
@@ -46,7 +46,7 @@ namespace Nightmare
                         target = enemy;
                     }
                 }
-                Debug.Log(distance);
+                // Debug.Log(distance);
                 if (distance < attackDist)
                 {
                     if (_timer > hitTime)
