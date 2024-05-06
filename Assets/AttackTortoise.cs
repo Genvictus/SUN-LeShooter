@@ -19,10 +19,12 @@ namespace Nightmare
         float _timer;
         Animator animator;
         AudioSource audio;
+        GameObject player;
         // Start is called before the first frame update
         void Start()
         {
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            player = GameObject.FindGameObjectWithTag("Player");
             animator = GetComponent<Animator>();
             audio = GetComponent<AudioSource>();
             _timer = 0;
@@ -34,15 +36,25 @@ namespace Nightmare
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
             animator.SetBool("Attack", false);
             Debug.Log(enemies.Length);
-            if (enemies.Length == 0)
+
+            List<GameObject> enemiesInRangePlayer = new List<GameObject>();
+            foreach (var enemy in enemies)
             {
-                GameObject player = GameObject.FindGameObjectWithTag("Player"); 
+                float enemyPlayerDist = Vector3.Distance(player.transform.position, enemy.transform.position);
+                if (enemyPlayerDist < 15f)
+                {
+                    enemiesInRangePlayer.Add(enemy);
+                }
+            }
+
+            if (enemiesInRangePlayer.Count == 0)
+            { 
                 pet.SetDestination(player.transform.position);
             }
             else
             {
                 var distance = float.MaxValue;
-                foreach (var enemy in enemies)
+                foreach (var enemy in enemiesInRangePlayer)
                 {
                     float enemyDist = Vector3.Distance(transform.position, enemy.transform.position);
                     if (enemyDist < distance)
@@ -51,6 +63,7 @@ namespace Nightmare
                         target = enemy;
                     }
                 }
+
                 Debug.Log(distance);
                 if (distance < attackDist)
                 {
