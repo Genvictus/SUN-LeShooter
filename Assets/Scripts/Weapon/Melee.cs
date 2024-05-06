@@ -59,4 +59,14 @@ public class Melee : MonoBehaviour
 
     }
 
+
+    public void DebuffAttack(float debuff)
+    {
+        meleeData.damage *= debuff;
+    }
+
+    public void BuffAttack(float buff)
+    {
+        meleeData.damage *= buff;
+    }
 }

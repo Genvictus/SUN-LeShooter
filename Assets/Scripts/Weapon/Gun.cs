@@ -78,4 +78,15 @@ public class Gun : MonoBehaviour
         gunData.reloading = false;
     }
 
+
+    public void DebuffAttack(float debuff)
+    {
+        gunData.damage *= debuff;
+    }
+
+    public void BuffAttack(float buff)
+    {
+        gunData.damage *= buff;
+    }
+
 }
