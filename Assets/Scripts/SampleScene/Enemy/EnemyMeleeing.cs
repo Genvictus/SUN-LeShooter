@@ -4,24 +4,24 @@ using Nightmare;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyShooting : MonoBehaviour
+public class EnemyMeeleeing : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
 
     public float sightRange;
-
     private float attackRange;
     private bool playerInSightRange, playerInAttackRange;
     float attackTimer;
-    public GunData gunData;
+
+    public MeleeData meleeData;
 
     protected void Awake()
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
-        attackRange = gunData.maxDistance;    
+        attackRange = meleeData.maxDistance;
     }
 
     void Start() {
@@ -42,8 +42,9 @@ public class EnemyShooting : MonoBehaviour
         agent.SetDestination(transform.position);
         transform.LookAt(player);
 
+        // if infront of player
         if (Vector3.Angle(transform.forward, player.position - transform.position) < 45)
-            EnemyShoot.shootAction.Invoke();
+            EnemyAttack.attackAction.Invoke();
 
         // Vector3 bulletSpawnPostion = transform.position + transform.forward * 1.5f;
 

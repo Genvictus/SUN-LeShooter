@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 
 namespace Nightmare
 {
-    public class EnemyAttack : PausibleObject
+    public class EnemyShoot : PausibleObject
     {
         public float timeBetweenAttacks = 0.5f;
         public int attackDamage = 10;
@@ -13,7 +13,7 @@ namespace Nightmare
         GameObject player;
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
-        public static Action attackAction;
+        public static Action shootAction;
         bool playerInRange;
         float timer;
 
@@ -85,7 +85,7 @@ namespace Nightmare
             if(playerHealth.currentHealth > 0)
             {
                 // ... damage the player.
-                attackAction.Invoke();
+                shootAction?.Invoke();
                 playerHealth.TakeDamage (attackDamage);
             }
         }

@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Nightmare;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public NavMeshAgent agent;
-    public Transform player;
+    private NavMeshAgent agent;
+    private Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
 
-    public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    public float sightRange;
 
-    public Vector3 walkPoint;
+    private float attackRange;
+    private bool playerInSightRange, playerInAttackRange;
+
+    private Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
 
@@ -20,6 +23,10 @@ public class EnemyMovement : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        attackRange = GetComponent<EnemyMeeleeing>().meleeData.maxDistance;
+        if (attackRange == 0 ){
+            attackRange = GetComponent<EnemyShooting>().gunData.maxDistance;
+        }
     }
 
     void Update()
