@@ -23,15 +23,15 @@ public class EnemyHealth : MonoBehaviour, IMobs, IDamageAble
         if (Health <= 0)
             DestroyEnemy();
     }
+    
+    public void TakeDamage(int damage, Vector3 hitpoint)
+    {
+        TakeDamage(damage);
+    }
 
     void DestroyEnemy()
     {
         enemyManager.EnemyDefeated();
         Destroy(gameObject);
-    }
-
-    public void Damage(float damage)
-    {
-        TakeDamage(damage);
     }
 }

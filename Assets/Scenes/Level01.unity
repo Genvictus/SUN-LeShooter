@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: a7bed68887a07e34394d4191b3081359, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13346997, g: 0.18373775, b: 0.26000538, a: 1}
+  m_IndirectSpecularColor: {r: 0.13346876, g: 0.18373644, b: 0.2600042, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -1893,6 +1893,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FaerieCircleMiddle
       objectReference: {fileID: 0}
+    - target: {fileID: 1275659691647608, guid: bfc27685a8b39124baf31b73cb9b0583, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4409721230505074, guid: bfc27685a8b39124baf31b73cb9b0583, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -2810,6 +2814,10 @@ PrefabInstance:
     - target: {fileID: 1275659691647608, guid: bfc27685a8b39124baf31b73cb9b0583, type: 3}
       propertyPath: m_Name
       value: FaerieCircleRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 1275659691647608, guid: bfc27685a8b39124baf31b73cb9b0583, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4409721230505074, guid: bfc27685a8b39124baf31b73cb9b0583, type: 3}
       propertyPath: m_RootOrder
@@ -4198,6 +4206,10 @@ PrefabInstance:
     - target: {fileID: 1275659691647608, guid: bfc27685a8b39124baf31b73cb9b0583, type: 3}
       propertyPath: m_Name
       value: FaerieCircleLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 1275659691647608, guid: bfc27685a8b39124baf31b73cb9b0583, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4409721230505074, guid: bfc27685a8b39124baf31b73cb9b0583, type: 3}
       propertyPath: m_RootOrder
