@@ -17,10 +17,14 @@ namespace Nightmare
         public int damage;
         public float hitTime;
         float _timer;
+        Animator animator;
+        AudioSource audio;
         // Start is called before the first frame update
         void Start()
         {
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            animator = GetComponent<Animator>();
+            audio = GetComponent<AudioSource>();
             _timer = 0;
         }
 
@@ -28,6 +32,7 @@ namespace Nightmare
         void Update()
         {
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            animator.SetBool("Attack", false);
             Debug.Log(enemies.Length);
             if (enemies.Length == 0)
             {
@@ -61,9 +66,17 @@ namespace Nightmare
         }
         void Attack(GameObject target)
         {
+            audio.Play();
+            animator.SetBool("Attack", true);
+            StartCoroutine(DamageEnemy());
+            _timer = 0;
+        }
+
+        IEnumerator DamageEnemy()
+        {
+            yield return new  WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             EnemyHealth health = target.GetComponent<EnemyHealth>();
             health.TakeDamage(damage, transform.position);
-            _timer = 0;
         }
     }
 }
