@@ -2,22 +2,27 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-public class PauseManager : MonoBehaviour {
-	
+public class PauseManager : MonoBehaviour
+{
+
 	public AudioMixerSnapshot paused;
 	public AudioMixerSnapshot unpaused;
-	
+
 	Canvas canvas;
-	
+
 	void Start()
 	{
 		canvas = GetComponent<Canvas>();
 	}
-	
+
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
@@ -26,34 +31,30 @@ public class PauseManager : MonoBehaviour {
 			Pause();
 		}
 	}
-	
+
 	public void Pause()
 	{
 		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
-		Lowpass ();
-		
+		Lowpass();
+
 	}
-	
+
 	void Lowpass()
 	{
 		if (Time.timeScale == 0)
 		{
 			paused.TransitionTo(.01f);
 		}
-		
+
 		else
-			
+
 		{
 			unpaused.TransitionTo(.01f);
 		}
 	}
-	
+
 	public void Quit()
 	{
-		#if UNITY_EDITOR 
-		EditorApplication.isPlaying = false;
-		#else 
-		Application.Quit();
-		#endif
+		SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
 	}
 }
