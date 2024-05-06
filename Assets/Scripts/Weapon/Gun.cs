@@ -43,7 +43,7 @@ public class Gun : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, gunData.maxDistance))
             {   
-                Debug.Log(hit.transform.name);
+                Debug.Log(hit.transform.name + gunData.damage);
                 IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
                 damageAble?.Damage(gunData.damage);
 
@@ -82,7 +82,7 @@ public class Gun : MonoBehaviour
 
     public void DebuffAttack(float debuff)
     {
-        gunData.damage *= debuff;
+        gunData.damage /= debuff;
     }
 
     public void BuffAttack(float buff)

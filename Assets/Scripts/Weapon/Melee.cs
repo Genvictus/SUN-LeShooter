@@ -38,7 +38,7 @@ public class Melee : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, meleeData.maxDistance))
             {   
-                Debug.Log(hit.transform.name);
+                Debug.Log(hit.transform.name + meleeData.damage);
                 IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
                 damageAble?.Damage(meleeData.damage);
 
@@ -62,7 +62,7 @@ public class Melee : MonoBehaviour
 
     public void DebuffAttack(float debuff)
     {
-        meleeData.damage *= debuff;
+        meleeData.damage /= debuff;
     }
 
     public void BuffAttack(float buff)
