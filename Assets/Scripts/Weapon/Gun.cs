@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -44,9 +45,9 @@ namespace Nightmare
                 RaycastHit hit;
                 if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, gunData.maxDistance))
                 {
-                    Debug.Log(hit.transform.name);
+                    Debug.Log("got hit: " + hit.transform.name);
                     IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
-                    damageAble?.Damage(gunData.damage);
+                    damageAble?.TakeDamage((int)Math.Round(gunData.damage), hit.transform.position);
 
                     lineRenderer.SetPosition(0, muzzle.position);
                     lineRenderer.SetPosition(1, hit.point);

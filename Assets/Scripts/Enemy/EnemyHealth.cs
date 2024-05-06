@@ -2,7 +2,7 @@
 
 namespace Nightmare
 {
-    public class EnemyHealth : MonoBehaviour
+    public class EnemyHealth : MonoBehaviour, IDamageAble
     {
         public int startingHealth = 100;
         public float sinkSpeed = 2.5f;
@@ -56,6 +56,7 @@ namespace Nightmare
 
         public void TakeDamage (int amount, Vector3 hitPoint)
         {
+            Debug.Log("taking damage: " + amount);
             if (!IsDead())
             {
                 enemyAudio.Play();

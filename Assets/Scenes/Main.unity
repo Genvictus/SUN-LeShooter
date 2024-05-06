@@ -393,38 +393,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93410271}
   m_CullTransparentMesh: 1
---- !u!1 &107576020 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3047580053816800232, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
-  m_PrefabInstance: {fileID: 1249550831950513008}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &107576023
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 107576020}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: Infinity
-  m_AngularDrag: Infinity
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 84
-  m_CollisionDetection: 0
 --- !u!1 &177326011
 GameObject:
   m_ObjectHideFlags: 0
@@ -3605,14 +3573,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2144636431088472887, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3047580053816800232, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 107576023}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
 --- !u!1001 &8895893730688143117
 PrefabInstance:
