@@ -20,6 +20,7 @@ public class EnemyMelee : MonoBehaviour
 
     void Update()
     {
+        Debug.DrawLine(enemyTransform.position, enemyTransform.position + enemyTransform.forward * meleeData.maxDistance, Color.red);
         timeSinceLastAttack += Time.deltaTime;
     }
 
@@ -39,6 +40,7 @@ public class EnemyMelee : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(enemyTransform.position, enemyTransform.forward, out hit, meleeData.maxDistance))
             {   
+                Debug.Log("Enemy Hit2");
                 Debug.Log(hit.transform.name);
                 IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
                 damageAble?.Damage(meleeData.damage);
