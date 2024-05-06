@@ -8,6 +8,7 @@ public class Gun : MonoBehaviour
     [Header("References")]
     [SerializeField] private GunData gunData;
     [SerializeField] private Transform muzzle;
+    [SerializeField] private Transform cameraTransform;
 
     [Header("Visuals")]
     [SerializeField] private LineRenderer lineRenderer;
@@ -39,7 +40,7 @@ public class Gun : MonoBehaviour
             timeSinceLastShot = 0;
             gunData.currentAmmo--;
             RaycastHit hit;
-            if (Physics.Raycast(muzzle.position, muzzle.forward, out hit, gunData.maxDistance))
+            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, gunData.maxDistance))
             {   
                 Debug.Log(hit.transform.name);
                 IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="Melee", menuName ="Weapon/Melee")]
-public class Melee : ScriptableObject
+public class MeleeData : ScriptableObject
 {
 
     public new string name;
