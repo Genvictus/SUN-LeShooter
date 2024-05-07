@@ -7,6 +7,7 @@ namespace Nightmare
 {
     public class EnemyMovement : PausibleObject
     {
+        public float movementSpeed = 4f; 
         public float visionRange = 10f;
         public float hearingRange = 20f;
         public float wanderDistance = 10f;
@@ -38,6 +39,7 @@ namespace Nightmare
             ScaleVision(1f);
             IsPsychic();
             timer = 0f;
+            nav.speed = movementSpeed;
         }
 
         void ClearPath()
