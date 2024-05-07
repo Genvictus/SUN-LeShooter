@@ -18,6 +18,9 @@ namespace Nightmare
 
         private void Update()
         {
+            if (isPaused)
+                return;
+
             if (Input.GetMouseButton(0))
                 shootInput?.Invoke();
 
