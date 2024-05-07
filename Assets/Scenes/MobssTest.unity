@@ -298,7 +298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &28911953
 Transform:
   m_ObjectHideFlags: 0
@@ -3730,7 +3730,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b2268f9c7df8764aa2e92dbf55b5ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
   speed: 6
+  walkSpeed: 6
+  runSpeed: 12
+  jumpPower: 7
+  gravity: 10
+  lookSpeed: 2
+  lookXLimit: 45
+  canMove: 1
 --- !u!114 &1635697709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3907,6 +3915,7 @@ GameObject:
   - component: {fileID: 1635697707}
   - component: {fileID: 1629270633}
   - component: {fileID: 1638803499}
+  - component: {fileID: 1641360880}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3945,6 +3954,32 @@ Transform:
   - {fileID: 1641360873}
   m_Father: {fileID: 142775991}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &1641360880
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641198031}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1669296431
 GameObject:
   m_ObjectHideFlags: 0
@@ -4107,7 +4142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1769187882
 Transform:
   m_ObjectHideFlags: 0
@@ -4631,6 +4666,7 @@ MonoBehaviour:
   - {fileID: 1284960059}
   - {fileID: 21160620}
   switchTime: 0
+  selectedWeapon: 0
 --- !u!1 &1992129939
 GameObject:
   m_ObjectHideFlags: 0
