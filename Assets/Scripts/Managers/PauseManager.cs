@@ -36,7 +36,7 @@ public class PauseManager : MonoBehaviour
 	{
 		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
 		Lowpass();
-        EventManager.TriggerEvent("Pause", canvas.enabled);
+		EventManager.TriggerEvent("Pause", canvas.enabled);
 	}
 
 	void Lowpass()
@@ -55,6 +55,12 @@ public class PauseManager : MonoBehaviour
 
 	public void Quit()
 	{
+		// fix game still paused after exiting and starting game from main menu
+		canvas.enabled = !canvas.enabled;
+		Pause();
+		// 
+
+
 		SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
 	}
 }
