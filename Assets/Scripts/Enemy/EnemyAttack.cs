@@ -6,9 +6,7 @@ namespace Nightmare
 {
     public class EnemyAttack : PausibleObject
     {
-        public float timeBetweenAttacks = 0.5f;
-        public int attackDamage = 10;
-
+        float timeBetweenAttacks;
         Animator anim;
         GameObject player;
         PlayerHealth playerHealth;
@@ -16,6 +14,7 @@ namespace Nightmare
         public static Action attackAction;
         bool playerInRange;
         float timer;
+        public MeleeData meleeData;
 
         void Awake ()
         {
@@ -24,6 +23,7 @@ namespace Nightmare
             playerHealth = player.GetComponent <PlayerHealth> ();
             enemyHealth = GetComponent<EnemyHealth>();
             anim = GetComponent <Animator> ();
+            timeBetweenAttacks = meleeData.fireRate;
 
             StartPausible();
         }
@@ -53,6 +53,19 @@ namespace Nightmare
             }
         }
 
+
+        void CheckPlayerInRange()
+        {
+            if (Vector3.Distance(player.transform.position, transform.position) < meleeData.maxDistance)
+            {
+                playerInRange = true;
+            }
+            else
+            {
+                playerInRange = false;
+            }
+        }
+
         void Update ()
         {
             if (isPaused)
@@ -65,6 +78,7 @@ namespace Nightmare
             if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.CurrentHealth() > 0)
             {
                 // ... attack.
+                transform.LookAt(player.transform);
                 Attack ();
             }
 
@@ -85,8 +99,8 @@ namespace Nightmare
             if(playerHealth.currentHealth > 0)
             {
                 // ... damage the player.
-                attackAction.Invoke();
-                playerHealth.TakeDamage (attackDamage);
+                attackAction?.Invoke();
+                // playerHealth.TakeDamage (attackDamage);
             }
         }
     }

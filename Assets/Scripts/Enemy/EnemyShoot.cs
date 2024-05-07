@@ -6,9 +6,7 @@ namespace Nightmare
 {
     public class EnemyShoot : PausibleObject
     {
-        public float timeBetweenAttacks = 0.5f;
-        public int attackDamage = 10;
-
+        float timeBetweenAttacks;
         Animator anim;
         GameObject player;
         PlayerHealth playerHealth;
@@ -16,6 +14,8 @@ namespace Nightmare
         public static Action shootAction;
         bool playerInRange;
         float timer;
+        public GunData gunData;
+
 
         void Awake ()
         {
@@ -24,7 +24,7 @@ namespace Nightmare
             playerHealth = player.GetComponent <PlayerHealth> ();
             enemyHealth = GetComponent<EnemyHealth>();
             anim = GetComponent <Animator> ();
-
+            timeBetweenAttacks = gunData.fireRate;
             StartPausible();
         }
 
@@ -33,22 +33,34 @@ namespace Nightmare
             StopPausible();
         }
 
-        void OnTriggerEnter (Collider other)
+        // void OnTriggerEnter (Collider other)
+        // {
+        //     // If the entering collider is the player...
+        //     if(other.gameObject == player)
+        //     {
+        //         // ... the player is in range.
+        //         playerInRange = true;
+        //     }
+        // }
+
+        // void OnTriggerExit (Collider other)
+        // {
+        //     // If the exiting collider is the player...
+        //     if(other.gameObject == player)
+        //     {
+        //         // ... the player is no longer in range.
+        //         playerInRange = false;
+        //     }
+        // }
+
+        void CheckPlayerInRange()
         {
-            // If the entering collider is the player...
-            if(other.gameObject == player)
+            if (Vector3.Distance(player.transform.position, transform.position) < gunData.maxDistance)
             {
-                // ... the player is in range.
                 playerInRange = true;
             }
-        }
-
-        void OnTriggerExit (Collider other)
-        {
-            // If the exiting collider is the player...
-            if(other.gameObject == player)
+            else
             {
-                // ... the player is no longer in range.
                 playerInRange = false;
             }
         }
@@ -60,11 +72,12 @@ namespace Nightmare
             
             // Add the time since Update was last called to the timer.
             timer += Time.deltaTime;
-
+            CheckPlayerInRange();
             // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
             if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.CurrentHealth() > 0)
             {
                 // ... attack.
+                transform.LookAt(player.transform);
                 Attack ();
             }
 
@@ -86,7 +99,7 @@ namespace Nightmare
             {
                 // ... damage the player.
                 shootAction?.Invoke();
-                playerHealth.TakeDamage (attackDamage);
+                // playerHealth.TakeDamage ((int)gunData.damage, player.transform.position);
             }
         }
     }
