@@ -93,5 +93,8 @@ namespace Nightmare
             gunData.damage *= buff;
         }
 
+        public GunData GetGunData() {
+            return gunData;
+        }
     }
 }

@@ -10,7 +10,7 @@ public class WeaponSwitching : MonoBehaviour {
     [Header("Settings")]
     [SerializeField] private float switchTime;
 
-    private int selectedWeapon;
+    public int selectedWeapon;
     private float timeSinceLastSwitch;
 
     private void Start() {
@@ -65,4 +65,8 @@ public class WeaponSwitching : MonoBehaviour {
     }
 
     private void OnWeaponSelected() {  }
+
+    public GameObject GetCurrentWeapon() {
+        return weapons[selectedWeapon].gameObject;
+    }
 }
