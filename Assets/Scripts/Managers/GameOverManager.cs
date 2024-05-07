@@ -11,6 +11,7 @@ namespace Nightmare
         Animator anim;
 
         LevelManager lm;
+        PauseManager pm;
         private UnityEvent listener;
 
         void Awake()
@@ -18,14 +19,13 @@ namespace Nightmare
             playerHealth = FindObjectOfType<PlayerHealth>();
             anim = GetComponent<Animator>();
             lm = FindObjectOfType<LevelManager>();
+            pm = FindObjectOfType<PauseManager>();
             EventManager.StartListening("GameOver", ShowGameOver);
-            EventManager.StartListening("ReturnToMainMenu", ShowGameOver);
         }
 
         void OnDestroy()
         {
             EventManager.StopListening("GameOver", ShowGameOver);
-            EventManager.StopListening("ReturnToMainMenu", ShowGameOver);
         }
 
         void ShowGameOver()
@@ -49,8 +49,9 @@ namespace Nightmare
             Debug.Log("Return to main menu from game over");
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
-        private void ResetLevel()
+        public void ResetLevel()
         {
+            Debug.Log("Reset Level Triggered");
             ScoreManager.score = 0;
             LevelManager lm = FindObjectOfType<LevelManager>();
             lm.LoadInitialLevel();

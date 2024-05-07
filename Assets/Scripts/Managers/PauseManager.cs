@@ -27,13 +27,18 @@ public class PauseManager : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			canvas.enabled = !canvas.enabled;
 			Pause();
 		}
 	}
 
-	public void Pause()
+	public void Pause(bool toggleCanvas = true)
 	{
+		// toggles pause based on canvas enabled or not
+		if (toggleCanvas)
+		{
+			canvas.enabled = !canvas.enabled;
+		}
+
 		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
 		Lowpass();
 		EventManager.TriggerEvent("Pause", canvas.enabled);
@@ -55,11 +60,7 @@ public class PauseManager : MonoBehaviour
 
 	public void Quit()
 	{
-		// fix game still paused after exiting and starting game from main menu
-		canvas.enabled = !canvas.enabled;
 		Pause();
-		// 
-
 
 		SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
 	}
