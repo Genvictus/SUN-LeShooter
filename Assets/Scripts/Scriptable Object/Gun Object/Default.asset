@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Default Weapon
   damage: 10
   maxDistance: 20
-  currentAmmo: 47
+  currentAmmo: 85
   magSize: 100
   reloadTime: 1
   fireRate: 0.5
