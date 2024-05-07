@@ -10,17 +10,17 @@ namespace Nightmare
 
         public void StartPausible()
         {
-            pauseListener = new UnityAction<bool>(Pause);
+            pauseListener = new UnityAction<bool>(SetPause);
 
-            EventManager.StartListening("Pause", Pause);
+            EventManager.StartListening("Pause", SetPause);
         }
 
         public void StopPausible()
         {
-            EventManager.StopListening("Pause", Pause);
+            EventManager.StopListening("Pause", SetPause);
         }
 
-        public void Pause(bool state)
+        public void SetPause(bool state)
         {
             isPaused = state;
             if (isPaused)
