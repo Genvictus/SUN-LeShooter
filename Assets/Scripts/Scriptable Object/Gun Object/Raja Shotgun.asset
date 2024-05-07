@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28e36f336831dbc42b3acd2975b42337, type: 3}
-  m_Name: Default
+  m_Name: Raja Shotgun
   m_EditorClassIdentifier: 
-  name: Default Weapon
+  name: Raja Shotgun
   damage: 10
-  maxDistance: 20
-  currentAmmo: 52
-  magSize: 100
-  reloadTime: 1
-  fireRate: 0.5
+  maxDistance: 5
+  currentAmmo: 15
+  magSize: 20
+  reloadTime: 0.5
+  fireRate: 1
   reloading: 0
