@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Nightmare;
 using UnityEngine;
 
-public class WeaponSwitching : MonoBehaviour {
+public class WeaponSwitching : PausibleObject {
 
     [Header("References")]
     [SerializeField] private Transform[] weapons = new Transform[3]; 
@@ -10,14 +12,24 @@ public class WeaponSwitching : MonoBehaviour {
     [Header("Settings")]
     [SerializeField] private float switchTime;
 
-    private int selectedWeapon;
+    public int selectedWeapon;
     private float timeSinceLastSwitch;
+
+    void Awake()
+    {
+        StartPausible();
+    }
 
     private void Start() {
         SetWeapons();
         Select(selectedWeapon);
 
         timeSinceLastSwitch = 0f;
+    }
+
+    void OnDestroy()
+    {
+        StopPausible();
     }
 
     private void SetWeapons() {
@@ -28,6 +40,9 @@ public class WeaponSwitching : MonoBehaviour {
     }
 
     private void Update() {
+        if (isPaused)
+            return;
+
         int previousSelectedWeapon = selectedWeapon;
 
         // Check for number key input 3 (default) weapons (1, 2, 3)
@@ -65,4 +80,8 @@ public class WeaponSwitching : MonoBehaviour {
     }
 
     private void OnWeaponSelected() {  }
+
+    public GameObject GetCurrentWeapon() {
+        return weapons[selectedWeapon].gameObject;
+    }
 }

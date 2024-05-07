@@ -70,7 +70,7 @@ namespace Nightmare
         public void StartReload()
         {
             Debug.Log("Reload");
-            if (!gunData.reloading)
+            if (!gunData.reloading && gameObject.activeSelf)
                 StartCoroutine(Reload());
         }
 
@@ -93,5 +93,8 @@ namespace Nightmare
             gunData.damage *= buff;
         }
 
+        public GunData GetGunData() {
+            return gunData;
+        }
     }
 }

@@ -46,6 +46,18 @@ namespace Nightmare
             Cursor.visible = false;
         }
 
+        public override void OnPause()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        public override void OnUnPause()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
         void OnDestroy()
         {
             StopPausible();
@@ -53,7 +65,7 @@ namespace Nightmare
 
         void Update()
         {
-            if (isPaused || !enabled)
+            if (isPaused)
                 return;
 
             float h = Input.GetAxis("Horizontal");

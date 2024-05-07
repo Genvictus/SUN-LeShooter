@@ -70,4 +70,8 @@ public class Melee : MonoBehaviour
     {
         meleeData.damage *= buff;
     }
+
+    public MeleeData GetMeleeData() {
+        return meleeData;
+    }
 }
