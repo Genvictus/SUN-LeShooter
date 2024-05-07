@@ -12,7 +12,6 @@ public class MainMenuButtons : MonoBehaviour
     public void NewGame()
     {
         SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
-        SceneManager.LoadSceneAsync("Level01", LoadSceneMode.Additive);
     }
 
     public void LoadGame()
