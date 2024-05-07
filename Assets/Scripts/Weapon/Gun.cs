@@ -85,7 +85,7 @@ namespace Nightmare
 
         public void DebuffAttack(float debuff)
         {
-            gunData.damage *= debuff;
+            gunData.damage /= debuff;
         }
 
         public void BuffAttack(float buff)

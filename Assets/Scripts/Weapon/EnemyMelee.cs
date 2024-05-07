@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using Nightmare;
 using UnityEngine;
@@ -43,7 +43,7 @@ public class EnemyMelee : MonoBehaviour
                 Debug.Log("Enemy Hit2");
                 Debug.Log(hit.transform.name);
                 IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
-                damageAble?.Damage(meleeData.damage);
+                damageAble?.TakeDamage((int)Math.Round(meleeData.damage), hit.transform.position);
 
                 lineRenderer.SetPosition(0, transform.position);
                 lineRenderer.SetPosition(1, hit.point);

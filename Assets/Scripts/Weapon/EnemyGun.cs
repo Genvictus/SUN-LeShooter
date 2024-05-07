@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Nightmare;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class EnemyGun : MonoBehaviour
 {
@@ -42,7 +43,7 @@ public class EnemyGun : MonoBehaviour
             {   
                 Debug.Log(hit.transform.name);
                 IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
-                damageAble?.Damage(gunData.damage);
+                damageAble?.TakeDamage((int)Math.Round(gunData.damage), hit.transform.position);
 
                 lineRenderer.SetPosition(0, muzzle.position);
                 lineRenderer.SetPosition(1, hit.point);
