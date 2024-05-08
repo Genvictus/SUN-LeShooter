@@ -9,10 +9,8 @@ namespace Nightmare
         public float moveDebuff = 2f;
         public int debuffRange = 5;
         public float debuffRate = 1f;
-        Animator anim;
         GameObject player;
         PlayerHealth playerHealth;
-        PlayerMovement playerMovement;
         EnemyHealth enemyHealth;
         public Gun Default;
         public Gun Shotgun;
@@ -26,10 +24,8 @@ namespace Nightmare
             // Setting up the references.
             player = GameObject.FindGameObjectWithTag ("Player");
             playerHealth = player.GetComponent <PlayerHealth> ();
-            playerMovement = player.GetComponent <PlayerMovement> ();
 
             enemyHealth = GetComponent<EnemyHealth>();
-            anim = GetComponent <Animator> ();
 
             StartPausible();
         }
@@ -80,11 +76,7 @@ namespace Nightmare
             // If the player has health to lose...
             if(playerHealth.currentHealth > 0)
             {
-                // ... damage the player.
-                playerMovement.speed /= moveDebuff;
-                playerMovement.walkSpeed /= moveDebuff;
-                playerMovement.runSpeed /= moveDebuff;
-
+                PlayerMovement.mobDebuff /= moveDebuff;
                 PlayerShooting.mobDebuff /= attackDebuff;
             }
         }
@@ -97,10 +89,7 @@ namespace Nightmare
             // If the player has health to lose...
             if(playerHealth.currentHealth > 0)
             {
-                playerMovement.speed *= moveDebuff;
-                playerMovement.walkSpeed *= moveDebuff;
-                playerMovement.runSpeed *= moveDebuff;
-
+                PlayerMovement.mobDebuff *= moveDebuff;
                 PlayerShooting.mobDebuff *= attackDebuff;
             }
         }

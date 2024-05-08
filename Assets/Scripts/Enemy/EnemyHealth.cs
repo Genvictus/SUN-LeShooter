@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Nightmare
 {
@@ -15,7 +16,9 @@ namespace Nightmare
         ParticleSystem hitParticles;
         CapsuleCollider capsuleCollider;
         EnemyMovement enemyMovement;
-        GameObject healOrdPrefab;
+        List<GameObject> orbPrefabs = new List<GameObject>();
+        public float orbDropChance = 0.5f;
+
 
         void Awake ()
         {
@@ -24,7 +27,10 @@ namespace Nightmare
             hitParticles = GetComponentInChildren <ParticleSystem> ();
             capsuleCollider = GetComponent <CapsuleCollider> ();
             enemyMovement = this.GetComponent<EnemyMovement>();
-            healOrdPrefab = Resources.Load("HealOrb") as GameObject;
+            
+            orbPrefabs.Add(Resources.Load("HealOrb") as GameObject);
+            orbPrefabs.Add(Resources.Load("AttackOrb") as GameObject);
+            orbPrefabs.Add(Resources.Load("SpeedOrb") as GameObject);
         }
 
         void OnEnable()
@@ -58,6 +64,7 @@ namespace Nightmare
 
         public void TakeDamage (float amount, Vector3 hitPoint)
         {
+            Debug.Log("Enemy take damage: " + amount);
             if (!IsDead())
             {
                 enemyAudio.Play();
@@ -83,7 +90,13 @@ namespace Nightmare
             anim.SetTrigger ("Dead");
             Vector3 orbSpawnPosition = transform.position;
             orbSpawnPosition.y += 0.5f;
-            Instantiate(healOrdPrefab, orbSpawnPosition, Quaternion.identity);
+
+            float orbDropValue = Random.value;
+            if (orbDropValue <= orbDropChance) {
+                int orbIndex = Random.Range(0, orbPrefabs.Count);
+                GameObject orb = orbPrefabs[orbIndex];
+                Instantiate(orb, orbSpawnPosition, Quaternion.identity);
+            }
 
             enemyAudio.clip = deathClip;
             enemyAudio.Play ();
