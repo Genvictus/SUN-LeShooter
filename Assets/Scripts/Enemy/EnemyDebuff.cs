@@ -85,12 +85,7 @@ namespace Nightmare
                 playerMovement.walkSpeed /= moveDebuff;
                 playerMovement.runSpeed /= moveDebuff;
 
-                Default.DebuffAttack(attackDebuff);
-
-                Sword.DebuffAttack(attackDebuff);
-
-                Shotgun.DebuffAttack(attackDebuff);
-
+                PlayerShooting.mobDebuff /= attackDebuff;
             }
         }
 
@@ -102,17 +97,11 @@ namespace Nightmare
             // If the player has health to lose...
             if(playerHealth.currentHealth > 0)
             {
-
                 playerMovement.speed *= moveDebuff;
                 playerMovement.walkSpeed *= moveDebuff;
                 playerMovement.runSpeed *= moveDebuff;
 
-                Default.BuffAttack(attackDebuff);
-
-                Sword.BuffAttack(attackDebuff);
-
-                Shotgun.BuffAttack(attackDebuff);
-
+                PlayerShooting.mobDebuff *= attackDebuff;
             }
         }
     }

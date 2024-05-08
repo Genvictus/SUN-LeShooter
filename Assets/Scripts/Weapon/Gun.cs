@@ -47,7 +47,11 @@ namespace Nightmare
                 {
                     Debug.Log("got hit: " + hit.transform.name);
                     IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
-                    damageAble?.TakeDamage((int)Math.Round(gunData.damage), hit.transform.position);
+                    
+                    float damage = gunData.damage;
+                    damage += gunData.damage * PlayerShooting.orbBuffMultiplier * PlayerShooting.orbBuffCount;
+                    damage *= PlayerShooting.mobDebuff;
+                    damageAble?.TakeDamage(damage, hit.transform.position);
 
                     lineRenderer.SetPosition(0, muzzle.position);
                     lineRenderer.SetPosition(1, hit.point);
@@ -80,17 +84,6 @@ namespace Nightmare
             yield return new WaitForSeconds(gunData.reloadTime);
             gunData.currentAmmo = gunData.magSize;
             gunData.reloading = false;
-        }
-
-
-        public void DebuffAttack(float debuff)
-        {
-            gunData.damage /= debuff;
-        }
-
-        public void BuffAttack(float buff)
-        {
-            gunData.damage *= buff;
         }
 
         public GunData GetGunData() {
