@@ -2,24 +2,14 @@ using System;
 
 public class ProgressionState : SaveData<ProgressionState>
 {
-    public string saveTime;
+    public string SaveTime { get; private set; }
 
     public int coins;
     public double score;
     public int currentLevel;
 
-    public Buffs buffs;
-
-    public override string ToJson()
-    {
+    public void UpdateSaveTime(){
         var now = DateTimeOffset.Now;
-        saveTime = now.ToString();
-        return base.ToJson();
+        SaveTime = now.ToString();
     }
-}
-
-public struct Buffs
-{
-    public float damageBuff;
-    // public float speedBuff;
 }

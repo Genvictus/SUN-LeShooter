@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SavesManager
@@ -50,6 +51,7 @@ public class SavesManager
 
     public bool SaveProgressionState(ProgressionState progression)
     {
+        progression.UpdateSaveTime();
         return SaveManager<ProgressionState>.Save(saveName, PROGRESSION, progression);
     }
 
