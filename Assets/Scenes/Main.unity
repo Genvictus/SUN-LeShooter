@@ -2410,7 +2410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.588}
+  m_Color: {r: 0.21568628, g: 1, b: 0.18039216, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2682,10 +2682,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1394906874}
   - {fileID: 506286815}
   - {fileID: 1334548030}
   - {fileID: 1434159494}
-  - {fileID: 1394906874}
   - {fileID: 1968981017}
   - {fileID: 654262916}
   - {fileID: 1125301621}
@@ -4131,6 +4131,42 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 1837071937}
+    - target: {fileID: 2054448874847141622, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
+      propertyPath: dyingColour.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054448874847141622, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
+      propertyPath: dyingColour.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054448874847141622, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
+      propertyPath: healthyColour.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054448874847141622, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
+      propertyPath: healthyColour.b
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054448874847141622, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
+      propertyPath: healthyColour.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054448874847141622, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
+      propertyPath: healthyColour.r
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054448874847141622, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
+      propertyPath: unhealthyColour.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054448874847141622, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
+      propertyPath: unhealthyColour.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054448874847141622, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
+      propertyPath: unhealthyColour.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2632717048477473255, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
       propertyPath: m_Name
       value: PlayerMain
