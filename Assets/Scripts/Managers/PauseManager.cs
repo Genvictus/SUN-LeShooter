@@ -31,6 +31,12 @@ public class PauseManager : MonoBehaviour
 		}
 	}
 
+	public void SetGameOverPause(bool pauseValue = true)
+	{
+		Debug.Log("Set GameOver Pause to " + pauseValue.ToString());
+		EventManager.TriggerEvent("GameOverPause", pauseValue);
+	}
+
 	public void SetPause(bool pauseValue = true)
 	{
 		Debug.Log("Set Pause to " + pauseValue.ToString());
@@ -44,7 +50,7 @@ public class PauseManager : MonoBehaviour
 
 		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
 		Lowpass();
-		EventManager.TriggerEvent("Pause", canvas.enabled);
+		SetPause(canvas.enabled);
 	}
 
 	void Lowpass()
@@ -63,8 +69,9 @@ public class PauseManager : MonoBehaviour
 
 	public void Quit()
 	{
+		SetGameOverPause();
 		SetPause(false);
-		// todo: setgameover
+		// todo: must reset gameover flag when restart game
 
 		SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
 	}

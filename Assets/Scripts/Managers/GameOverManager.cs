@@ -13,6 +13,7 @@ namespace Nightmare
         LevelManager lm;
         PauseManager pm;
         private UnityEvent listener;
+        private IEnumerator countdownCoroutine;
 
         void Awake()
         {
@@ -32,8 +33,12 @@ namespace Nightmare
         {
             Debug.Log("GameOver screen triggered");
             anim.SetBool("GameOver", true);
+            pm.SetPause(true);
+            pm.SetGameOverPause(true);
 
-            StartCoroutine(WaitAndReturnToMainMenu());
+            countdownCoroutine = WaitAndReturnToMainMenu();
+            StartCoroutine(countdownCoroutine);
+            Debug.Log("Countdown started");
         }
 
         IEnumerator WaitAndReturnToMainMenu()
@@ -49,13 +54,26 @@ namespace Nightmare
             Debug.Log("Return to main menu from game over");
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
+
+        void StopCountdown()
+        {
+            StopCoroutine(countdownCoroutine);
+            Debug.Log("Countdown interrupted");
+        }
         public void ResetLevel()
         {
+            // todo: fix restart game behaviour
             Debug.Log("Reset Level Triggered");
+
+            StopCountdown();
+
             ScoreManager.score = 0;
             LevelManager lm = FindObjectOfType<LevelManager>();
             lm.LoadInitialLevel();
             anim.SetBool("GameOver", false);
+            pm.SetGameOverPause(false);
+            pm.SetPause(false);
+
             playerHealth.ResetPlayer();
         }
     }

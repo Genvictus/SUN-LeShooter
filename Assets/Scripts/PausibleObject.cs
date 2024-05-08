@@ -7,17 +7,20 @@ namespace Nightmare
     {
         public UnityAction<bool> pauseListener;
         internal bool isPaused = false;
+        internal bool isGameOver = true;
 
         public void StartPausible()
         {
             pauseListener = new UnityAction<bool>(SetPause);
 
             EventManager.StartListening("Pause", SetPause);
+            EventManager.StartListening("GameOverPause", SetGameOver);
         }
 
         public void StopPausible()
         {
             EventManager.StopListening("Pause", SetPause);
+            EventManager.StopListening("GameOverPause", SetGameOver);
         }
 
         public void SetPause(bool state)
@@ -27,7 +30,21 @@ namespace Nightmare
             {
                 OnPause();
             }
-            else{
+            else
+            {
+                OnUnPause();
+            }
+        }
+
+        public void SetGameOver(bool state)
+        {
+            isGameOver = state;
+            if (isGameOver)
+            {
+                OnPause();
+            }
+            else
+            {
                 OnUnPause();
             }
         }
