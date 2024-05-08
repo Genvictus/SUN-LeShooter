@@ -13,6 +13,7 @@ namespace Nightmare
         private PlayerMovement playerMove;
         private Vector3 playerRespawn;
         private CinematicController cinema;
+        private PauseManager pm;
 
         void OnEnable()
         {
@@ -26,6 +27,11 @@ namespace Nightmare
             SceneManager.LoadSceneAsync(levels[0], LoadSceneMode.Additive);
             playerMove = FindObjectOfType<PlayerMovement>();
             playerRespawn = playerMove.transform.position;
+            pm = FindObjectOfType<PauseManager>();
+
+            // order or setting pause matters for cursor lock
+            pm.SetGameOverPause(false);
+            pm.SetPause(false);
         }
 
         public void AdvanceLevel()
@@ -40,7 +46,17 @@ namespace Nightmare
 
         private void LoadLevel(int level)
         {
+            Debug.Log("Loading Level " + level.ToString());
+            
             currentLevel = level;
+
+            playerMove = FindObjectOfType<PlayerMovement>();
+            playerRespawn = playerMove.transform.position;
+            pm = FindObjectOfType<PauseManager>();
+            
+            // order or setting pause matters for cursor lock
+            pm.SetGameOverPause(false);
+            pm.SetPause(false);
 
             //Load next level in background
             string loadingScene = levels[level % levels.Length];

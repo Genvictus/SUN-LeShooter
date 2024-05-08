@@ -44,6 +44,7 @@ namespace Nightmare
             playerShooting.enabled = true;
 
             anim.SetBool("IsDead", false);
+            isDead = false;
         }
 
 
