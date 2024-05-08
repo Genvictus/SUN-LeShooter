@@ -56,24 +56,22 @@ namespace Nightmare
             timer += Time.deltaTime;
             CheckInRange();
             // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-            if(timer >= debuffRate && playerInRange && enemyHealth.CurrentHealth() > 0)
+           if(timer >= debuffRate && playerInRange && enemyHealth.CurrentHealth() > 0)
             {
-                if (!isDebuffed)
+                if (!isDebuffed){
                     Debuff ();
-
-                isDebuffed = true;
+                }
             }
-
-            if (timer >= debuffRate && !playerInRange && isDebuffed)
+            if (!playerInRange && isDebuffed)
             {   
-
                 Rebuff();
-                isDebuffed = false;
             }
         }
 
         void Debuff ()
         {
+            isDebuffed = true;
+
             // Reset the timer.
             timer = 0f;
 
@@ -96,6 +94,8 @@ namespace Nightmare
 
         void Rebuff ()
         {
+            isDebuffed = false;
+
             // Reset the timer.
             timer = 0f;
 
