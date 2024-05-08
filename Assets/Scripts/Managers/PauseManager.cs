@@ -41,6 +41,14 @@ public class PauseManager : MonoBehaviour
 	{
 		Debug.Log("Set Pause to " + pauseValue.ToString());
 		EventManager.TriggerEvent("Pause", pauseValue);
+
+
+		// if setting paused to false, unfreeze time 
+		if (!pauseValue)
+		{
+			Time.timeScale = 1;
+			Lowpass();
+		}
 	}
 
 	public void TogglePauseMenu()
@@ -69,9 +77,8 @@ public class PauseManager : MonoBehaviour
 
 	public void Quit()
 	{
-		SetGameOverPause();
 		SetPause(false);
-		// todo: must reset gameover flag when restart game
+		SetGameOverPause(true);
 
 		SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
 	}

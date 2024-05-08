@@ -28,8 +28,10 @@ namespace Nightmare
             playerMove = FindObjectOfType<PlayerMovement>();
             playerRespawn = playerMove.transform.position;
             pm = FindObjectOfType<PauseManager>();
-            pm.SetPause(false);
+
+            // order or setting pause matters for cursor lock
             pm.SetGameOverPause(false);
+            pm.SetPause(false);
         }
 
         public void AdvanceLevel()
@@ -47,6 +49,14 @@ namespace Nightmare
             Debug.Log("Loading Level " + level.ToString());
             
             currentLevel = level;
+
+            playerMove = FindObjectOfType<PlayerMovement>();
+            playerRespawn = playerMove.transform.position;
+            pm = FindObjectOfType<PauseManager>();
+            
+            // order or setting pause matters for cursor lock
+            pm.SetGameOverPause(false);
+            pm.SetPause(false);
 
             //Load next level in background
             string loadingScene = levels[level % levels.Length];
