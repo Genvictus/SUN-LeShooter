@@ -1,27 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
-using Nightmare;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyShooting : MonoBehaviour
+public class EnemyDraining : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
 
     public float sightRange;
-
-    private float attackRange;
+    public float drainRange;
+    public float drainRate;
     private bool playerInSightRange, playerInAttackRange;
     float attackTimer;
-    public GunData gunData;
+
+    public float damage = 10;
 
     protected void Awake()
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
-        attackRange = gunData.maxDistance;    
     }
 
     void Start() {
@@ -31,19 +30,27 @@ public class EnemyShooting : MonoBehaviour
     void Update()
     {
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, drainRange, whatIsPlayer);
 
-        attackTimer -= Time.deltaTime;
-        if (playerInAttackRange && playerInSightRange && attackTimer <= 0) AttackPlayer();
+        attackTimer += Time.deltaTime;
+
+        if (playerInSightRange && playerInAttackRange)
+        {
+            if (attackTimer >= drainRate)
+                AttackPlayer();
+            
+        }
     }
 
     void AttackPlayer()
     {
         agent.SetDestination(transform.position);
-        transform.LookAt(player);
 
-        if (Vector3.Angle(transform.forward, player.position - transform.position) < 45)
-            EnemyShoot.shootAction.Invoke();
+        IMobs enemyHealth = player.gameObject.GetComponent<IMobs>();
+        enemyHealth?.TakeDamage(damage);
+
+        Debug.DrawLine(transform.position, transform.forward * drainRange, Color.red, 2f);
+        attackTimer = 0;
 
         // Vector3 bulletSpawnPostion = transform.position + transform.forward * 1.5f;
 

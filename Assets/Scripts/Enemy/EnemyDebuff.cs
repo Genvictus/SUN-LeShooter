@@ -5,23 +5,20 @@ namespace Nightmare
 {
     public class EnemyDebuff : PausibleObject
     {
-        public float attackDebuff = 0.5f;
-        public float moveDebuff = 0.5f;
-
-        public int debuffRange = 10;
-
-        public float debuffRate = 0.5f;
-
+        public float attackDebuff = 2f;
+        public float moveDebuff = 2f;
+        public int debuffRange = 5;
+        public float debuffRate = 1f;
         Animator anim;
         GameObject player;
         PlayerHealth playerHealth;
         PlayerMovement playerMovement;
         EnemyHealth enemyHealth;
-        Gun gun;
-        Melee melee;
+        public Gun Default;
+        public Gun Shotgun;
+        public Melee Sword;
         bool playerInRange;
         float timer;
-
         bool isDebuffed = false;
 
         void Awake ()
@@ -42,22 +39,10 @@ namespace Nightmare
             StopPausible();
         }
 
-        void OnTriggerEnter (Collider other)
-        {
-            // If the entering collider is the player...
-            if(other.gameObject == player)
-            {
-                // ... the player is in range.
+        void CheckInRange(){
+            if(Vector3.Distance(player.transform.position, transform.position) < debuffRange){
                 playerInRange = true;
-            }
-        }
-
-        void OnTriggerExit (Collider other)
-        {
-            // If the exiting collider is the player...
-            if(other.gameObject == player)
-            {
-                // ... the player is no longer in range.
+            } else {
                 playerInRange = false;
             }
         }
@@ -69,7 +54,7 @@ namespace Nightmare
             
             // Add the time since Update was last called to the timer.
             timer += Time.deltaTime;
-
+            CheckInRange();
             // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
             if(timer >= debuffRate && playerInRange && enemyHealth.CurrentHealth() > 0)
             {
@@ -85,13 +70,6 @@ namespace Nightmare
                 Rebuff();
                 isDebuffed = false;
             }
-
-            // If the player has zero or less health...
-            if(playerHealth.currentHealth <= 0)
-            {
-                // ... tell the animator the player is dead.
-                anim.SetTrigger ("PlayerDead");
-            }
         }
 
         void Debuff ()
@@ -103,11 +81,15 @@ namespace Nightmare
             if(playerHealth.currentHealth > 0)
             {
                 // ... damage the player.
-                playerMovement.speed *= moveDebuff;
+                playerMovement.speed /= moveDebuff;
+                playerMovement.walkSpeed /= moveDebuff;
+                playerMovement.runSpeed /= moveDebuff;
 
-                gun.DebuffAttack(attackDebuff);
+                Default.DebuffAttack(attackDebuff);
 
-                melee.DebuffAttack(attackDebuff);
+                Sword.DebuffAttack(attackDebuff);
+
+                Shotgun.DebuffAttack(attackDebuff);
 
             }
         }
@@ -121,11 +103,15 @@ namespace Nightmare
             if(playerHealth.currentHealth > 0)
             {
 
-                playerMovement.speed /= moveDebuff;
+                playerMovement.speed *= moveDebuff;
+                playerMovement.walkSpeed *= moveDebuff;
+                playerMovement.runSpeed *= moveDebuff;
 
-                gun.BuffAttack(attackDebuff);
+                Default.BuffAttack(attackDebuff);
 
-                melee.BuffAttack(attackDebuff);
+                Sword.BuffAttack(attackDebuff);
+
+                Shotgun.BuffAttack(attackDebuff);
 
             }
         }

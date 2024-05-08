@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour, IMobs
+public class PlayerHealth : MonoBehaviour, IMobs, IDamageAble
 {
     public HealthUI healthUI;
     public GameEndUI gameEndUI;
@@ -26,4 +26,22 @@ public class PlayerHealth : MonoBehaviour, IMobs
         if (Health <= 0)
             gameEndUI.EndGame("You Lose");
     }
+    public void Damage(float damage)
+    {
+        Health -= damage;
+        healthUI.UpdateHealth(Health);
+
+        if (Health <= 0)
+            gameEndUI.EndGame("You Lose");
+    }
+
+    public void TakeDamage(int damage, Vector3 hitPoint)
+    {
+        Health -= damage;
+        healthUI.UpdateHealth(Health);
+
+        if (Health <= 0)
+            gameEndUI.EndGame("You Lose");
+    }
+
 }

@@ -1,20 +1,21 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 namespace Nightmare
 {
-    public class EnemyDrain : PausibleObject
+    public class EnemyShoot : PausibleObject
     {
-        public int drainAmount = 1;
-        public float drainRate =  5f;
-        public int drainRange = 3;
-
+        float timeBetweenAttacks;
         Animator anim;
         GameObject player;
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
+        public static Action shootAction;
         bool playerInRange;
         float timer;
+        public GunData gunData;
+
 
         void Awake ()
         {
@@ -23,7 +24,7 @@ namespace Nightmare
             playerHealth = player.GetComponent <PlayerHealth> ();
             enemyHealth = GetComponent<EnemyHealth>();
             anim = GetComponent <Animator> ();
-
+            timeBetweenAttacks = gunData.fireRate;
             StartPausible();
         }
 
@@ -32,10 +33,34 @@ namespace Nightmare
             StopPausible();
         }
 
-        void CheckInRange(){
-            if(Vector3.Distance(player.transform.position, transform.position) < drainRange){
+        // void OnTriggerEnter (Collider other)
+        // {
+        //     // If the entering collider is the player...
+        //     if(other.gameObject == player)
+        //     {
+        //         // ... the player is in range.
+        //         playerInRange = true;
+        //     }
+        // }
+
+        // void OnTriggerExit (Collider other)
+        // {
+        //     // If the exiting collider is the player...
+        //     if(other.gameObject == player)
+        //     {
+        //         // ... the player is no longer in range.
+        //         playerInRange = false;
+        //     }
+        // }
+
+        void CheckPlayerInRange()
+        {
+            if (Vector3.Distance(player.transform.position, transform.position) < gunData.maxDistance)
+            {
                 playerInRange = true;
-            } else {
+            }
+            else
+            {
                 playerInRange = false;
             }
         }
@@ -47,12 +72,13 @@ namespace Nightmare
             
             // Add the time since Update was last called to the timer.
             timer += Time.deltaTime;
-            CheckInRange();
+            CheckPlayerInRange();
             // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-            if(timer >= drainRate && playerInRange && enemyHealth.CurrentHealth() > 0)
+            if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.CurrentHealth() > 0)
             {
                 // ... attack.
-                Drain ();
+                transform.LookAt(player.transform);
+                Attack ();
             }
 
             // If the player has zero or less health...
@@ -63,7 +89,7 @@ namespace Nightmare
             }
         }
 
-        void Drain ()
+        void Attack ()
         {
             // Reset the timer.
             timer = 0f;
@@ -72,7 +98,8 @@ namespace Nightmare
             if(playerHealth.currentHealth > 0)
             {
                 // ... damage the player.
-                playerHealth.TakeDamage (drainAmount, player.transform.position);
+                shootAction?.Invoke();
+                // playerHealth.TakeDamage ((int)gunData.damage, player.transform.position);
             }
         }
     }

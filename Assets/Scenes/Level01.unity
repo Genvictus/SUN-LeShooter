@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 14871711}
   - component: {fileID: 14871710}
   - component: {fileID: 14871709}
+  - component: {fileID: 14871713}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
@@ -207,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb4291fd5d37862448290bf2de777045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 153412, guid: 548c56f4bcf4db24b8aa057e9846a005, type: 3}
+  enemy: {fileID: 4940003812776887530, guid: c60b492742e954f41845bc1f4f1a623a, type: 3}
   spawnTime: 10
   spawnPoints:
   - {fileID: 345275349}
@@ -225,8 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb4291fd5d37862448290bf2de777045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 100000, guid: ea3c2728ef33e3a4d99527a86cda6465, type: 3}
-  spawnTime: 3
+  enemy: {fileID: 2105370142014841287, guid: 03b82cdf0373d1c46bdd7e1cae9738f2, type: 3}
+  spawnTime: 4
   spawnPoints:
   - {fileID: 345275349}
   - {fileID: 1725468539}
@@ -243,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb4291fd5d37862448290bf2de777045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 100002, guid: e5171f72421770240bd7c3989fe351e3, type: 3}
+  enemy: {fileID: 8716174416900575860, guid: fb23b46b260fbc04193b46bdae79ed6e, type: 3}
   spawnTime: 2
   spawnPoints:
   - {fileID: 345275349}
@@ -264,6 +265,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1165414997}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &14871713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14871708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb4291fd5d37862448290bf2de777045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 6827248445979793188, guid: 640a2b1933a1a8e4a8a890f35ffa52e9, type: 3}
+  spawnTime: 20
+  spawnPoints:
+  - {fileID: 345275349}
+  - {fileID: 1725468539}
+  - {fileID: 933997770}
 --- !u!1 &23611505
 GameObject:
   m_ObjectHideFlags: 0

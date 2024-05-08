@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Nightmare
 {
-    public class PlayerHealth : MonoBehaviour
+    public class PlayerHealth : MonoBehaviour, IDamageAble
     {
         public int startingHealth = 100;
         public int maxHealth = 100;
@@ -68,7 +68,7 @@ namespace Nightmare
         }
 
 
-        public void TakeDamage(int amount)
+        public void TakeDamage(int amount, Vector3 hitPoint)
         {
             if (godMode)
                 return;
