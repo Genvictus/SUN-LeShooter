@@ -7,9 +7,9 @@ namespace Nightmare
 {
     public class PlayerHealth : MonoBehaviour, IDamageAble
     {
-        public int startingHealth = 100;
-        public int maxHealth = 100;
-        public int currentHealth;
+        public float startingHealth = 100;
+        public float maxHealth = 100;
+        public float currentHealth;
         public Slider healthSlider;
         public Image damageImage;
         public AudioClip deathClip;
@@ -93,7 +93,7 @@ namespace Nightmare
             }
         }
 
-        public void Heal(int amount)
+        public void Heal(float amount)
         {
             if (!isDead)
             {

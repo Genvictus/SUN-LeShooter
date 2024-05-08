@@ -4,12 +4,12 @@ namespace Nightmare
 {
     public class EnemyHealth : MonoBehaviour, IDamageAble
     {
-        public int startingHealth = 100;
+        public float startingHealth = 100;
         public float sinkSpeed = 2.5f;
         public int scoreValue = 10;
         public AudioClip deathClip;
 
-        int currentHealth;
+        float currentHealth;
         Animator anim;
         AudioSource enemyAudio;
         ParticleSystem hitParticles;
@@ -93,7 +93,7 @@ namespace Nightmare
             ScoreManager.score += scoreValue;
         }
 
-        public int CurrentHealth()
+        public float CurrentHealth()
         {
             return currentHealth;
         }
