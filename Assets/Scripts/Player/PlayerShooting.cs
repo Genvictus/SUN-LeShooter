@@ -14,6 +14,7 @@ namespace Nightmare
         [SerializeField] private KeyCode reloadKey = KeyCode.R;
         public static float orbBuffMultiplier = 0.1f;
         public static int orbBuffCount = 0;
+        public static GameObject buffHUD = null;
         public static float mobDebuff = 1;
 
         void Awake() {
