@@ -56,7 +56,7 @@ namespace Nightmare
             return (currentHealth <= 0f);
         }
 
-        public void TakeDamage (int amount, Vector3 hitPoint)
+        public void TakeDamage (float amount, Vector3 hitPoint)
         {
             if (!IsDead())
             {

@@ -68,7 +68,7 @@ namespace Nightmare
         }
 
 
-        public void TakeDamage(int amount, Vector3 hitPoint)
+        public void TakeDamage(float amount, Vector3 hitPoint)
         {
             if (godMode)
                 return;

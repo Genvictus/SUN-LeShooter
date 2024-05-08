@@ -43,7 +43,7 @@ public class EnemyGun : MonoBehaviour
             {   
                 Debug.Log(hit.transform.name);
                 IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
-                damageAble?.TakeDamage((int)Math.Round(gunData.damage), hit.transform.position);
+                damageAble?.TakeDamage(gunData.damage, hit.transform.position);
 
                 lineRenderer.SetPosition(0, muzzle.position);
                 lineRenderer.SetPosition(1, hit.point);
