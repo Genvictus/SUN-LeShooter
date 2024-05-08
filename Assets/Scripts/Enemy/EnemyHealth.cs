@@ -15,6 +15,7 @@ namespace Nightmare
         ParticleSystem hitParticles;
         CapsuleCollider capsuleCollider;
         EnemyMovement enemyMovement;
+        GameObject healOrdPrefab;
 
         void Awake ()
         {
@@ -23,6 +24,7 @@ namespace Nightmare
             hitParticles = GetComponentInChildren <ParticleSystem> ();
             capsuleCollider = GetComponent <CapsuleCollider> ();
             enemyMovement = this.GetComponent<EnemyMovement>();
+            healOrdPrefab = Resources.Load("HealOrb") as GameObject;
         }
 
         void OnEnable()
@@ -56,7 +58,6 @@ namespace Nightmare
 
         public void TakeDamage (int amount, Vector3 hitPoint)
         {
-            Debug.Log("taking damage: " + amount);
             if (!IsDead())
             {
                 enemyAudio.Play();
@@ -80,6 +81,9 @@ namespace Nightmare
         {
             EventManager.TriggerEvent("Sound", this.transform.position);
             anim.SetTrigger ("Dead");
+            Vector3 orbSpawnPosition = transform.position;
+            orbSpawnPosition.y += 0.5f;
+            Instantiate(healOrdPrefab, orbSpawnPosition, Quaternion.identity);
 
             enemyAudio.clip = deathClip;
             enemyAudio.Play ();

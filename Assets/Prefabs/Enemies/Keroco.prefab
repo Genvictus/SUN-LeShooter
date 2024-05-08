@@ -10419,6 +10419,7 @@ MonoBehaviour:
   sinkSpeed: 2.5
   scoreValue: 7
   deathClip: {fileID: 8300000, guid: 1d3bfb9269f136947bf8ac164cace1ff, type: 3}
+  healOrdPrefab: {fileID: 8225120799566343110, guid: 87d8f4f20479bc741ae150c4351c58be, type: 3}
 --- !u!114 &8482491516844989301
 MonoBehaviour:
   m_ObjectHideFlags: 0

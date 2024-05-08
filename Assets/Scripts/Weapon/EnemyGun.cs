@@ -36,7 +36,7 @@ public class EnemyGun : MonoBehaviour
     {
         if (CanShoot())
         {
-            Debug.Log("Enemy Shoot");
+            // Debug.Log("Enemy Shoot");
             timeSinceLastShot = 0;
             RaycastHit hit;
             if (Physics.Raycast(enemyTransform.position, enemyTransform.forward, out hit, gunData.maxDistance))
