@@ -38,6 +38,7 @@ namespace Nightmare
 
             countdownCoroutine = WaitAndReturnToMainMenu();
             StartCoroutine(countdownCoroutine);
+            EventManager.TriggerEvent("ResetCountdown");
             Debug.Log("Countdown started");
         }
 
