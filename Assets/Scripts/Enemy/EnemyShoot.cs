@@ -11,7 +11,7 @@ namespace Nightmare
         GameObject player;
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
-        public static Action shootAction;
+        public Action shootAction;
         bool playerInRange;
         float timer;
         public GunData gunData;
@@ -98,6 +98,7 @@ namespace Nightmare
             if(playerHealth.currentHealth > 0)
             {
                 // ... damage the player.
+                Debug.Log("Enemy has shot");
                 shootAction?.Invoke();
                 // playerHealth.TakeDamage ((int)gunData.damage, player.transform.position);
             }

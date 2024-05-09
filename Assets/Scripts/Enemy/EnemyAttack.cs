@@ -11,7 +11,7 @@ namespace Nightmare
         GameObject player;
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
-        public static Action attackAction;
+        public Action attackAction;
         bool playerInRange;
         float timer;
         public MeleeData meleeData;
