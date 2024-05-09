@@ -175,7 +175,6 @@ MonoBehaviour:
   pet: {fileID: 8240762720540091471}
   target: {fileID: 0}
   player: {fileID: 0}
-  petHealth: {fileID: 0}
   health: {fileID: 0}
   healCooldown: 2
   healAmount: 10
@@ -203,7 +202,7 @@ AudioSource:
   m_GameObject: {fileID: 5885717227846053581}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300000, guid: 8434b04884c414ac6b468e10945685e6, type: 2}
   m_audioClip: {fileID: 8300000, guid: b3cdb2dc1be950f40a0b498655aebace, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
