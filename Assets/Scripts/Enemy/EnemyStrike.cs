@@ -6,7 +6,6 @@ namespace Nightmare
 {
     public class EnemyStrike : EnemyAttack
     {
-        public static Action<Transform> strikeAction;
         public MeleeData meleeData;
 
         protected override void Awake()
@@ -15,11 +14,6 @@ namespace Nightmare
             timeBetweenAttacks = meleeData.fireRate;
             attackRange = meleeData.maxDistance;
             base.Awake();
-        }
-
-        protected override Action<Transform> GetAttackAction()
-        {
-            return strikeAction;
         }
 
         void OnTriggerEnter (Collider other)

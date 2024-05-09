@@ -16,11 +16,6 @@ namespace Nightmare
             base.Awake();
         }
 
-        protected override Action<Transform> GetAttackAction()
-        {
-            return shootAction;
-        }
-
         void OnDestroy()
         {
             StopPausible();

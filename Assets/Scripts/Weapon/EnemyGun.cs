@@ -28,7 +28,7 @@ public class EnemyGun : MonoBehaviour
         EnemyShoot enemyShoot = GetComponentInParent<EnemyShoot>();
         if (enemyShoot != null)
         {
-            enemyShoot.shootAction += Shoot;
+            enemyShoot.attackAction += Shoot;
         }
         if (gunData.spread && lineRenderers.Count == 0){
             initLineRenders();

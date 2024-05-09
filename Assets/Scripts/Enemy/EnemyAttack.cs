@@ -8,7 +8,7 @@ namespace Nightmare
     {
         protected float timeBetweenAttacks;
         protected float attackRange;
-        public Action attackAction;
+        public Action<Transform> attackAction;
         protected Animator anim;
 
         protected GameObject player;
@@ -98,7 +98,10 @@ namespace Nightmare
             }
         }
 
-        protected abstract Action<Transform> GetAttackAction();
+        protected virtual Action<Transform> GetAttackAction()
+        {
+            return attackAction;
+        }
 
         protected void AttackPlayer ()
         {
