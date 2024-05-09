@@ -95,25 +95,19 @@ namespace Nightmare
 
             // Press Left Shift to run
             bool isRunning = Input.GetKey(KeyCode.LeftShift);
-            float curSpeedX = speed * v * mobDebuff;
-            float curSpeedY = speed * h * mobDebuff;
-
+            float speedBuff = speed * mobDebuff;
+            
             if (speedBuffTimer > 0)
-            {
-                curSpeedX *= speedBuffMultiplier;
-                curSpeedY *= speedBuffMultiplier;
-            }
+                speedBuff *= speedBuffMultiplier;
 
             if (isRunning)
-            {
-                curSpeedX *= runningSpeedMultiplier;
-                curSpeedY *= runningSpeedMultiplier;
-            }
+                speedBuff *= runningSpeedMultiplier;
 
-            if (godMode) {
-                curSpeedX *= godBuffMultiplier;
-                curSpeedY *= godBuffMultiplier;
-            }
+            if (godMode)
+                speedBuff *= godBuffMultiplier;
+
+            float curSpeedX = v * speedBuff;
+            float curSpeedY = h * speedBuff;
 
             float movementDirectionY = moveDirection.y;
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
