@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 namespace Nightmare
 {
-    public class PlayerHealth : MonoBehaviour, IDamageAble
+    public class PlayerHealth : MonoBehaviour, IPlayerDamageAble
     {
-        public int startingHealth = 100;
-        public int maxHealth = 100;
-        public int currentHealth;
+        public float startingHealth = 100;
+        public float maxHealth = 100;
+        public float currentHealth;
         public Slider healthSlider;
         public Image damageImage;
         public AudioClip deathClip;
@@ -72,7 +72,7 @@ namespace Nightmare
         }
 
 
-        public void TakeDamage(int amount, Vector3 hitPoint)
+        public void TakeDamage(float amount, Vector3 hitPoint)
         {
             if (godMode)
                 return;
@@ -112,7 +112,7 @@ namespace Nightmare
             }
         }
 
-        public void Heal(int amount)
+        public void Heal(float amount)
         {
             if (!isDead)
             {

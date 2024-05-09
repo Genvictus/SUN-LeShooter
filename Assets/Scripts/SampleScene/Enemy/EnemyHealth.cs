@@ -24,7 +24,7 @@ public class EnemyHealth : MonoBehaviour, IMobs, IDamageAble
             DestroyEnemy();
     }
     
-    public void TakeDamage(int damage, Vector3 hitpoint)
+    public void TakeDamage(float damage, Vector3 hitpoint)
     {
         TakeDamage(damage);
     }

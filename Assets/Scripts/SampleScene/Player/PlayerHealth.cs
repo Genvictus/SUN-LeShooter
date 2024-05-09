@@ -35,7 +35,7 @@ public class PlayerHealth : MonoBehaviour, IMobs, IDamageAble
             gameEndUI.EndGame("You Lose");
     }
 
-    public void TakeDamage(int damage, Vector3 hitPoint)
+    public void TakeDamage(float damage, Vector3 hitPoint)
     {
         Health -= damage;
         healthUI.UpdateHealth(Health);

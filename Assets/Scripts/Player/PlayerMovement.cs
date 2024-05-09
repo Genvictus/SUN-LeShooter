@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnitySampleAssets.CrossPlatformInput;
 
 
@@ -10,8 +11,12 @@ namespace Nightmare
     {
         public Camera playerCamera;
         public float speed = 6f;
-        public float walkSpeed = 6f;
-        public float runSpeed = 12f;
+        public float runningSpeedMultiplier = 2f;
+        public static float speedBuffMultiplier = 1.2f;
+        public static float speedBuffTimer = 0f;
+        public static GameObject buffHUD = null;
+        public static float mobDebuff = 1f;
+
         public float jumpPower = 7f;
         public float gravity = 10f;
 
@@ -25,17 +30,11 @@ namespace Nightmare
 
         CharacterController characterController;
         Animator anim;
-        Rigidbody playerRigidbody;
-        int floorMask;
+
 
         void Awake()
         {
-            floorMask = LayerMask.GetMask("Floor");
-
-            // Set up references.
             anim = GetComponent<Animator>();
-            playerRigidbody = GetComponent<Rigidbody>();
-
             StartPausible();
         }
 
@@ -68,6 +67,17 @@ namespace Nightmare
             if (isPaused)
                 return;
 
+            if (speedBuffTimer > 0f)
+            {
+                speedBuffTimer -= Time.deltaTime;
+                setSpeedDurationText(speedBuffTimer);
+            }
+            else if (buffHUD is not null)
+            {
+                BuffManager.RemoveBuff(buffHUD);
+                buffHUD = null;
+            }
+
             float h = Input.GetAxis("Horizontal");
             float v = Input.GetAxis("Vertical");
 
@@ -75,15 +85,29 @@ namespace Nightmare
             Animating(h, v);
         }
 
-        void Move(float h, float v) {
+        void Move(float h, float v)
+        {
             #region Handles Movement
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
 
             // Press Left Shift to run
             bool isRunning = Input.GetKey(KeyCode.LeftShift);
-            float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * v : 0;
-            float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * h : 0;
+            float curSpeedX = speed * v * mobDebuff;
+            float curSpeedY = speed * h * mobDebuff;
+
+            if (speedBuffTimer > 0)
+            {
+                curSpeedX *= speedBuffMultiplier;
+                curSpeedY *= speedBuffMultiplier;
+            }
+
+            if (isRunning)
+            {
+                curSpeedX *= runningSpeedMultiplier;
+                curSpeedY *= runningSpeedMultiplier;
+            }
+
             float movementDirectionY = moveDirection.y;
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
@@ -119,7 +143,7 @@ namespace Nightmare
 
             #endregion
         }
-        
+
         void Animating(float h, float v)
         {
             // Create a boolean that is true if either of the input axes is non-zero.
@@ -127,6 +151,11 @@ namespace Nightmare
 
             // Tell the animator whether or not the player is walking.
             anim.SetBool("IsWalking", walking);
+        }
+
+        public static void setSpeedDurationText(float duration) {
+            Text stackText = buffHUD.GetComponentInChildren<Text>();
+            stackText.text = ((int)Math.Ceiling(duration)).ToString();
         }
     }
 }
