@@ -8,25 +8,25 @@ namespace Nightmare
     public class CheatManager : MonoBehaviour
     {
         private CheatDFA cheatDFA;
-        private Pair<string, Action>[] cheatActions;
+        private Cheat[] cheats;
 
         void Start()
         {
             cheatDFA = new CheatDFA();
-            cheatActions = new Pair<string, Action>[] {
-                new("iwillprotectyou", PlayerInvincible),
-                new("bigerwepong", OneHitKill),
-                new("akutubuhpeluru", InfiniteMoney),
-                new("fasterdadieh", DoubleSpeed),
-                new("cumbehindme", PetInvincible),
-                new("ambatu", KillPet),
-                new("thankyousomuch", GetAllOrbs),
-                new("skipkelas", SkipLevel),
+            cheats = new Cheat[] {
+                new PlayerInvincibleCheat(),
+                new OneHitKillCheat(),
+                new InfiniteMoneyCheat(),
+                new DoubleSpeedCheat(),
+                new PetInvincibleCheat(),
+                new KillPetCheat(),
+                new GetAllOrbsCheat(),
+                new SkipLevelCheat(),
             };
 
-            foreach (Pair<string, Action> cheat in cheatActions)
+            foreach (Cheat cheat in cheats)
             {
-                cheatDFA.AddCheatCode(cheat.First, cheat.Second);
+                cheatDFA.AddCheat(cheat);
             }
         }
 
@@ -38,63 +38,14 @@ namespace Nightmare
                 cheatDFA.Next(inputKey);
                 if (cheatDFA.currentNode.isTerminal)
                 {
-                    Debug.Log("Cheat Activated");
+                    Debug.Log("Cheat Activated: " + cheatDFA.currentNode.cheat.cheatName);
 
-                    Action cheatAction = cheatDFA.currentNode.cheatAction;
+                    Action cheatAction = cheatDFA.currentNode.cheat.ExecuteCheat;
                     cheatAction();
 
                     cheatDFA.currentNode = cheatDFA.startNode;
                 }
             }
         }
-
-        private void PlayerInvincible()
-        {
-            // TODO
-            Debug.Log("PlayerInvincible Cheat");
-        }
-
-        private void OneHitKill()
-        {
-            // TODO
-            Debug.Log("OneHitKill Cheat");
-        }
-
-        private void InfiniteMoney()
-        {
-            // TODO
-            Debug.Log("InfiniteMoney Cheat");
-        }
-
-        private void DoubleSpeed()
-        {
-            // TODO
-            Debug.Log("DoubleSpeed Cheat");
-        }
-
-        private void PetInvincible()
-        {
-            // TODO
-            Debug.Log("PetInvincible Cheat");
-        }
-
-        private void KillPet()
-        {
-            // TODO
-            Debug.Log("KillPet Cheat");
-        }
-
-        private void GetAllOrbs()
-        {
-            // TODO
-            Debug.Log("GetAllOrbs Cheat");
-        }
-
-        private void SkipLevel()
-        {
-            // TODO
-            Debug.Log("SkipLevel Cheat");
-        }
-
     }
 }

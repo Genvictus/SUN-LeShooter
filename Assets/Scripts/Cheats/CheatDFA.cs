@@ -13,7 +13,7 @@ namespace Nightmare
             public Dictionary<string, DFANode> transitions = new();
             public bool isTerminal = false;
             public string cheatCode = ""; // can be removed, just for debug
-            public Action cheatAction;
+            public Cheat cheat = null;
 
             public DFANode AddTransition(string input)
             {
@@ -33,17 +33,17 @@ namespace Nightmare
             currentNode = startNode;
         }
 
-        public void AddCheatCode(string cheatSequence, Action cheatAction)
+        public void AddCheat(Cheat cheat)
         {
             DFANode node = startNode;
-            foreach (char letter in cheatSequence)
+            foreach (char letter in cheat.cheatCode)
             {
                 string prevCheatCode = node.cheatCode;
                 node = node.AddTransition(letter.ToString());
                 node.cheatCode = prevCheatCode + letter;
             }
             node.isTerminal = true;
-            node.cheatAction = cheatAction;
+            node.cheat = cheat;
         }
 
         public void Next(string input)
