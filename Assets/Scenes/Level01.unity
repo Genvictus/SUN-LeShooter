@@ -1372,6 +1372,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cutscene1
       objectReference: {fileID: 0}
+    - target: {fileID: 5500365130034066383, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6255931688928275994, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.3
