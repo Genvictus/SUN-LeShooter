@@ -12,6 +12,7 @@ namespace Nightmare
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
         public Action attackAction;
+        public Action clearAction;
         bool playerInRange;
         float timer;
         public MeleeData meleeData;
@@ -31,6 +32,7 @@ namespace Nightmare
         void OnDestroy()
         {
             StopPausible();
+            clearAction?.Invoke();
         }
 
         void OnTriggerEnter (Collider other)
@@ -80,6 +82,10 @@ namespace Nightmare
                 // ... attack.
                 transform.LookAt(player.transform);
                 Attack ();
+            }
+
+            if (timer >= 0.1f){
+                clearAction?.Invoke();
             }
 
             // If the player has zero or less health...

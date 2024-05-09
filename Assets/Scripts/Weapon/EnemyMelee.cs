@@ -24,6 +24,7 @@ public class EnemyMelee : MonoBehaviour
         if (enemyAttack != null)
         {
             enemyAttack.attackAction += Attack;
+            enemyAttack.clearAction += DisableEffects;
         }
     }
 
