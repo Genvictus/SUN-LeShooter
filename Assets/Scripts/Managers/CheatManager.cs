@@ -9,9 +9,14 @@ namespace Nightmare
     {
         private CheatDFA cheatDFA;
         private Cheat[] cheats;
+        public AudioClip cheatAudioClip;
+        AudioSource cheatAudio;
 
         void Start()
         {
+            cheatAudio = gameObject.AddComponent<AudioSource>();
+            cheatAudio.clip = cheatAudioClip;
+
             cheatDFA = new CheatDFA();
             cheats = new Cheat[] {
                 new PlayerInvincibleCheat(),
@@ -41,6 +46,7 @@ namespace Nightmare
                     Debug.Log("Cheat Activated: " + cheatDFA.currentNode.cheat.cheatName);
 
                     string cheatMessage = cheatDFA.currentNode.cheat.ExecuteCheat();
+                    cheatAudio.Play();
                     Debug.Log(cheatMessage);
 
                     cheatDFA.currentNode = cheatDFA.startNode;
