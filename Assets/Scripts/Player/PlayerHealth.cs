@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Nightmare
 {
-    public class PlayerHealth : MonoBehaviour, IDamageAble
+    public class PlayerHealth : MonoBehaviour, IPlayerDamageAble
     {
         public float startingHealth = 100;
         public float maxHealth = 100;

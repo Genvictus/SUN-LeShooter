@@ -1,18 +1,23 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Nightmare;
 using UnityEngine;
 
 public class EnemyMelee : MonoBehaviour
 {
-   [Header("References")]
+    [Header("References")]
     [SerializeField] private MeleeData meleeData;
     [SerializeField] private Transform enemyTransform;
 
     [Header("Visuals")]
+    [SerializeField] private float visualDuration = 0.1f;
     [SerializeField] private LineRenderer lineRenderer;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource attackSound;
     float timeSinceLastAttack;
+    bool effectActive;
     private void Start()
     {
         EnemyAttack.attackAction += Attack;
@@ -20,7 +25,11 @@ public class EnemyMelee : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawLine(enemyTransform.position, enemyTransform.position + enemyTransform.forward * meleeData.maxDistance, Color.red);
+        if (effectActive && timeSinceLastAttack > visualDuration)
+        {
+            DisableEffects();
+            effectActive = false;
+        }
         timeSinceLastAttack += Time.deltaTime;
     }
 
@@ -39,10 +48,10 @@ public class EnemyMelee : MonoBehaviour
 
             RaycastHit hit;
             if (Physics.Raycast(enemyTransform.position, enemyTransform.forward, out hit, meleeData.maxDistance))
-            {   
+            {
                 Debug.Log("Enemy Hit2");
                 Debug.Log(hit.transform.name);
-                IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
+                IPlayerDamageAble damageAble = hit.transform.GetComponent<IPlayerDamageAble>();
                 damageAble?.TakeDamage(meleeData.damage, hit.transform.position);
 
                 lineRenderer.SetPosition(0, transform.position);
@@ -54,12 +63,18 @@ public class EnemyMelee : MonoBehaviour
             }
             OnMeleeAttack();
         }
-
     }
 
     private void OnMeleeAttack()
     {
+        lineRenderer.enabled = true;
+        attackSound.Play();
+        effectActive = true;
+    }
 
+    private void DisableEffects()
+    {
+        lineRenderer.enabled = false;
     }
 
 }

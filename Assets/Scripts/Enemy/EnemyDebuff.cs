@@ -12,18 +12,25 @@ namespace Nightmare
         GameObject player;
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
-        public Gun Default;
-        public Gun Shotgun;
-        public Melee Sword;
+        WeaponSwitching weaponSwitching;
+        Gun Default;
+        Gun Shotgun;
+        Melee Sword;
         bool playerInRange;
         float timer;
         bool isDebuffed = false;
 
-        void Awake ()
+        void Start ()
         {
             // Setting up the references.
             player = GameObject.FindGameObjectWithTag ("Player");
             playerHealth = player.GetComponent <PlayerHealth> ();
+
+            weaponSwitching = player.GetComponentInChildren<WeaponSwitching>();
+
+            Default = weaponSwitching.GetWeapon(0).GetComponent<Gun>();
+            Shotgun = weaponSwitching.GetWeapon(1).GetComponent<Gun>();
+            Sword = weaponSwitching.GetWeapon(2).GetComponent<Melee>();
 
             enemyHealth = GetComponent<EnemyHealth>();
 
@@ -70,6 +77,7 @@ namespace Nightmare
 
             // Reset the timer.
             timer = 0f;
+            isDebuffed = true;
 
             // If the player has health to lose...
             if(playerHealth.currentHealth > 0)
@@ -85,6 +93,7 @@ namespace Nightmare
 
             // Reset the timer.
             timer = 0f;
+            isDebuffed = false;
 
             // If the player has health to lose...
             if(playerHealth.currentHealth > 0)
