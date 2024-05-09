@@ -56,7 +56,16 @@ namespace Nightmare
 
             // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
             
-            Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+            var instantiatedEnemy = Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+
+            if (enemy.name == "Jenderal" || enemy.name == "Raja" || enemy.name == "Jenderal(Clone)" || enemy.name == "Raja(Clone)")
+            {
+                var pet = Resources.Load("IncreaseTortoise") as GameObject;
+                var petObject = Instantiate(pet, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation) as GameObject;
+                var petScript = petObject.GetComponent<IncreaseTortoise>();
+                petScript.followTarget = instantiatedEnemy;
+            }
+            return;
         }
     }
 }

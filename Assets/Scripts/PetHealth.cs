@@ -56,7 +56,7 @@ public class PetHealth : MonoBehaviour, IPlayerDamageAble
         }
     }
 
-    void Death()
+    public void Death()
     {
         isDead = true;
 
