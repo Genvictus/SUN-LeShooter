@@ -9,6 +9,7 @@ namespace Nightmare
         protected float timeBetweenAttacks;
         protected float attackRange;
         public Action<Transform> attackAction;
+        public Action clearAction;
         protected Animator anim;
 
         protected GameObject player;
@@ -42,24 +43,37 @@ namespace Nightmare
         void OnDestroy()
         {
             StopPausible();
+            clearAction?.Invoke();
         }
 
-        protected void CheckTargetInRange()
+        void OnTriggerEnter (Collider other)
         {
-            if (Vector3.Distance(player.transform.position, transform.position) < attackRange)
+            // If the entering collider is the player...
+            if(other.gameObject == player)
             {
+                // ... the player is in range.
                 playerInRange = true;
             }
-            else
+            // If the entering collider is pet...
+            if(other.gameObject == pet)
             {
-                playerInRange = false;
-            }
-            if (Vector3.Distance(pet.transform.position, transform.position) < attackRange)
-            {
+                // ... the pet is in range.
                 petInRange = true;
             }
-            else
+        }
+
+        void OnTriggerExit (Collider other)
+        {
+            // If the exiting collider is the player...
+            if(other.gameObject == player)
             {
+                // ... the player is no longer in range.
+                playerInRange = false;
+            }
+            // If the entering collider is pet...
+            if(other.gameObject == pet)
+            {
+                // ... the pet is in range.
                 petInRange = false;
             }
         }
@@ -75,7 +89,6 @@ namespace Nightmare
             // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
             if(timer >= timeBetweenAttacks && enemyHealth.CurrentHealth() > 0)
             {
-                CheckTargetInRange();
                 // ... attack.
                 if (playerInRange)
                 {
@@ -87,7 +100,10 @@ namespace Nightmare
                     transform.LookAt(pet.transform);
                     AttackPet();
                 }
+            }
 
+            if (timer >= 0.1f){
+                clearAction?.Invoke();
             }
 
             // If the player has zero or less health...
