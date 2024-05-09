@@ -57,11 +57,11 @@ public class EnemyDebuffing : MonoBehaviour
         playerMovement.walkSpeed /= debuffStrength;
         playerMovement.runSpeed /= debuffStrength;
 
-        Default.DebuffAttack(debuffStrength);
+        // Default.DebuffAttack(debuffStrength);
 
-        Sword.DebuffAttack(debuffStrength);
+        // Sword.DebuffAttack(debuffStrength);
 
-        Shotgun.DebuffAttack(debuffStrength);
+        // Shotgun.DebuffAttack(debuffStrength);
         // Vector3 bulletSpawnPostion = transform.position + transform.forward * 1.5f;
 
         // Rigidbody rb = Instantiate(projectile, bulletSpawnPostion, Quaternion.identity).GetComponent<Rigidbody>();
@@ -83,11 +83,11 @@ public class EnemyDebuffing : MonoBehaviour
         playerMovement.walkSpeed *= debuffStrength;
         playerMovement.runSpeed *= debuffStrength;
 
-        Default.BuffAttack(debuffStrength);
+        // Default.BuffAttack(debuffStrength);
 
-        Sword.BuffAttack(debuffStrength);
+        // Sword.BuffAttack(debuffStrength);
 
-        Shotgun.BuffAttack(debuffStrength);
+        // Shotgun.BuffAttack(debuffStrength);
 
         // Vector3 bulletSpawnPostion = transform.position + transform.forward * 1.5f;
 

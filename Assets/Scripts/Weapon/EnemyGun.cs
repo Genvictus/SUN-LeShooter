@@ -36,14 +36,14 @@ public class EnemyGun : MonoBehaviour
     {
         if (CanShoot())
         {
-            Debug.Log("Enemy Shoot");
+            // Debug.Log("Enemy Shoot");
             timeSinceLastShot = 0;
             RaycastHit hit;
             if (Physics.Raycast(enemyTransform.position, enemyTransform.forward, out hit, gunData.maxDistance))
             {   
                 Debug.Log(hit.transform.name);
                 IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
-                damageAble?.TakeDamage((int)Math.Round(gunData.damage), hit.transform.position);
+                damageAble?.TakeDamage(gunData.damage, hit.transform.position);
 
                 lineRenderer.SetPosition(0, muzzle.position);
                 lineRenderer.SetPosition(1, hit.point);

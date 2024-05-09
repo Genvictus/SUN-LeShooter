@@ -1,20 +1,24 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Nightmare
 {
     public class EnemyHealth : MonoBehaviour, IDamageAble
     {
-        public int startingHealth = 100;
+        public float startingHealth = 100;
         public float sinkSpeed = 2.5f;
         public int scoreValue = 10;
         public AudioClip deathClip;
 
-        int currentHealth;
+        float currentHealth;
         Animator anim;
         AudioSource enemyAudio;
         ParticleSystem hitParticles;
         CapsuleCollider capsuleCollider;
         EnemyMovement enemyMovement;
+        List<GameObject> orbPrefabs = new List<GameObject>();
+        public float orbDropChance = 0.5f;
+
 
         void Awake ()
         {
@@ -23,6 +27,10 @@ namespace Nightmare
             hitParticles = GetComponentInChildren <ParticleSystem> ();
             capsuleCollider = GetComponent <CapsuleCollider> ();
             enemyMovement = this.GetComponent<EnemyMovement>();
+            
+            orbPrefabs.Add(Resources.Load("HealOrb") as GameObject);
+            orbPrefabs.Add(Resources.Load("AttackOrb") as GameObject);
+            orbPrefabs.Add(Resources.Load("SpeedOrb") as GameObject);
         }
 
         void OnEnable()
@@ -54,9 +62,9 @@ namespace Nightmare
             return (currentHealth <= 0f);
         }
 
-        public void TakeDamage (int amount, Vector3 hitPoint)
+        public void TakeDamage (float amount, Vector3 hitPoint)
         {
-            Debug.Log("taking damage: " + amount);
+            Debug.Log("Enemy take damage: " + amount);
             if (!IsDead())
             {
                 enemyAudio.Play();
@@ -80,6 +88,15 @@ namespace Nightmare
         {
             EventManager.TriggerEvent("Sound", this.transform.position);
             anim.SetTrigger ("Dead");
+            Vector3 orbSpawnPosition = transform.position;
+            orbSpawnPosition.y += 0.5f;
+
+            float orbDropValue = Random.value;
+            if (orbDropValue <= orbDropChance) {
+                int orbIndex = Random.Range(0, orbPrefabs.Count);
+                GameObject orb = orbPrefabs[orbIndex];
+                Instantiate(orb, orbSpawnPosition, Quaternion.identity);
+            }
 
             enemyAudio.clip = deathClip;
             enemyAudio.Play ();
@@ -93,7 +110,7 @@ namespace Nightmare
             ScoreManager.score += scoreValue;
         }
 
-        public int CurrentHealth()
+        public float CurrentHealth()
         {
             return currentHealth;
         }

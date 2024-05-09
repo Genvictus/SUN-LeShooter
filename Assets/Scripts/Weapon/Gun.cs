@@ -39,15 +39,20 @@ namespace Nightmare
 
             if (gunData.currentAmmo > 0 && CanShoot())
             {
-                Debug.Log("Shoot");
+                // Debug.Log("Shoot");
                 timeSinceLastShot = 0;
                 gunData.currentAmmo--;
                 RaycastHit hit;
                 if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, gunData.maxDistance))
                 {
-                    Debug.Log("got hit: " + hit.transform.name);
+                    // Debug.Log("got hit: " + hit.transform.name);
                     IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
-                    damageAble?.TakeDamage((int)Math.Round(gunData.damage), hit.transform.position);
+                    
+                    float damage = gunData.damage;
+                    damage += gunData.damage * PlayerShooting.orbBuffMultiplier * PlayerShooting.orbBuffCount;
+                    damage *= PlayerShooting.mobDebuff;
+                    Debug.Log("Deal damage: " + damage);
+                    damageAble?.TakeDamage(damage, hit.transform.position);
 
                     lineRenderer.SetPosition(0, muzzle.position);
                     lineRenderer.SetPosition(1, hit.point);
@@ -80,17 +85,6 @@ namespace Nightmare
             yield return new WaitForSeconds(gunData.reloadTime);
             gunData.currentAmmo = gunData.magSize;
             gunData.reloading = false;
-        }
-
-
-        public void DebuffAttack(float debuff)
-        {
-            gunData.damage /= debuff;
-        }
-
-        public void BuffAttack(float buff)
-        {
-            gunData.damage *= buff;
         }
 
         public GunData GetGunData() {
