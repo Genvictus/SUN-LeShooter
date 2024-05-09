@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Raja Shotgun
   m_EditorClassIdentifier: 
   name: Raja Shotgun
-  damage: 10
+  damage: 4
   maxDistance: 5
   currentAmmo: 15
   magSize: 20
@@ -21,3 +21,4 @@ MonoBehaviour:
   fireRate: 3
   spread: 1
   reloading: 0
+  shooting: 0

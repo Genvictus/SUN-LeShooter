@@ -144,15 +144,11 @@ namespace Nightmare
         private float CalculateAdjustedDamage(float distance)
         {
             float maxDistance = gunData.maxDistance; 
-            float minDistance = 0f;
             float maxDamage = gunData.damage;
             float minDamage = 1f;
 
-            float slope = (maxDamage - minDamage) / (maxDistance - minDistance);
-
-            float adjustedDamage = slope * distance + maxDamage;
-
-            adjustedDamage = Mathf.Max(minDamage, adjustedDamage);
+            float t = distance / maxDistance;
+            float adjustedDamage = Mathf.Lerp(maxDamage, minDamage, t);
 
             return adjustedDamage;
         }
