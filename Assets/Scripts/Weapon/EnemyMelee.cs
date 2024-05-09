@@ -8,7 +8,6 @@ public class EnemyMelee : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private MeleeData meleeData;
-    [SerializeField] private Transform enemyTransform;
 
     [Header("Visuals")]
     [SerializeField] private float visualDuration = 0.1f;
@@ -20,7 +19,7 @@ public class EnemyMelee : MonoBehaviour
     bool effectActive;
     private void Start()
     {
-        EnemyAttack.attackAction += Attack;
+        EnemyStrike.strikeAction += Attack;
     }
 
     void Update()
@@ -38,7 +37,7 @@ public class EnemyMelee : MonoBehaviour
         return timeSinceLastAttack > meleeData.fireRate;
     }
 
-    public void Attack()
+    public void Attack(Transform enemyTransform)
     {
 
         if (CanAttack())
