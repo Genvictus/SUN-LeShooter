@@ -15,7 +15,15 @@ namespace Nightmare
 
         public override void ExecuteCheat()
         {
-            // TODO
+            GameObject player = GameObject.FindGameObjectWithTag ("Player");
+            PlayerHealth playerHealth = player.GetComponent <PlayerHealth> ();
+            playerHealth.godMode = !playerHealth.godMode;
+            
+            if (playerHealth.godMode) {
+                Debug.Log("Player Invincible Cheat Activated");
+            } else {
+                Debug.Log("Player Invincible Cheat Deactivated");
+            }
         }
     }
 }
