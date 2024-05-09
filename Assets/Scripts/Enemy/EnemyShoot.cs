@@ -6,7 +6,6 @@ namespace Nightmare
 {
     public class EnemyShoot : EnemyAttack
     {
-        public static Action<Transform> shootAction;
         public GunData gunData;
 
         protected override void Awake()

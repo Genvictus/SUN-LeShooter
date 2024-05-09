@@ -19,7 +19,11 @@ public class EnemyMelee : MonoBehaviour
     bool effectActive;
     private void Start()
     {
-        EnemyStrike.strikeAction += Attack;
+        EnemyStrike enemyStrike = GetComponentInParent<EnemyStrike>();
+        if (enemyStrike != null)
+        {
+            enemyStrike.attackAction += Attack;
+        }
     }
 
     void Update()

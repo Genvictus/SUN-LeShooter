@@ -8,6 +8,7 @@ namespace Nightmare
     {
         protected float timeBetweenAttacks;
         protected float attackRange;
+        public Action attackAction;
         protected Animator anim;
 
         protected GameObject player;

@@ -43,7 +43,10 @@ public class EnemyShooting : MonoBehaviour
         transform.LookAt(player);
 
         if (Vector3.Angle(transform.forward, player.position - transform.position) < 45)
-            EnemyShoot.shootAction.Invoke(player.transform);
+        {
+            // Shoot
+            Debug.Log("Enemy has shot");
+        }
 
         // Vector3 bulletSpawnPostion = transform.position + transform.forward * 1.5f;
 
