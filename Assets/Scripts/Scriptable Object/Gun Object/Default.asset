@@ -16,10 +16,10 @@ MonoBehaviour:
   damage: 10
   originalDamage: 10
   maxDistance: 20
-  currentAmmo: 971
-  magSize: 1000
+  currentAmmo: 10
+  magSize: 10
   reloadTime: 1
-  fireRate: 0.1
+  fireRate: 0.4
   spread: 0
   reloading: 0
-  shooting: 1
+  shooting: 0
