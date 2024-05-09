@@ -47,13 +47,13 @@ namespace Nightmare
         private void LoadLevel(int level)
         {
             Debug.Log("Loading Level " + level.ToString());
-            
+
             currentLevel = level;
 
             playerMove = FindObjectOfType<PlayerMovement>();
             playerRespawn = playerMove.transform.position;
             pm = FindObjectOfType<PauseManager>();
-            
+
             // order or setting pause matters for cursor lock
             pm.SetGameOverPause(false);
             pm.SetPause(false);
@@ -75,11 +75,8 @@ namespace Nightmare
 
             currentScene = scene;
 
-            // Play realtime cinematic?
-            if (currentLevel > 1)
-                cinema.StartCinematic(CinematicController.CinematicType.Realtime);
-            else
-                cinema.StartCinematic(CinematicController.CinematicType.PreRendered);
+            cinema.StartCinematic(CinematicController.CinematicType.Realtime);
+            // cinema.StartCinematic(CinematicController.CinematicType.PreRendered);
         }
 
         private void DisableOldScene()
