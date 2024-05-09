@@ -8,12 +8,17 @@ public class ShopUI : MonoBehaviour
 {
     private Transform petItem;
     private Transform container;
+    private Transform goldAmount; 
     private IShopCustomer customer;
     
     private void Awake()
     {
         container = transform.Find("container");
         petItem = container.Find("petItem");
+        goldAmount = container.Find("GoldAmount");
+
+ /*       GameObject player = GameObject.FindGameObjectWithTag("player");
+        customer = player.GetComponent<IShopCustomer>();*/
     }
 
     private void Start()
@@ -34,20 +39,22 @@ public class ShopUI : MonoBehaviour
         petItemTransform.Find("Petname").GetComponent<TextMeshProUGUI>().SetText(itemName);
         petItemTransform.Find("Price").GetComponent<TextMeshProUGUI>().SetText(itemCost.ToString());
 
-        petItemTransform.GetComponent<Button_UI>().ClickFunc = () =>
+        /*petItemTransform.GetComponent<Button_UI>().ClickFunc = () =>
         {
             TryBuyItem();
-        };
+        };*/
     }
 
-    private void TryBuyItem()
+    public void TryBuyItem()
     {
+        Debug.Log("masuk beli");
         customer.BoughItem();
     }
 
     public void Show(IShopCustomer customer)
     {
         this.customer = customer;
+        goldAmount.GetComponent<TextMeshProUGUI>().SetText(customer.getGoldAmount().ToString());
         gameObject.SetActive(true);
     }
     

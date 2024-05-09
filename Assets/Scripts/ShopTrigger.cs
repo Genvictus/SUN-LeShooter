@@ -19,9 +19,9 @@ public class ShopTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Masuk"); 
         IShopCustomer shopCustomer = other.GetComponent<IShopCustomer>();
-        if(shopCustomer != null) {
+        if (shopCustomer != null)
+        {
             shopUI.Show(shopCustomer);
         }
     }

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 namespace Nightmare
 {
-    public class AttackTortoise : MonoBehaviour
+    public class AttackTortoise : PausibleObject
     {
         public NavMeshAgent pet;
         //public GameObject player;
@@ -33,9 +33,11 @@ namespace Nightmare
         // Update is called once per frame
         void Update()
         {
+            if (isPaused)
+                return;
+
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
             animator.SetBool("Attack", false);
-            Debug.Log(enemies.Length);
 
             List<GameObject> enemiesInRangePlayer = new List<GameObject>();
             foreach (var enemy in enemies)
@@ -64,7 +66,6 @@ namespace Nightmare
                     }
                 }
 
-                Debug.Log(distance);
                 if (distance < attackDist)
                 {
                     if (_timer > hitTime)
@@ -90,6 +91,11 @@ namespace Nightmare
             yield return new  WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             EnemyHealth health = target.GetComponent<EnemyHealth>();
             health.TakeDamage(damage, transform.position);
+        }
+
+        void OnDestroy()
+        {
+            StopPausible();
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace Nightmare
 {
-    public class PetFollow : MonoBehaviour
+    public class PetFollow : PausibleObject
     {
         // Start is called before the first frame update
         public NavMeshAgent pet;
@@ -39,6 +39,9 @@ namespace Nightmare
         // Update is called once per frame
         void Update()
         {
+            if (isPaused)
+                return;
+
             pet.SetDestination(target.position);
 
             if ((transform.position - target.position).magnitude <= 100)
@@ -60,6 +63,11 @@ namespace Nightmare
                 health.Heal(healAmount);
                 _timer = 0f;
             }
+        }
+
+        void OnDestroy()
+        {
+            StopPausible();
         }
     }
 }
