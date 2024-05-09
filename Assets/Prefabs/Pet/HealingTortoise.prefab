@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       propertyPath: m_Name
-      value: Tortoise_Boss_Anims
+      value: HealingTortoise
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -51,6 +51,22 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400032, guid: 312893f539145244eb941380e62dd9e8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.1424008
+      objectReference: {fileID: 0}
+    - target: {fileID: 400032, guid: 312893f539145244eb941380e62dd9e8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.00898165
+      objectReference: {fileID: 0}
+    - target: {fileID: 400050, guid: 312893f539145244eb941380e62dd9e8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.004598401
+      objectReference: {fileID: 0}
+    - target: {fileID: 400050, guid: 312893f539145244eb941380e62dd9e8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.087207206
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       propertyPath: m_Controller

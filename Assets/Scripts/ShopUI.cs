@@ -8,9 +8,9 @@ public class ShopUI : MonoBehaviour
 {
     private Transform petItem;
     private Transform container;
-    private Transform goldAmount; 
+    private Transform goldAmount;
     private IShopCustomer customer;
-    
+
     private void Awake()
     {
         container = transform.Find("container");
@@ -47,19 +47,23 @@ public class ShopUI : MonoBehaviour
 
     public void TryBuyItem()
     {
-        Debug.Log("masuk beli");
+        Debug.LogError("masuk beli");
         customer.BoughItem();
     }
 
     public void Show(IShopCustomer customer)
     {
+        CursorHandler.ShowCursor();
+
         this.customer = customer;
         goldAmount.GetComponent<TextMeshProUGUI>().SetText(customer.getGoldAmount().ToString());
         gameObject.SetActive(true);
     }
-    
+
     public void Hide()
     {
+        CursorHandler.HideCursor();
+
         gameObject.SetActive(false);
     }
 }

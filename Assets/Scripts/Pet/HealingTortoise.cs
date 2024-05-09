@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace Nightmare
 {
-    public class PetFollow : PausibleObject
+    public class HealingTortoise : PausibleObject
     {
         // Start is called before the first frame update
         public NavMeshAgent pet;
@@ -57,9 +57,7 @@ namespace Nightmare
             _timer += Time.deltaTime;
             if (playerInRange && _timer >= healCooldown && health.currentHealth < 100)
             {
-                Debug.Log("Playing heal sound");
                 _audio.Play();
-                Debug.Log("Heal sound should have played");
                 health.Heal(healAmount);
                 _timer = 0f;
             }
