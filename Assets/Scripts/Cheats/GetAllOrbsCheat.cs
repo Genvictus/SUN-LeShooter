@@ -16,9 +16,7 @@ namespace Nightmare
         public override void ExecuteCheat()
         {
             GameObject player = GameObject.FindGameObjectWithTag ("Player");
-            PlayerMovement playerMovement = player.GetComponent <PlayerMovement> ();
-            playerMovement.godMode = !playerMovement.godMode;
-            
+
             GameObject[] orbs = Orb.GetOrbs();
             Vector3 orbSpawnPosition = player.transform.position;
             orbSpawnPosition.y += 0.5f;
