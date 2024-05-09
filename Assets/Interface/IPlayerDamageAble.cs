@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IPlayerDamageAble
 {
-    void TakeDamage(int amount, Vector3 hitPoint);
+    void TakeDamage(float amount, Vector3 hitPoint);
 }
