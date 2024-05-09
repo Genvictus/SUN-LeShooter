@@ -16,6 +16,8 @@ namespace Nightmare
         public static float speedBuffTimer = 0f;
         public static GameObject buffHUD = null;
         public static float mobDebuff = 1f;
+        public float godBuffMultiplier = 2f;
+        public bool godMode = false;
 
         public float jumpPower = 7f;
         public float gravity = 10f;
@@ -106,6 +108,11 @@ namespace Nightmare
             {
                 curSpeedX *= runningSpeedMultiplier;
                 curSpeedY *= runningSpeedMultiplier;
+            }
+
+            if (godMode) {
+                curSpeedX *= godBuffMultiplier;
+                curSpeedY *= godBuffMultiplier;
             }
 
             float movementDirectionY = moveDirection.y;

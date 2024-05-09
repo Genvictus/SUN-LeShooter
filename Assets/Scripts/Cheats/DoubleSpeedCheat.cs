@@ -15,7 +15,15 @@ namespace Nightmare
 
         public override void ExecuteCheat()
         {
-            // TODO
+            GameObject player = GameObject.FindGameObjectWithTag ("Player");
+            PlayerMovement playerMovement = player.GetComponent <PlayerMovement> ();
+            playerMovement.godMode = !playerMovement.godMode;
+            
+            if (playerMovement.godMode) {
+                Debug.Log("Player Speed Cheat Activated");
+            } else {
+                Debug.Log("Player Speed Cheat Deactivated");
+            }
         }
     }
 }
