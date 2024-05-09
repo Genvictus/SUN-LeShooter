@@ -55,6 +55,10 @@ namespace Nightmare
             else
             {
                 currentNode = startNode;
+                if (currentNode.transitions.ContainsKey(input))
+                {
+                    currentNode = currentNode.transitions[input];
+                }
             }
         }
 
