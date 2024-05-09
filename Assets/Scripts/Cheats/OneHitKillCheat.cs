@@ -15,7 +15,13 @@ namespace Nightmare
 
         public override void ExecuteCheat()
         {
-            // TODO
+            PlayerShooting.godMode = !PlayerShooting.godMode;
+
+            if (PlayerShooting.godMode) {
+                Debug.Log("One Hit Kill Cheat Activated");
+            } else {
+                Debug.Log("One Hit Kill Cheat Deactivated");
+            }
         }
     }
 }
