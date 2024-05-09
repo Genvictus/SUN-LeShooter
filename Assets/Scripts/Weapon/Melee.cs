@@ -14,6 +14,7 @@ namespace Nightmare
         [Header("Visuals")]
         [SerializeField] private float visualDuration = 0.1f;
         [SerializeField] private LineRenderer lineRenderer;
+        Animator anim;
 
         [Header("Audio")]
         [SerializeField] private AudioSource attackSound;
@@ -23,6 +24,7 @@ namespace Nightmare
         private void Start()
         {
             PlayerAttack.attackInput += Attack;
+            anim = GetComponentInChildren<Animator>();
         }
 
         void Update()
@@ -31,6 +33,7 @@ namespace Nightmare
             {
                 DisableEffects();
                 effectActive = false;
+                anim.ResetTrigger("Attack");
             }
             timeSinceLastAttack += Time.deltaTime;
         }
@@ -70,6 +73,7 @@ namespace Nightmare
                     lineRenderer.SetPosition(1, transform.position + transform.forward * meleeData.maxDistance);
                 }
                 OnMeleeAttack();
+                anim.SetTrigger("Attack");
             }
         }
 
