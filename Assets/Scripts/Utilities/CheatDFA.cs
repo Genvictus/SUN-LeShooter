@@ -30,6 +30,7 @@ namespace Nightmare
         public CheatDFA()
         {
             startNode = new DFANode();
+            currentNode = startNode;
         }
 
         public void AddCheatCode(string cheatSequence, Action cheatAction)

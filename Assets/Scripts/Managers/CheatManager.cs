@@ -34,7 +34,7 @@ namespace Nightmare
         {
             if (Input.anyKeyDown)
             {
-                string inputKey = Input.inputString;
+                string inputKey = Input.inputString.ToLower();
                 cheatDFA.Next(inputKey);
                 if (cheatDFA.currentNode.isTerminal)
                 {
