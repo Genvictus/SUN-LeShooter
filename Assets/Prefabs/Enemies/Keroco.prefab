@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeData: {fileID: 11400000, guid: 0c3d6bb50a5c2924181009485afb3c34, type: 2}
-  enemyTransform: {fileID: 4900407129070869284}
   visualDuration: 0.1
   lineRenderer: {fileID: 1153911150630337420}
   attackSound: {fileID: 5136152017961236714}
@@ -10344,7 +10343,7 @@ GameObject:
   - component: {fileID: 3529535720216870705}
   - component: {fileID: 4648316594344266014}
   - component: {fileID: 8831899854559310795}
-  - component: {fileID: 224566877441589862}
+  - component: {fileID: 7902770966887810068}
   - component: {fileID: 7884534594699297469}
   - component: {fileID: 8482491516844989301}
   - component: {fileID: 1288356057736544489}
@@ -10489,7 +10488,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 29
   m_ObstacleAvoidanceType: 1
---- !u!114 &224566877441589862
+--- !u!114 &7902770966887810068
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10498,7 +10497,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8716174416900575860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc28e8f7dbbe7494a8d67b6f5f3636bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c105ed3323ed804383436c7fa0047bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   meleeData: {fileID: 11400000, guid: 0c3d6bb50a5c2924181009485afb3c34, type: 2}
@@ -10518,7 +10517,7 @@ MonoBehaviour:
   sinkSpeed: 2.5
   scoreValue: 7
   deathClip: {fileID: 8300000, guid: 1d3bfb9269f136947bf8ac164cace1ff, type: 3}
-  healOrdPrefab: {fileID: 8225120799566343110, guid: 87d8f4f20479bc741ae150c4351c58be, type: 3}
+  orbDropChance: 0.5
 --- !u!114 &8482491516844989301
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -43,20 +43,17 @@ namespace Nightmare
         void Start()
         {
             characterController = GetComponent<CharacterController>();
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            CursorHandler.HideCursor();
         }
 
         public override void OnPause()
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            CursorHandler.ShowCursor();
         }
 
         public override void OnUnPause()
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            CursorHandler.HideCursor();
         }
 
         void OnDestroy()

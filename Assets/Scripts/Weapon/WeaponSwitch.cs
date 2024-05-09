@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using Nightmare;
 using UnityEngine;
 
-public class WeaponSwitching : PausibleObject {
+public class WeaponSwitching : PausibleObject
+{
 
     [Header("References")]
-    [SerializeField] private Transform[] weapons = new Transform[3]; 
+    [SerializeField] private Transform[] weapons = new Transform[3];
 
     [Header("Settings")]
     [SerializeField] private float switchTime;
@@ -20,7 +21,8 @@ public class WeaponSwitching : PausibleObject {
         StartPausible();
     }
 
-    private void Start() {
+    private void Start()
+    {
         SetWeapons();
         Select(selectedWeapon);
 
@@ -32,27 +34,31 @@ public class WeaponSwitching : PausibleObject {
         StopPausible();
     }
 
-    private void SetWeapons() {
+    private void SetWeapons()
+    {
         weapons = new Transform[transform.childCount];
 
         for (int i = 0; i < transform.childCount; i++)
             weapons[i] = transform.GetChild(i);
     }
 
-    private void Update() {
+    private void Update()
+    {
         // bool isReloading = false;
         // if (GetCurrentWeapon().GetComponent<Gun>() != null){
         //     isReloading = GetCurrentWeapon().GetComponent<Gun>().GetGunData().reloading;
         // }
 
-        if (isPaused)
+        if (isPaused || isGameOver)
             return;
 
         int previousSelectedWeapon = selectedWeapon;
 
         // Check for number key input 3 (default) weapons (1, 2, 3)
-        for (int i = 0; i < weapons.Length; i++) {
-            if (Input.GetKeyDown(KeyCode.Alpha1 + i) && timeSinceLastSwitch >= switchTime) {
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i) && timeSinceLastSwitch >= switchTime)
+            {
                 selectedWeapon = i;
                 break;
             }
@@ -60,8 +66,9 @@ public class WeaponSwitching : PausibleObject {
 
         // Check for scroll wheel input
         float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
-        if (scroll != 0 && timeSinceLastSwitch >= switchTime) {
-         selectedWeapon += (scroll > 0) ? -1 : 1;
+        if (scroll != 0 && timeSinceLastSwitch >= switchTime)
+        {
+            selectedWeapon += (scroll > 0) ? -1 : 1;
             if (selectedWeapon < 0)
                 selectedWeapon = weapons.Length - 1;
             else if (selectedWeapon >= weapons.Length)
@@ -69,14 +76,15 @@ public class WeaponSwitching : PausibleObject {
         }
 
 
-        if (previousSelectedWeapon != selectedWeapon) 
+        if (previousSelectedWeapon != selectedWeapon)
             ClearPreviousWeapon(previousSelectedWeapon);
-            Select(selectedWeapon);
+        Select(selectedWeapon);
 
         timeSinceLastSwitch += Time.deltaTime;
     }
 
-    private void Select(int weaponIndex) {
+    private void Select(int weaponIndex)
+    {
         for (int i = 0; i < weapons.Length; i++)
             weapons[i].gameObject.SetActive(i == weaponIndex);
 
@@ -85,16 +93,35 @@ public class WeaponSwitching : PausibleObject {
         OnWeaponSelected();
     }
 
-    private void OnWeaponSelected() {  }
+    private void OnWeaponSelected()
+    {
+        // Debug.Log("Crosshair update, selected " + selectedWeapon);
 
-    private void ClearPreviousWeapon(int previousSelectedWeapon) {
+        EventManager.TriggerEvent("CrosshairUpdate", new Vector3(selectedWeapon, 0, 0));
+    }
+
+    public override void OnPause()
+    {
+        EventManager.TriggerEvent("CrosshairUpdate", new Vector3(-1, 0, 0));
+    }
+
+    public override void OnUnPause()
+    {
+        OnWeaponSelected();
+    }
+
+    private void ClearPreviousWeapon(int previousSelectedWeapon)
+    {
         GameObject previousWeapon = GetWeapon(previousSelectedWeapon);
 
-        if (previousSelectedWeapon == 3) {
+        if (previousSelectedWeapon == 3)
+        {
             Melee meleeComponent = previousWeapon.GetComponent<Melee>();
             if (meleeComponent != null)
                 meleeComponent.ResetMelee();
-        } else {
+        }
+        else
+        {
             Gun gunComponent = previousWeapon.GetComponent<Gun>();
             if (gunComponent != null)
                 gunComponent.ResetGun();
@@ -102,11 +129,13 @@ public class WeaponSwitching : PausibleObject {
     }
 
 
-    public GameObject GetCurrentWeapon() {
+    public GameObject GetCurrentWeapon()
+    {
         return weapons[selectedWeapon].gameObject;
     }
 
-    public GameObject GetWeapon(int idx) {
+    public GameObject GetWeapon(int idx)
+    {
         return weapons[idx].gameObject;
     }
 }
