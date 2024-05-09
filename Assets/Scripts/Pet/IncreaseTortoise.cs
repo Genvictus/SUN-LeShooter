@@ -13,7 +13,7 @@ namespace Nightmare
         GameObject player;
         public GameObject followTarget;
         public EnemyHealth followTargetHealth;
-        PetHealth petHealth;
+        EnemyPetHealth petHealth;
         float scale = 0.1f;
 
 
@@ -23,11 +23,11 @@ namespace Nightmare
             player = GameObject.FindGameObjectWithTag("Player");
             PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
             pet.speed = 0.75f * playerMovement.speed;
-            petHealth = GetComponent<PetHealth>();
+            petHealth = GetComponent<EnemyPetHealth>();
         }
 
 
-        void setFollowTargetHealth()
+        void SetFollowTargetHealth()
         {
             followTargetHealth = followTarget.GetComponent<EnemyHealth>();
         }
@@ -35,7 +35,7 @@ namespace Nightmare
         // Update is called once per frame
         void Update()
         {
-            setFollowTargetHealth();
+            SetFollowTargetHealth();
             if (followTargetHealth.IsDead())
             {
                 petHealth.Death();
@@ -100,6 +100,11 @@ namespace Nightmare
 
             pet.SetDestination(targetPosition);
         }
+
+        /*public void TakeDamage(float damage, Vector3 hitPoint)
+        {
+            throw new System.NotImplementedException();
+        }*/
     }
 }
 
