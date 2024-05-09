@@ -10,7 +10,11 @@ public class Melee : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
 
     [Header("Visuals")]
+    [SerializeField] private float visualDuration = 0.1f;
     [SerializeField] private LineRenderer lineRenderer;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource attackSound;
 
     float timeSinceLastAttack;
     private void Start()
@@ -51,14 +55,26 @@ public class Melee : MonoBehaviour
                 lineRenderer.SetPosition(1, transform.position + transform.forward * meleeData.maxDistance);
             }
             OnMeleeAttack();
+            StartCoroutine(DisableEffects(visualDuration));
         }
-
     }
+
+    private IEnumerator DisableEffects(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            DisableEffects();
+        }
 
     private void OnMeleeAttack()
     {
-
+        lineRenderer.enabled = true;
+        attackSound.Play();
     }
+
+        private void DisableEffects()
+        {
+            lineRenderer.enabled = false;
+        }
 
 
     public void DebuffAttack(float debuff)
