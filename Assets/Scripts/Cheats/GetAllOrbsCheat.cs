@@ -25,7 +25,7 @@ namespace Nightmare
                 GameObject.Instantiate(orb, orbSpawnPosition, Quaternion.identity);
             }
 
-            return "Getting All Orbs Effect Cheat Activated";
+            return "Get All Orbs Effect Cheat Activated";
         }
     }
 }
