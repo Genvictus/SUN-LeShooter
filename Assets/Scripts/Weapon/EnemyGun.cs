@@ -26,7 +26,11 @@ public class EnemyGun : MonoBehaviour
 
     private void Start()
     {
-        EnemyShoot.shootAction += Shoot;
+        EnemyShoot enemyShoot = GetComponentInParent<EnemyShoot>();
+        if (enemyShoot != null)
+        {
+            enemyShoot.shootAction += Shoot;
+        }
         if (gunData.spread && lineRenderers.Count == 0){
             initLineRenders();           
         }
@@ -76,6 +80,7 @@ public class EnemyGun : MonoBehaviour
         {
             timeSinceLastShot = 0;
             OnGunShot();
+            Debug.Log("Enemy has shot (Shoot)");
 
             if (gunData.spread)
             {
@@ -169,11 +174,11 @@ public class EnemyGun : MonoBehaviour
         lineRenderer.enabled = false;
         muzzleFlash.enabled = false;
         if (gunData.spread){
-            DisableLineRenderers(lineRenderers);
+            DisableLineRenderers();
         }
     }
 
-    private void DisableLineRenderers (List<LineRenderer> lineRenderers)
+    private void DisableLineRenderers ()
     {
         foreach (LineRenderer renderer in lineRenderers)
         {

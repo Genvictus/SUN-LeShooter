@@ -44,7 +44,10 @@ public class EnemyMeeleeing : MonoBehaviour
 
         // if infront of player
         if (Vector3.Angle(transform.forward, player.position - transform.position) < 45)
-            EnemyAttack.attackAction.Invoke();
+        {
+            // Attack
+            Debug.Log("Enemy has attacked");
+        }
 
         // Vector3 bulletSpawnPostion = transform.position + transform.forward * 1.5f;
 

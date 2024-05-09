@@ -20,7 +20,11 @@ public class EnemyMelee : MonoBehaviour
     bool effectActive;
     private void Start()
     {
-        EnemyAttack.attackAction += Attack;
+        EnemyAttack enemyAttack = GetComponentInParent<EnemyAttack>();
+        if (enemyAttack != null)
+        {
+            enemyAttack.attackAction += Attack;
+        }
     }
 
     void Update()
