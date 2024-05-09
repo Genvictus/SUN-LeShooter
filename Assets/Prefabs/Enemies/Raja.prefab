@@ -10595,13 +10595,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9771a3ea41f2ddc4d89df1370858d2ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDebuff: 2
-  moveDebuff: 2
-  debuffRange: 5
+  attackDebuff: 1.42
+  moveDebuff: 1.42
+  debuffRange: 6
   debuffRate: 1
-  Default: {fileID: 0}
-  Shotgun: {fileID: 0}
-  Sword: {fileID: 0}
 --- !u!114 &5834243644514365556
 MonoBehaviour:
   m_ObjectHideFlags: 0
