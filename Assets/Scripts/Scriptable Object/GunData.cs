@@ -21,5 +21,7 @@ public class GunData : ScriptableObject
     public bool spread;
     [HideInInspector]
     public bool reloading;
+    [HideInInspector] 
+    public bool shooting;
 
 }

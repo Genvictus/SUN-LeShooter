@@ -24,22 +24,25 @@ namespace Nightmare
 
         private int bulletsSpread = 5;
 
-        private List<LineRenderer> lineRenderers;
-
+        private List<LineRenderer> lineRenderers = new List<LineRenderer>();
 
         float timeSinceLastShot;
         private void Start()
         {
             PlayerShooting.shootInput += Shoot;
             PlayerShooting.reloadInput += StartReload;
-            if (gunData.spread){
-                lineRenderers = new List<LineRenderer>();
+            if (gunData.spread && lineRenderers.Count == 0){
                 initLineRenders();           
             }
         }
 
         void Update()
         {
+            if (gunData.shooting && timeSinceLastShot > visualDuration)
+            {
+                DisableEffects();
+                gunData.shooting = false;
+            }
             timeSinceLastShot += Time.deltaTime;
             Debug.DrawRay(muzzle.position, muzzle.forward * gunData.maxDistance, Color.red);
         }
@@ -54,6 +57,7 @@ namespace Nightmare
             if (gunData.currentAmmo > 0 && CanShoot())
             {
                 Debug.Log("Shoot");
+                gunData.shooting = true;
                 timeSinceLastShot = 0;
                 gunData.currentAmmo--;
                 OnGunShot();
@@ -65,7 +69,6 @@ namespace Nightmare
                 {
                     DefaultShoot();
                 }
-                StartCoroutine(DisableEffects(visualDuration));
             }
         }
 
@@ -136,8 +139,6 @@ namespace Nightmare
                     newLineRenderer.SetPosition(1, muzzle.position + spreadDirection * gunData.maxDistance);
                 }
             }
-
-            StartCoroutine(DisableLineRenderers(lineRenderers));
         }
 
         private float CalculateAdjustedDamage(float distance)
@@ -157,10 +158,8 @@ namespace Nightmare
         }
 
 
-        private IEnumerator DisableLineRenderers(List<LineRenderer> lineRenderers)
+        private void DisableLineRenderers (List<LineRenderer> lineRenderers)
         {
-            yield return new WaitForSeconds(visualDuration);
-
             foreach (LineRenderer renderer in lineRenderers)
             {
                 if (renderer != null)
@@ -168,12 +167,6 @@ namespace Nightmare
                     renderer.enabled = false;
                 }
             }
-        }
-
-        private IEnumerator DisableEffects(float duration)
-        {
-            yield return new WaitForSeconds(duration);
-            DisableEffects();
         }
 
         private void OnGunShot()
@@ -190,10 +183,13 @@ namespace Nightmare
             }
         }
 
-        private void DisableEffects()
+        public void DisableEffects()
         {
             lineRenderer.enabled = false;
             muzzleFlash.enabled = false;
+            if (gunData.spread){
+                DisableLineRenderers(lineRenderers);
+            }
         }
 
         public void StartReload()
@@ -227,6 +223,12 @@ namespace Nightmare
 
         public GunData GetGunData() {
             return gunData;
+        }
+
+        public void ResetGun(){
+            StopAllCoroutines();
+            DisableEffects();
+            gunData.reloading = false;
         }
     }
 }

@@ -13,7 +13,12 @@ public class EnemyGun : MonoBehaviour
     [SerializeField] private Transform enemyTransform;
 
     [Header("Visuals")]
+    [SerializeField] private float visualDuration = 0.2f;
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private Light muzzleFlash;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource shootSound;
 
     float timeSinceLastShot;
     private void Start()
@@ -23,6 +28,11 @@ public class EnemyGun : MonoBehaviour
 
     void Update()
     {
+        if (gunData.shooting && timeSinceLastShot > visualDuration)
+        {
+            DisableEffects();
+            gunData.shooting = false;
+        }
         timeSinceLastShot += Time.deltaTime;
         Debug.DrawRay(muzzle.position, muzzle.forward * gunData.maxDistance, Color.red);
     }
@@ -42,7 +52,7 @@ public class EnemyGun : MonoBehaviour
             if (Physics.Raycast(enemyTransform.position, enemyTransform.forward, out hit, gunData.maxDistance))
             {   
                 Debug.Log(hit.transform.name);
-                IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
+                IPlayerDamageAble damageAble = hit.transform.GetComponent<IPlayerDamageAble>();
                 damageAble?.TakeDamage((int)Math.Round(gunData.damage), hit.transform.position);
 
                 lineRenderer.SetPosition(0, muzzle.position);
@@ -55,11 +65,23 @@ public class EnemyGun : MonoBehaviour
             OnGunShot();
         }
 
+
     }
 
     private void OnGunShot()
     {
-
+        lineRenderer.enabled = true;
+        muzzleFlash.enabled = true;
+        shootSound.Play();
+        gunData.shooting = true;
     }
+
+
+    private void DisableEffects()
+    {
+        lineRenderer.enabled = false;
+        muzzleFlash.enabled = false;
+    }
+
 
 }

@@ -40,6 +40,11 @@ public class WeaponSwitching : PausibleObject {
     }
 
     private void Update() {
+        // bool isReloading = false;
+        // if (GetCurrentWeapon().GetComponent<Gun>() != null){
+        //     isReloading = GetCurrentWeapon().GetComponent<Gun>().GetGunData().reloading;
+        // }
+
         if (isPaused)
             return;
 
@@ -56,7 +61,7 @@ public class WeaponSwitching : PausibleObject {
         // Check for scroll wheel input
         float scroll = Input.GetAxisRaw("Mouse ScrollWheel");
         if (scroll != 0 && timeSinceLastSwitch >= switchTime) {
-            selectedWeapon += (scroll > 0) ? -1 : 1;
+         selectedWeapon += (scroll > 0) ? -1 : 1;
             if (selectedWeapon < 0)
                 selectedWeapon = weapons.Length - 1;
             else if (selectedWeapon >= weapons.Length)
@@ -65,6 +70,7 @@ public class WeaponSwitching : PausibleObject {
 
 
         if (previousSelectedWeapon != selectedWeapon) 
+            ClearPreviousWeapon(previousSelectedWeapon);
             Select(selectedWeapon);
 
         timeSinceLastSwitch += Time.deltaTime;
@@ -81,7 +87,26 @@ public class WeaponSwitching : PausibleObject {
 
     private void OnWeaponSelected() {  }
 
+    private void ClearPreviousWeapon(int previousSelectedWeapon) {
+        GameObject previousWeapon = GetWeapon(previousSelectedWeapon);
+
+        if (previousSelectedWeapon == 3) {
+            Melee meleeComponent = previousWeapon.GetComponent<Melee>();
+            if (meleeComponent != null)
+                meleeComponent.ResetMelee();
+        } else {
+            Gun gunComponent = previousWeapon.GetComponent<Gun>();
+            if (gunComponent != null)
+                gunComponent.ResetGun();
+        }
+    }
+
+
     public GameObject GetCurrentWeapon() {
         return weapons[selectedWeapon].gameObject;
+    }
+
+    public GameObject GetWeapon(int idx) {
+        return weapons[idx].gameObject;
     }
 }
