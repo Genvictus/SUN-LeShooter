@@ -23,7 +23,7 @@ namespace Nightmare
 
         }
 
-        private DFANode startNode;
+        public DFANode startNode;
         public DFANode currentNode;
 
         public CheatDFA()
