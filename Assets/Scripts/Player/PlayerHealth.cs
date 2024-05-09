@@ -15,6 +15,10 @@ namespace Nightmare
         public AudioClip deathClip;
         public float flashSpeed = 5f;
         public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
+
+        public Color healthyColour = new Color(0.2f, 1f, 0.2f, 1f);
+        public Color unhealthyColour = new Color(1f, 1f, 0f, 1f);
+        public Color dyingColour = new Color(1f, 0f, 0f, 1f);
         public bool godMode = false;
 
         Animator anim;
@@ -51,7 +55,7 @@ namespace Nightmare
         void Update()
         {
             // If the player has just been damaged...
-            if (damaged)
+            if (damaged || currentHealth <= 0.25 * maxHealth)
             {
                 // ... set the colour of the damageImage to the flash colour.
                 damageImage.color = flashColour;
@@ -81,6 +85,21 @@ namespace Nightmare
 
             // Set the health bar's value to the current health.
             healthSlider.value = currentHealth;
+
+            // Set health bar colour
+            if (currentHealth >= 0.5 * maxHealth)
+            {
+                healthSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = healthyColour;
+            }
+            else if (currentHealth >= 0.25 * maxHealth)
+            {
+                healthSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = unhealthyColour;
+            }
+            else
+            {
+                healthSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = dyingColour;
+            }
+
 
             // Play the hurt sound effect.
             playerAudio.Play();

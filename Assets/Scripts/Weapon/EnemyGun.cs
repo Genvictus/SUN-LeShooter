@@ -10,7 +10,6 @@ public class EnemyGun : MonoBehaviour
     [Header("References")]
     [SerializeField] private GunData gunData;
     [SerializeField] private Transform muzzle;
-    [SerializeField] private Transform enemyTransform;
 
     [Header("Visuals")]
     [SerializeField] private float visualDuration = 0.2f;
@@ -30,10 +29,10 @@ public class EnemyGun : MonoBehaviour
         if (enemyShoot != null)
         {
             enemyShoot.shootAction += Shoot;
-            enemyShoot.clearRenders += DisableEffects;
+            enemyShoot.clearAction += DisableEffects;
         }
         if (gunData.spread && lineRenderers.Count == 0){
-            initLineRenders();           
+            initLineRenders();
         }
     }
 
@@ -75,7 +74,7 @@ public class EnemyGun : MonoBehaviour
         return !gunData.reloading && timeSinceLastShot > gunData.fireRate;
     }
 
-    public void Shoot()
+    public void Shoot(Transform enemyTransform)
     {
         if (CanShoot())
         {
@@ -85,20 +84,20 @@ public class EnemyGun : MonoBehaviour
 
             if (gunData.spread)
             {
-                SpreadShoot();
+                SpreadShoot(enemyTransform);
             }
             else
             {
-                DefaultShoot();
+                DefaultShoot(enemyTransform);
             }
         }
 
     }
 
-    private void DefaultShoot(){
+    private void DefaultShoot(Transform enemyTransform){
         RaycastHit hit;
         if (Physics.Raycast(enemyTransform.position, enemyTransform.forward, out hit, gunData.maxDistance))
-        {   
+        {
             Debug.Log(hit.transform.name);
             IPlayerDamageAble damageAble = hit.transform.GetComponent<IPlayerDamageAble>();
             damageAble?.TakeDamage((int)Math.Round(gunData.damage), hit.transform.position);
@@ -112,7 +111,7 @@ public class EnemyGun : MonoBehaviour
         }
     }
 
-    private void SpreadShoot()
+    private void SpreadShoot(Transform enemyTransform)
     {
         float spreadAngle = 20f;
 

@@ -4990,7 +4990,7 @@ GameObject:
   - component: {fileID: 1816410844699772089}
   - component: {fileID: 1797451000411428102}
   - component: {fileID: 7796940394323284041}
-  - component: {fileID: 2075681884964643479}
+  - component: {fileID: 5396688920747415824}
   - component: {fileID: 189744329204881843}
   - component: {fileID: 2462156968778468159}
   - component: {fileID: 4873110074424369485}
@@ -5136,7 +5136,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 29
   m_ObstacleAvoidanceType: 1
---- !u!114 &2075681884964643479
+--- !u!114 &5396688920747415824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5145,10 +5145,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4940003812776887530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc28e8f7dbbe7494a8d67b6f5f3636bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c105ed3323ed804383436c7fa0047bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeData: {fileID: 11400000, guid: 7f73beee76fd0794e82b2d1b0ec24dca, type: 2}
+  meleeData: {fileID: 11400000, guid: 0c3d6bb50a5c2924181009485afb3c34, type: 2}
 --- !u!114 &189744329204881843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5165,6 +5165,7 @@ MonoBehaviour:
   sinkSpeed: 2.5
   scoreValue: 11
   deathClip: {fileID: 8300000, guid: 62366b8d2c37a49dca550841c741317f, type: 3}
+  orbDropChance: 0.5
 --- !u!114 &2462156968778468159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10457,7 +10458,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeData: {fileID: 11400000, guid: 7f73beee76fd0794e82b2d1b0ec24dca, type: 2}
-  enemyTransform: {fileID: 2507803257342077563}
   visualDuration: 0.1
   lineRenderer: {fileID: 3572860348638601013}
   attackSound: {fileID: 4143207219700431674}
@@ -10574,7 +10574,7 @@ AudioSource:
   m_GameObject: {fileID: 9153302490874468503}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300004, guid: 8434b04884c414ac6b468e10945685e6, type: 2}
   m_audioClip: {fileID: 8300000, guid: 9c8d5018a5d4b1f43914ca1f288f0e59, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.749

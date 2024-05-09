@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PetHealth : MonoBehaviour
+public class PetHealth : MonoBehaviour, IPlayerDamageAble
 {
     // Start is called before the first frame update
     public int maxHealth;
     public AudioClip deathClip;
     public bool godMode = false;
+    public float sinkSpeed = 0.1f;
 
-    int currentHealth;
-    bool isDead;
+    public float currentHealth;
+    public bool isDead;
     AudioSource petAudio;
     bool damaged;
+    CapsuleCollider capsuleCollider;
 
 
     private void Awake()
     {
         petAudio = GetComponent<AudioSource>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         ResetPet();
     }
 
@@ -32,7 +35,7 @@ public class PetHealth : MonoBehaviour
         anim.SetBool("IsDead", false);*/
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount, Vector3 hitPoint)
     {
         if (godMode)
             return;
@@ -55,20 +58,38 @@ public class PetHealth : MonoBehaviour
 
     void Death()
     {
+        Debug.Log("pet is dead :(");
         isDead = true;
 
+        StartSinking();
         // Set the audiosource to play the death clip and play it (this will stop the hurt sound from playing).
         petAudio.clip = deathClip;
         petAudio.Play();
     }
 
+    private void SetKinematics(bool isKinematic)
+    {
+        capsuleCollider.isTrigger = isKinematic;
+        capsuleCollider.attachedRigidbody.isKinematic = isKinematic;
+    }
+
+    public void StartSinking()
+    {
+        GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+        SetKinematics(true);
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (damaged)
+        if (isDead)
         {
-            Debug.Log("Damaged");
+            transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
+            // Debug.Log(transform.position.y);
+            if (transform.position.y < -10f)
+            {
+                Destroy(this.gameObject);
+            }
         }
 
         damaged = false;

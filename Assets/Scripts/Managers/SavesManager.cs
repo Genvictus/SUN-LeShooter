@@ -4,17 +4,23 @@ using UnityEngine;
 public class SavesManager
 {
     public string saveName;
+    public static string playerName = "Player";
 
     private const string PROGRESSION = "progression";
     private const string LEVEL = "level";
     private const string PLAYERSTATS = "playerstats";
+
+    public static void SetPlayerName(string name)
+    {
+        playerName = name;
+    }
 
     public static bool LoadPlayerStats(out PlayerStats playerStats)
     {
         playerStats = new();
 
         bool status = SaveFileManager.LoadFromFile(PLAYERSTATS, out string statsJSON);
-        if(!status) return false;
+        if (!status) return false;
 
         playerStats.LoadFromJson(statsJSON);
         return true;
@@ -34,7 +40,7 @@ public class SavesManager
     public bool ChangeSaveName(string saveName)
     {
         string oldSaveName = this.saveName;
-        if(SaveFileManager.RenameDirectory(oldSaveName, saveName))
+        if (SaveFileManager.RenameDirectory(oldSaveName, saveName))
         {
             this.saveName = saveName;
             Debug.LogError($"Error renaming save!");
