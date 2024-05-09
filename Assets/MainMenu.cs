@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 #if UNITY_EDITOR
@@ -8,6 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -49,18 +51,31 @@ public class MainMenu : MonoBehaviour
         statisticsMenu.gameObject.SetActive(true);
 
         PlayerStats stats;
-        // TODO: this is just loading and saving PlayerStats template
+        // init game stats file if none exists
         if (!SavesManager.LoadPlayerStats(out stats))
         {
             stats = new();
             Debug.LogError("Unable to load player stats!");
+            stats.SetInitialPlayTime();
+            Debug.Log(stats.InitialPlayTime);
+            Debug.Log(stats.PlayTime);
+
+            SavesManager.SavePlayerStats(stats);
         }
 
-        stats.SetInitialPlayTime();
-        Debug.Log(stats.InitialPlayTime);
-        Debug.Log(stats.PlayTime);
+        // get text component for storing values on screen
+        foreach (var tmp in statisticsMenu.transform.GetComponentsInChildren<TextMeshProUGUI>(true))
+        {
+            if (tmp.name == "StatisticsValues")
+            {
+                tmp.text = stats.totalshot.ToString() + "\n";
+                tmp.text += stats.Accuracy.ToString() + "\n";
+                tmp.text += stats.distanceTraveled.ToString() + "\n";
+                tmp.text += stats.PlayTime.ToString() + "\n";
 
-        SavesManager.SavePlayerStats(stats);
+                // todo: update for new statistics 
+            }
+        }
     }
 
     public void ViewSettings()
