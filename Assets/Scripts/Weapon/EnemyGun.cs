@@ -21,6 +21,8 @@ public class EnemyGun : MonoBehaviour
     [SerializeField] private AudioSource shootSound;
 
     float timeSinceLastShot;
+    private int bulletsSpread = 3;
+
     private void Start()
     {
         EnemyShoot.shootAction += Shoot;

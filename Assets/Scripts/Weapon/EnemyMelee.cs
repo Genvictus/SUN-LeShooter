@@ -69,6 +69,7 @@ public class EnemyMelee : MonoBehaviour
     {
         lineRenderer.enabled = true;
         attackSound.Play();
+        effectActive = true;
     }
 
     private void DisableEffects()

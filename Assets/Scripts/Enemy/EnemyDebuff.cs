@@ -28,6 +28,16 @@ namespace Nightmare
             playerHealth = player.GetComponent <PlayerHealth> ();
             playerMovement = player.GetComponent <PlayerMovement> ();
 
+            GameObject DefaultObject = GameObject.FindGameObjectWithTag("Default");
+            Default = DefaultObject.GetComponent<Gun>();
+
+            GameObject ShotgunObject = GameObject.FindGameObjectWithTag("Shotgun");
+            Shotgun = ShotgunObject.GetComponent<Gun>();
+
+            GameObject SwordObject = GameObject.FindGameObjectWithTag("Sword");
+            Sword = SwordObject.GetComponent<Melee>();
+
+
             enemyHealth = GetComponent<EnemyHealth>();
             anim = GetComponent <Animator> ();
 
