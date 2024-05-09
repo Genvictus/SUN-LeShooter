@@ -10,4 +10,7 @@ public class MeleeData : ScriptableObject
     public float damage;
     public float maxDistance;
     public float fireRate;
+
+    [HideInInspector]
+    public bool attacking;
 }

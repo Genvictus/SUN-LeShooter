@@ -15,11 +15,11 @@ namespace Nightmare
         void Start ()
         {
             timer = spawnTime;
+            playerHealth = FindObjectOfType<PlayerHealth>();
         }
 
         void OnEnable()
         {
-            playerHealth = FindObjectOfType<PlayerHealth>();
             StartPausible();
         }
 
@@ -43,7 +43,7 @@ namespace Nightmare
         }
 
         void Spawn ()
-        {           
+        {
             // If the player has no health left...
             if(playerHealth.currentHealth <= 0f)
             {

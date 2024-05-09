@@ -49,12 +49,13 @@ public class FaerieCircle : MonoBehaviour
 
         remainingGrenades = grenadeStock;
         faerieSpeed = happyFaerie.speed;
+        
+        Camera camMain = Camera.main;
+        cameraEffect = camMain.gameObject.GetComponent<FaerieAnger>();
     }
 
     void OnEnable()
     {
-        Camera camMain = Camera.main;
-        cameraEffect = camMain.gameObject.GetComponent<FaerieAnger>();
     }
 
     private void SetupStateBehaviours()

@@ -5,34 +5,34 @@ namespace Nightmare
 {
     public class EnemyDebuff : PausibleObject
     {
-        public float attackDebuff = 0.5f;
-        public float moveDebuff = 0.5f;
-
-        public int debuffRange = 10;
-
-        public float debuffRate = 0.5f;
-
-        Animator anim;
+        public float attackDebuff = 2f;
+        public float moveDebuff = 2f;
+        public int debuffRange = 5;
+        public float debuffRate = 1f;
         GameObject player;
         PlayerHealth playerHealth;
-        PlayerMovement playerMovement;
         EnemyHealth enemyHealth;
-        Gun gun;
-        Melee melee;
+        WeaponSwitching weaponSwitching;
+        Gun Default;
+        Gun Shotgun;
+        Melee Sword;
         bool playerInRange;
         float timer;
-
         bool isDebuffed = false;
 
-        void Awake ()
+        void Start ()
         {
             // Setting up the references.
             player = GameObject.FindGameObjectWithTag ("Player");
             playerHealth = player.GetComponent <PlayerHealth> ();
-            playerMovement = player.GetComponent <PlayerMovement> ();
+
+            weaponSwitching = player.GetComponentInChildren<WeaponSwitching>();
+
+            Default = weaponSwitching.GetWeapon(0).GetComponent<Gun>();
+            Shotgun = weaponSwitching.GetWeapon(1).GetComponent<Gun>();
+            Sword = weaponSwitching.GetWeapon(2).GetComponent<Melee>();
 
             enemyHealth = GetComponent<EnemyHealth>();
-            anim = GetComponent <Animator> ();
 
             StartPausible();
         }
@@ -42,22 +42,10 @@ namespace Nightmare
             StopPausible();
         }
 
-        void OnTriggerEnter (Collider other)
-        {
-            // If the entering collider is the player...
-            if(other.gameObject == player)
-            {
-                // ... the player is in range.
+        void CheckInRange(){
+            if(Vector3.Distance(player.transform.position, transform.position) < debuffRange){
                 playerInRange = true;
-            }
-        }
-
-        void OnTriggerExit (Collider other)
-        {
-            // If the exiting collider is the player...
-            if(other.gameObject == player)
-            {
-                // ... the player is no longer in range.
+            } else {
                 playerInRange = false;
             }
         }
@@ -69,64 +57,49 @@ namespace Nightmare
             
             // Add the time since Update was last called to the timer.
             timer += Time.deltaTime;
-
+            CheckInRange();
             // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-            if(timer >= debuffRate && playerInRange && enemyHealth.CurrentHealth() > 0)
+           if(timer >= debuffRate && playerInRange && enemyHealth.CurrentHealth() > 0)
             {
-                if (!isDebuffed)
+                if (!isDebuffed){
                     Debuff ();
-
-                isDebuffed = true;
+                }
             }
-
-            if (timer >= debuffRate && !playerInRange && isDebuffed)
+            if (!playerInRange && isDebuffed)
             {   
-
                 Rebuff();
-                isDebuffed = false;
-            }
-
-            // If the player has zero or less health...
-            if(playerHealth.currentHealth <= 0)
-            {
-                // ... tell the animator the player is dead.
-                anim.SetTrigger ("PlayerDead");
             }
         }
 
         void Debuff ()
         {
+            isDebuffed = true;
+
             // Reset the timer.
             timer = 0f;
+            isDebuffed = true;
 
             // If the player has health to lose...
             if(playerHealth.currentHealth > 0)
             {
-                // ... damage the player.
-                playerMovement.speed *= moveDebuff;
-
-                gun.DebuffAttack(attackDebuff);
-
-                melee.DebuffAttack(attackDebuff);
-
+                PlayerMovement.mobDebuff /= moveDebuff;
+                PlayerShooting.mobDebuff /= attackDebuff;
             }
         }
 
         void Rebuff ()
         {
+            isDebuffed = false;
+
             // Reset the timer.
             timer = 0f;
+            isDebuffed = false;
 
             // If the player has health to lose...
             if(playerHealth.currentHealth > 0)
             {
-
-                playerMovement.speed /= moveDebuff;
-
-                gun.BuffAttack(attackDebuff);
-
-                melee.BuffAttack(attackDebuff);
-
+                PlayerMovement.mobDebuff *= moveDebuff;
+                PlayerShooting.mobDebuff *= attackDebuff;
             }
         }
     }
