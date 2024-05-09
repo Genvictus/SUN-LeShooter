@@ -13,17 +13,21 @@ namespace Nightmare
         void Start()
         {
             cheatDFA = new CheatDFA();
-            // TODO
             cheatActions = new Pair<string, Action>[] {
-                new("", PlayerInvincible),
-                new("", OneHitKill),
-                new("", InfiniteMoney),
-                new("", DoubleSpeed),
-                new("", PetInvincible),
-                new("", KillPet),
-                new("", GetAllOrbs),
-                new("", SkipLevel),
+                new("iwillprotectyou", PlayerInvincible),
+                new("bigerwepong", OneHitKill),
+                new("akutubuhpeluru", InfiniteMoney),
+                new("fasterdadieh", DoubleSpeed),
+                new("cumbehindme", PetInvincible),
+                new("ambatu", KillPet),
+                new("thankyousomuch", GetAllOrbs),
+                new("skipkelas", SkipLevel),
             };
+
+            foreach (Pair<string, Action> cheat in cheatActions)
+            {
+                cheatDFA.AddCheatCode(cheat.First, cheat.Second);
+            }
         }
 
         void Update()
@@ -36,8 +40,7 @@ namespace Nightmare
                 {
                     Debug.Log("Cheat Activated");
 
-                    int cheatIndex = cheatDFA.currentNode.cheatIndex;
-                    Action cheatAction = cheatActions[cheatIndex].Second;
+                    Action cheatAction = cheatDFA.currentNode.cheatAction;
                     cheatAction();
 
                     cheatDFA.currentNode = cheatDFA.startNode;

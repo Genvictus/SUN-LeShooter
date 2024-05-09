@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal;
+using System;
 
 namespace Nightmare
 {
@@ -12,7 +13,7 @@ namespace Nightmare
             public Dictionary<string, DFANode> transitions = new();
             public bool isTerminal = false;
             public string cheatCode = ""; // can be removed, just for debug
-            public int cheatIndex = -1;
+            public Action cheatAction;
 
             public DFANode AddTransition(string input)
             {
@@ -31,7 +32,7 @@ namespace Nightmare
             startNode = new DFANode();
         }
 
-        public void AddCheatCode(string cheatSequence, int cheatIndex)
+        public void AddCheatCode(string cheatSequence, Action cheatAction)
         {
             DFANode node = startNode;
             foreach (char letter in cheatSequence)
@@ -41,7 +42,7 @@ namespace Nightmare
                 node.cheatCode = prevCheatCode + letter;
             }
             node.isTerminal = true;
-            node.cheatIndex = cheatIndex;
+            node.cheatAction = cheatAction;
         }
 
         public void Next(string input)
