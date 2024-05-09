@@ -8,14 +8,20 @@ namespace Nightmare
     {
         float timeBetweenAttacks;
         Animator anim;
+
         GameObject player;
         PlayerHealth playerHealth;
-        EnemyHealth enemyHealth;
-        public static Action attackAction;
+        GameObject pet;
+        PetHealth petHealth;
         bool playerInRange;
         bool petInRange;
+
+        EnemyHealth enemyHealth;
+        public static Action attackAction;
         float timer;
         public MeleeData meleeData;
+        
+
 
         void Awake ()
         {
@@ -25,6 +31,13 @@ namespace Nightmare
             enemyHealth = GetComponent<EnemyHealth>();
             anim = GetComponent <Animator> ();
             timeBetweenAttacks = meleeData.fireRate;
+
+            pet = GameObject.FindGameObjectWithTag("Pet");
+            if (pet is not null)
+            {
+                petHealth = pet.GetComponent<PetHealth>();
+            }
+
 
             StartPausible();
         }
@@ -57,6 +70,12 @@ namespace Nightmare
                 // ... the player is no longer in range.
                 playerInRange = false;
             }
+            if (other.gameObject == pet)
+            {
+                // ... the pet is in range.
+                petInRange = false;
+            }
+
         }
 
 
@@ -84,12 +103,21 @@ namespace Nightmare
             if(timer >= timeBetweenAttacks && enemyHealth.CurrentHealth() > 0)
             {
                 // ... attack.
-                transform.LookAt(player.transform);
-                Attack ();
+                if (playerInRange)
+                {
+                    transform.LookAt(player.transform);
+                    AttackPlayer();
+                }
+                else if (petInRange)
+                {
+                    transform.LookAt(pet.transform);
+                    AttackPet();
+                }
+
             }
 
             // If the player has zero or less health...
-            if(playerHealth.currentHealth <= 0)
+            if (playerHealth.currentHealth <= 0)
             {
                 // ... tell the animator the player is dead.
                 anim.SetTrigger ("PlayerDead");
@@ -117,8 +145,8 @@ namespace Nightmare
             // If the player has health to lose...
             if (petHealth.currentHealth > 0)
             {
-                // ... damage the player.
-                petHealth.TakeDamage(attackDamage);
+                // ... damage the pet.
+                // TODO: attack pet
             }
             
         }
