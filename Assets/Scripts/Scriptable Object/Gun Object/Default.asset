@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Default Weapon
   damage: 10
+  originalDamage: 10
   maxDistance: 20
-  currentAmmo: 409
+  currentAmmo: 971
   magSize: 1000
   reloadTime: 1
   fireRate: 0.1
+  spread: 0
   reloading: 0
+  shooting: 1

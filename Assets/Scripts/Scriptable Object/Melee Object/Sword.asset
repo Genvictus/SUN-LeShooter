@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Sword
   damage: 20
+  originalDamage: 20
   maxDistance: 2
   fireRate: 0.6
+  attacking: 0
