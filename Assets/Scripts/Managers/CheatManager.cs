@@ -40,8 +40,8 @@ namespace Nightmare
                 {
                     Debug.Log("Cheat Activated: " + cheatDFA.currentNode.cheat.cheatName);
 
-                    Action cheatAction = cheatDFA.currentNode.cheat.ExecuteCheat;
-                    cheatAction();
+                    string cheatMessage = cheatDFA.currentNode.cheat.ExecuteCheat();
+                    Debug.Log(cheatMessage);
 
                     cheatDFA.currentNode = cheatDFA.startNode;
                 }

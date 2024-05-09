@@ -13,16 +13,16 @@ namespace Nightmare
             cheatCode = "iwillprotectyou";
         }
 
-        public override void ExecuteCheat()
+        public override string ExecuteCheat()
         {
             GameObject player = GameObject.FindGameObjectWithTag ("Player");
             PlayerHealth playerHealth = player.GetComponent <PlayerHealth> ();
             playerHealth.godMode = !playerHealth.godMode;
             
             if (playerHealth.godMode) {
-                Debug.Log("Player Invincible Cheat Activated");
+                return "Player Invincible Cheat Activated";
             } else {
-                Debug.Log("Player Invincible Cheat Deactivated");
+                return "Player Invincible Cheat Deactivated";
             }
         }
     }

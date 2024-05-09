@@ -13,9 +13,10 @@ namespace Nightmare
             cheatCode = "ambatu";
         }
 
-        public override void ExecuteCheat()
+        public override string ExecuteCheat()
         {
             // TODO
+            return "Kill Pet Cheat Activated";
         }
     }
 }

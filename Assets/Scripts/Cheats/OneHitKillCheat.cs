@@ -13,14 +13,14 @@ namespace Nightmare
             cheatCode = "bigerwepong";
         }
 
-        public override void ExecuteCheat()
+        public override string ExecuteCheat()
         {
             PlayerShooting.godMode = !PlayerShooting.godMode;
 
             if (PlayerShooting.godMode) {
-                Debug.Log("One Hit Kill Cheat Activated");
+                return "One Hit Kill Cheat Activated";
             } else {
-                Debug.Log("One Hit Kill Cheat Deactivated");
+                return "One Hit Kill Cheat Deactivated";
             }
         }
     }

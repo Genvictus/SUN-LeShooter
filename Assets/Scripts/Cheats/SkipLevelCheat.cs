@@ -13,9 +13,10 @@ namespace Nightmare
             cheatCode = "skipkelas";
         }
 
-        public override void ExecuteCheat()
+        public override string ExecuteCheat()
         {
             // TODO
+            return "Skip Level Cheat Activated";
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Nightmare
             cheatCode = "cumbehindme";
         }
 
-        public override void ExecuteCheat()
+        public override string ExecuteCheat()
         {
             GameObject[] pets = GameObject.FindGameObjectsWithTag("Pet");
             bool petCheatStatus = false;
@@ -25,9 +25,9 @@ namespace Nightmare
             }
             
             if (petCheatStatus) {
-                Debug.Log("Pet Invincible Cheat Activated");
+                return "Pet Invincible Cheat Activated";
             } else {
-                Debug.Log("Pet Invincible Cheat Deactivated");
+                return "Pet Invincible Cheat Deactivated";
             }
         }
     }

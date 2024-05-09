@@ -13,16 +13,16 @@ namespace Nightmare
             cheatCode = "fasterdadieh";
         }
 
-        public override void ExecuteCheat()
+        public override string ExecuteCheat()
         {
             GameObject player = GameObject.FindGameObjectWithTag ("Player");
             PlayerMovement playerMovement = player.GetComponent <PlayerMovement> ();
             playerMovement.godMode = !playerMovement.godMode;
             
             if (playerMovement.godMode) {
-                Debug.Log("Player Speed Cheat Activated");
+                return "Player Speed Cheat Activated";
             } else {
-                Debug.Log("Player Speed Cheat Deactivated");
+                return "Player Speed Cheat Deactivated";
             }
         }
     }

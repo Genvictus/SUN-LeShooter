@@ -13,7 +13,7 @@ namespace Nightmare
             cheatCode = "thankyousomuch";
         }
 
-        public override void ExecuteCheat()
+        public override string ExecuteCheat()
         {
             GameObject player = GameObject.FindGameObjectWithTag ("Player");
 
@@ -25,8 +25,7 @@ namespace Nightmare
                 GameObject.Instantiate(orb, orbSpawnPosition, Quaternion.identity);
             }
 
-            Debug.Log("Getting All Orbs Effect Cheat Activated");
-            Debug.Log("Spawning All Orbs");
+            return "Getting All Orbs Effect Cheat Activated";
         }
     }
 }

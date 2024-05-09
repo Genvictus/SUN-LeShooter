@@ -9,6 +9,6 @@ namespace Nightmare
     {
         public string cheatName;
         public string cheatCode;
-        public abstract void ExecuteCheat();
+        public abstract string ExecuteCheat();
     }
 }
