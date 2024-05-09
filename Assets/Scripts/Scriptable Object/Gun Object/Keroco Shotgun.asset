@@ -17,6 +17,7 @@ MonoBehaviour:
   maxDistance: 5
   currentAmmo: 14
   magSize: 20
-  reloadTime: 0.5
-  fireRate: 1
+  reloadTime: 2.5
+  fireRate: 2
+  spread: 1
   reloading: 0
