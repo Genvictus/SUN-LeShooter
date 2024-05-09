@@ -15,7 +15,20 @@ namespace Nightmare
 
         public override void ExecuteCheat()
         {
-            // TODO
+            GameObject[] pets = GameObject.FindGameObjectsWithTag("Pet");
+            bool petCheatStatus = false;
+            foreach (GameObject pet in pets)
+            {
+                PetHealth petHealth = pet.GetComponent<PetHealth>();
+                petHealth.godMode = !petHealth.godMode;
+                petCheatStatus = petHealth.godMode;
+            }
+            
+            if (petCheatStatus) {
+                Debug.Log("Pet Invincible Cheat Activated");
+            } else {
+                Debug.Log("Pet Invincible Cheat Deactivated");
+            }
         }
     }
 }
