@@ -18,10 +18,12 @@ namespace Nightmare
         float _timer;
 
         AudioSource _audio;
+        PetHealth petHealth;
 
         void Start()
         {
             player = GameObject.FindGameObjectWithTag("Player");
+            petHealth = GetComponent<PetHealth>();
             health = player.GetComponent<PlayerHealth>();
             _timer = 0f;
             _audio = GetComponent<AudioSource>();
@@ -39,7 +41,7 @@ namespace Nightmare
         // Update is called once per frame
         void Update()
         {
-            if (isPaused)
+            if (isPaused || petHealth.isDead)
                 return;
 
             pet.SetDestination(target.position);

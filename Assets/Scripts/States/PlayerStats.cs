@@ -6,7 +6,7 @@ public class PlayerStats : SaveData<PlayerStats>
     // Accuracy  stat
     public int totalshot;
     public int shotHit;
-    public float Accuracy => shotHit / totalshot;
+    public float Accuracy => totalshot == 0 ? 0 : shotHit / totalshot;
 
     // DistanceTraveled
     public float distanceTraveled;
@@ -25,7 +25,7 @@ public class PlayerStats : SaveData<PlayerStats>
 
     private TimeSpan CalculatePlayTime()
     {
-        if(InitialPlayTime is not null)
+        if (InitialPlayTime is not null)
         {
             DateTimeOffset initialPlayTime = DateTimeOffset.Parse(InitialPlayTime);
             return DateTimeOffset.Now - initialPlayTime;
