@@ -20,11 +20,14 @@ namespace Nightmare
         Animator animator;
         AudioSource audio;
         GameObject player;
+
+        PetHealth petHealth;
         // Start is called before the first frame update
         void Start()
         {
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
             player = GameObject.FindGameObjectWithTag("Player");
+            petHealth = GetComponent<PetHealth>();
             animator = GetComponent<Animator>();
             audio = GetComponent<AudioSource>();
             _timer = 0;
@@ -33,7 +36,7 @@ namespace Nightmare
         // Update is called once per frame
         void Update()
         {
-            if (isPaused)
+            if (isPaused || petHealth.isDead)
                 return;
 
             enemies = GameObject.FindGameObjectsWithTag("Enemy");

@@ -13,7 +13,10 @@ namespace Nightmare
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
         bool playerInRange;
+        bool petInRange;
         float timer;
+        GameObject pet;
+        PetHealth petHealth;
 
         void Awake ()
         {
@@ -22,6 +25,13 @@ namespace Nightmare
             playerHealth = player.GetComponent <PlayerHealth> ();
             enemyHealth = GetComponent<EnemyHealth>();
             anim = GetComponent <Animator> ();
+
+            pet = GameObject.FindGameObjectWithTag("Pet");
+            if(pet is not null)
+            {
+                petHealth = pet.GetComponent<PetHealth>();
+            }
+            
 
             StartPausible();
         }
@@ -39,15 +49,26 @@ namespace Nightmare
                 // ... the player is in range.
                 playerInRange = true;
             }
+            if (other.gameObject == pet)
+            {
+                // ... the pet is in range.
+                petInRange = true;
+            }
         }
 
         void OnTriggerExit (Collider other)
         {
             // If the exiting collider is the player...
-            if(other.gameObject == player)
+            if (other.gameObject == player)
             {
-                // ... the player is no longer in range.
+                // ... the player is in range.
                 playerInRange = false;
+            }
+            if (other.gameObject == pet)
+            {
+                // ... the player is in range.
+                petInRange = false;
+                // Debug.Log("pet in range");
             }
         }
 
@@ -55,15 +76,22 @@ namespace Nightmare
         {
             if (isPaused)
                 return;
-            
+
             // Add the time since Update was last called to the timer.
             timer += Time.deltaTime;
 
             // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-            if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.CurrentHealth() > 0)
+            if(timer >= timeBetweenAttacks && enemyHealth.CurrentHealth() > 0)
             {
                 // ... attack.
-                Attack ();
+                if(playerInRange)
+                {
+                    AttackPlayer();
+                }
+                else if (petInRange)
+                {
+                    AttackPet();
+                }
             }
 
             // If the player has zero or less health...
@@ -74,7 +102,7 @@ namespace Nightmare
             }
         }
 
-        void Attack ()
+        void AttackPlayer ()
         {
             // Reset the timer.
             timer = 0f;
@@ -85,6 +113,19 @@ namespace Nightmare
                 // ... damage the player.
                 playerHealth.TakeDamage (attackDamage);
             }
+        }
+        void AttackPet()
+        {
+            // Reset the timer.
+            timer = 0f;
+
+            // If the player has health to lose...
+            if (petHealth.currentHealth > 0)
+            {
+                // ... damage the player.
+                petHealth.TakeDamage(attackDamage);
+            }
+            
         }
     }
 }
