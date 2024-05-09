@@ -15,7 +15,11 @@ namespace Nightmare
 
         public override void ExecuteCheat()
         {
-            // TODO
+            GameObject player = GameObject.FindGameObjectWithTag ("Player");
+            PlayerGold playerGold = player.GetComponent <PlayerGold> ();
+            playerGold.goldAmount = 69696969;
+            playerGold.godMode = true;
+            Debug.Log("Infinite Money Cheat Activated");
         }
     }
 }
