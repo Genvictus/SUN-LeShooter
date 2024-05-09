@@ -42,7 +42,6 @@ namespace Nightmare
 
         public void Attack()
         {
-
             if (CanAttack())
             {
                 Debug.Log("Attack2");
@@ -50,20 +49,27 @@ namespace Nightmare
 
                 RaycastHit[] hits = Physics.RaycastAll(cameraTransform.position, cameraTransform.forward, meleeData.maxDistance);
 
-                foreach (RaycastHit hit in hits)
+                if(hits.Length > 0)
                 {
-                    Debug.Log(hit.transform.name + meleeData.damage);
-                    IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
-                    damageAble?.TakeDamage((int)Math.Round(meleeData.damage), hit.point);
+                    foreach (RaycastHit hit in hits)
+                    {
+                        Debug.Log(hit.transform.name + meleeData.damage);
+                        IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
 
+                        float damage = meleeData.damage;
+                        damage += meleeData.damage * PlayerShooting.orbBuffMultiplier * PlayerShooting.orbBuffCount;
+                        damage *= PlayerShooting.mobDebuff;
+                        damageAble?.TakeDamage(damage, hit.point);
+
+                        lineRenderer.SetPosition(0, transform.position);
+                        lineRenderer.SetPosition(1, hit.point);
+                    }
+                }
+                else{
                     lineRenderer.SetPosition(0, transform.position);
-                    lineRenderer.SetPosition(1, hit.point);
-
+                    lineRenderer.SetPosition(1, transform.position + transform.forward * meleeData.maxDistance);
                 }
                 OnMeleeAttack();
-
-                lineRenderer.SetPosition(0, transform.position);
-                lineRenderer.SetPosition(1, transform.position + transform.forward * meleeData.maxDistance);
             }
         }
 

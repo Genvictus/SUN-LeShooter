@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -21,7 +23,19 @@ public class MainMenuButtons : MonoBehaviour
 
     public void ViewStatistics()
     {
-        // todo: open statistic menu
+        PlayerStats stats;
+        // TODO: this is just loading and saving PlayerStats template
+        if (!SavesManager.LoadPlayerStats(out stats))
+        {
+            stats = new();
+            Debug.LogError("Unable to load player stats!");
+        }
+
+        stats.SetInitialPlayTime();
+        Debug.Log(stats.InitialPlayTime);
+        Debug.Log(stats.PlayTime);
+
+        SavesManager.SavePlayerStats(stats);
     }
 
     public void ViewSettings()

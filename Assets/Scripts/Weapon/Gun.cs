@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Nightmare
@@ -32,7 +30,7 @@ namespace Nightmare
             PlayerShooting.shootInput += Shoot;
             PlayerShooting.reloadInput += StartReload;
             if (gunData.spread && lineRenderers.Count == 0){
-                initLineRenders();           
+                initLineRenders();
             }
         }
 
@@ -76,9 +74,14 @@ namespace Nightmare
             RaycastHit hit;
             if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, gunData.maxDistance))
             {
-                Debug.Log("got hit: " + hit.transform.name);
+                // Debug.Log("got hit: " + hit.transform.name);
                 IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
-                damageAble?.TakeDamage((int)Math.Round(gunData.damage), hit.transform.position);
+
+                float damage = gunData.damage;
+                damage += gunData.damage * PlayerShooting.orbBuffMultiplier * PlayerShooting.orbBuffCount;
+                damage *= PlayerShooting.mobDebuff;
+                Debug.Log("Deal damage: " + damage);
+                damageAble?.TakeDamage(damage, hit.transform.position);
 
                 lineRenderer.SetPosition(0, muzzle.position);
                 lineRenderer.SetPosition(1, hit.point);
@@ -114,7 +117,7 @@ namespace Nightmare
         }
         private void SpreadShoot()
         {
-            float spreadAngle = 20f; 
+            float spreadAngle = 20f;
 
             for (int i = 0; i <= bulletsSpread; i++)
             {
@@ -143,7 +146,7 @@ namespace Nightmare
 
         private float CalculateAdjustedDamage(float distance)
         {
-            float maxDistance = gunData.maxDistance; 
+            float maxDistance = gunData.maxDistance;
             float maxDamage = gunData.damage;
             float minDamage = 1f;
 
@@ -195,7 +198,6 @@ namespace Nightmare
                 {
                     reloadSound.Play();
                     StartCoroutine(Reload());
-                
                 }
         }
 

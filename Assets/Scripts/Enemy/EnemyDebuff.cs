@@ -11,7 +11,6 @@ namespace Nightmare
         public float debuffRate = 1f;
         GameObject player;
         PlayerHealth playerHealth;
-        PlayerMovement playerMovement;
         EnemyHealth enemyHealth;
         WeaponSwitching weaponSwitching;
         Gun Default;
@@ -26,7 +25,6 @@ namespace Nightmare
             // Setting up the references.
             player = GameObject.FindGameObjectWithTag ("Player");
             playerHealth = player.GetComponent <PlayerHealth> ();
-            playerMovement = player.GetComponent <PlayerMovement> ();
 
             weaponSwitching = player.GetComponentInChildren<WeaponSwitching>();
 
@@ -84,17 +82,8 @@ namespace Nightmare
             // If the player has health to lose...
             if(playerHealth.currentHealth > 0)
             {
-                // ... damage the player.
-                playerMovement.speed /= moveDebuff;
-                playerMovement.walkSpeed /= moveDebuff;
-                playerMovement.runSpeed /= moveDebuff;
-
-                Default.DebuffAttack(attackDebuff);
-
-                Sword.DebuffAttack(attackDebuff);
-
-                Shotgun.DebuffAttack(attackDebuff);
-
+                PlayerMovement.mobDebuff /= moveDebuff;
+                PlayerShooting.mobDebuff /= attackDebuff;
             }
         }
 
@@ -109,17 +98,8 @@ namespace Nightmare
             // If the player has health to lose...
             if(playerHealth.currentHealth > 0)
             {
-
-                playerMovement.speed *= moveDebuff;
-                playerMovement.walkSpeed *= moveDebuff;
-                playerMovement.runSpeed *= moveDebuff;
-
-                Default.BuffAttack(attackDebuff);
-
-                Sword.BuffAttack(attackDebuff);
-
-                Shotgun.BuffAttack(attackDebuff);
-
+                PlayerMovement.mobDebuff *= moveDebuff;
+                PlayerShooting.mobDebuff *= attackDebuff;
             }
         }
     }

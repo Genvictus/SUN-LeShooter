@@ -48,11 +48,11 @@ public class EnemyMelee : MonoBehaviour
 
             RaycastHit hit;
             if (Physics.Raycast(enemyTransform.position, enemyTransform.forward, out hit, meleeData.maxDistance))
-            {   
+            {
                 Debug.Log("Enemy Hit2");
                 Debug.Log(hit.transform.name);
                 IPlayerDamageAble damageAble = hit.transform.GetComponent<IPlayerDamageAble>();
-                damageAble?.TakeDamage((int)Math.Round(meleeData.damage), hit.transform.position);
+                damageAble?.TakeDamage(meleeData.damage, hit.transform.position);
 
                 lineRenderer.SetPosition(0, transform.position);
                 lineRenderer.SetPosition(1, hit.point);
