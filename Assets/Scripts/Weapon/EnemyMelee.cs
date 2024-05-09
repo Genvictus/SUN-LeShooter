@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyMelee : MonoBehaviour
 {
-   [Header("References")]
+    [Header("References")]
     [SerializeField] private MeleeData meleeData;
     [SerializeField] private Transform enemyTransform;
 

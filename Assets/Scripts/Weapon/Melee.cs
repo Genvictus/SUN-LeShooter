@@ -7,7 +7,7 @@ namespace Nightmare
 {
     public class Melee : MonoBehaviour
     {
-    [Header("References")]
+        [Header("References")]
         [SerializeField] private MeleeData meleeData;
         [SerializeField] private Transform cameraTransform;
 
