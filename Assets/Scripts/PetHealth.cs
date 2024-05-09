@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PetHealth : MonoBehaviour
+public class PetHealth : MonoBehaviour, IPlayerDamageAble
 {
     // Start is called before the first frame update
     public int maxHealth;
@@ -35,7 +35,7 @@ public class PetHealth : MonoBehaviour
         anim.SetBool("IsDead", false);*/
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, Vector3 hitPoint)
     {
         if (godMode)
             return;
@@ -92,5 +92,10 @@ public class PetHealth : MonoBehaviour
         }
 
         damaged = false;
+    }
+
+    public void TakeDamage(float amount, Vector3 hitPoint)
+    {
+        throw new System.NotImplementedException();
     }
 }
