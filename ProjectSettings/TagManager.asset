@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Logic
   - Pet
+  - Default
+  - Shotgun
+  - Sword
   layers:
   - Default
   - TransparentFX

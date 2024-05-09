@@ -1,22 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 namespace Nightmare
 {
     public class EnemyAttack : PausibleObject
     {
-        public float timeBetweenAttacks = 0.5f;
-        public int attackDamage = 10;
-
+        float timeBetweenAttacks;
         Animator anim;
         GameObject player;
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
+        public static Action attackAction;
         bool playerInRange;
         bool petInRange;
         float timer;
-        GameObject pet;
-        PetHealth petHealth;
+        public MeleeData meleeData;
 
         void Awake ()
         {
@@ -25,13 +24,7 @@ namespace Nightmare
             playerHealth = player.GetComponent <PlayerHealth> ();
             enemyHealth = GetComponent<EnemyHealth>();
             anim = GetComponent <Animator> ();
-
-            pet = GameObject.FindGameObjectWithTag("Pet");
-            if(pet is not null)
-            {
-                petHealth = pet.GetComponent<PetHealth>();
-            }
-            
+            timeBetweenAttacks = meleeData.fireRate;
 
             StartPausible();
         }
@@ -61,14 +54,21 @@ namespace Nightmare
             // If the exiting collider is the player...
             if (other.gameObject == player)
             {
-                // ... the player is in range.
+                // ... the player is no longer in range.
                 playerInRange = false;
             }
-            if (other.gameObject == pet)
+        }
+
+
+        void CheckPlayerInRange()
+        {
+            if (Vector3.Distance(player.transform.position, transform.position) < meleeData.maxDistance)
             {
-                // ... the player is in range.
-                petInRange = false;
-                // Debug.Log("pet in range");
+                playerInRange = true;
+            }
+            else
+            {
+                playerInRange = false;
             }
         }
 
@@ -84,14 +84,8 @@ namespace Nightmare
             if(timer >= timeBetweenAttacks && enemyHealth.CurrentHealth() > 0)
             {
                 // ... attack.
-                if(playerInRange)
-                {
-                    AttackPlayer();
-                }
-                else if (petInRange)
-                {
-                    AttackPet();
-                }
+                transform.LookAt(player.transform);
+                Attack ();
             }
 
             // If the player has zero or less health...
@@ -111,7 +105,8 @@ namespace Nightmare
             if(playerHealth.currentHealth > 0)
             {
                 // ... damage the player.
-                playerHealth.TakeDamage (attackDamage);
+                attackAction?.Invoke();
+                // playerHealth.TakeDamage (attackDamage);
             }
         }
         void AttackPet()

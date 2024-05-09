@@ -5,13 +5,12 @@ using UnityEngine.AI;
 
 namespace Nightmare
 {
-    public class PetFollow : PausibleObject
+    public class HealingTortoise : PausibleObject
     {
         // Start is called before the first frame update
         public NavMeshAgent pet;
         public Transform target;
         public GameObject player;
-        public PetHealth petHealth;
         bool playerInRange;
         public PlayerHealth health;
         public float healCooldown;
@@ -24,12 +23,9 @@ namespace Nightmare
         {
             player = GameObject.FindGameObjectWithTag("Player");
             health = player.GetComponent<PlayerHealth>();
-    
             _timer = 0f;
             _audio = GetComponent<AudioSource>();
             _audio.Play();
-
-            petHealth = GetComponent<PetHealth>();
             if ((transform.position - target.position).magnitude <= 100)
             {
                 playerInRange = true;
@@ -43,11 +39,8 @@ namespace Nightmare
         // Update is called once per frame
         void Update()
         {
-            if (isPaused || petHealth.isDead)
-            {
-                // Debug.Log("Pet Debug meninggal ");
+            if (isPaused)
                 return;
-            }
 
             pet.SetDestination(target.position);
 
@@ -64,9 +57,7 @@ namespace Nightmare
             _timer += Time.deltaTime;
             if (playerInRange && _timer >= healCooldown && health.currentHealth < 100)
             {
-                // Debug.Log("Playing heal sound");
                 _audio.Play();
-                // Debug.Log("Heal sound should have played");
                 health.Heal(healAmount);
                 _timer = 0f;
             }

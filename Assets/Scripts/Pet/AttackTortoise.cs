@@ -18,7 +18,7 @@ namespace Nightmare
         public float hitTime;
         float _timer;
         Animator animator;
-        AudioSource audio;
+        public AudioSource audio;
         GameObject player;
 
         PetHealth petHealth;
@@ -40,7 +40,6 @@ namespace Nightmare
                 return;
 
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            animator.SetBool("Attack", false);
 
             List<GameObject> enemiesInRangePlayer = new List<GameObject>();
             foreach (var enemy in enemies)
@@ -94,6 +93,7 @@ namespace Nightmare
             yield return new  WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             EnemyHealth health = target.GetComponent<EnemyHealth>();
             health.TakeDamage(damage, transform.position);
+            animator.SetBool("Attack", false);
         }
 
         void OnDestroy()

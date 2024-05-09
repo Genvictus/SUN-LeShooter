@@ -27,16 +27,38 @@ public class PauseManager : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			canvas.enabled = !canvas.enabled;
-			Pause();
+			TogglePauseMenu();
 		}
 	}
 
-	public void Pause()
+	public void SetGameOverPause(bool pauseValue = true)
 	{
+		Debug.Log("Set GameOver Pause to " + pauseValue.ToString());
+		EventManager.TriggerEvent("GameOverPause", pauseValue);
+	}
+
+	public void SetPause(bool pauseValue = true)
+	{
+		Debug.Log("Set Pause to " + pauseValue.ToString());
+		EventManager.TriggerEvent("Pause", pauseValue);
+
+
+		// if setting paused to false, unfreeze time 
+		if (!pauseValue)
+		{
+			Time.timeScale = 1;
+			Lowpass();
+		}
+	}
+
+	public void TogglePauseMenu()
+	{
+		// toggles pause based on canvas enabled or not
+		canvas.enabled = !canvas.enabled;
+
 		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
 		Lowpass();
-
+		SetPause(canvas.enabled);
 	}
 
 	void Lowpass()
@@ -55,6 +77,9 @@ public class PauseManager : MonoBehaviour
 
 	public void Quit()
 	{
+		SetPause(false);
+		SetGameOverPause(true);
+
 		SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
 	}
 }
