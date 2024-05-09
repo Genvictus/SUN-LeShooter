@@ -10,7 +10,7 @@ public class PetHealth : MonoBehaviour, IPlayerDamageAble
     public bool godMode = false;
     public float sinkSpeed = 0.1f;
 
-    public int currentHealth;
+    public float currentHealth;
     public bool isDead;
     AudioSource petAudio;
     bool damaged;
@@ -35,7 +35,7 @@ public class PetHealth : MonoBehaviour, IPlayerDamageAble
         anim.SetBool("IsDead", false);*/
     }
 
-    public void TakeDamage(int amount, Vector3 hitPoint)
+    public void TakeDamage(float amount, Vector3 hitPoint)
     {
         if (godMode)
             return;
@@ -58,6 +58,7 @@ public class PetHealth : MonoBehaviour, IPlayerDamageAble
 
     void Death()
     {
+        Debug.Log("pet is dead :(");
         isDead = true;
 
         StartSinking();
@@ -92,10 +93,5 @@ public class PetHealth : MonoBehaviour, IPlayerDamageAble
         }
 
         damaged = false;
-    }
-
-    public void TakeDamage(float amount, Vector3 hitPoint)
-    {
-        throw new System.NotImplementedException();
     }
 }
