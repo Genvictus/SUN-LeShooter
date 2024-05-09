@@ -56,9 +56,7 @@ namespace Nightmare
                         Debug.Log(hit.transform.name + meleeData.damage);
                         IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
 
-                        float damage = meleeData.damage;
-                        damage += meleeData.damage * PlayerShooting.orbBuffMultiplier * PlayerShooting.orbBuffCount;
-                        damage *= PlayerShooting.mobDebuff;
+                        float damage = PlayerShooting.Calculatedamage(meleeData.damage);
                         damageAble?.TakeDamage(damage, hit.point);
 
                         lineRenderer.SetPosition(0, transform.position);

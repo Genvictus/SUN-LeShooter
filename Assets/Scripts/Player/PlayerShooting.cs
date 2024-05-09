@@ -17,7 +17,8 @@ namespace Nightmare
         public static GameObject buffHUD = null;
         public static float mobDebuff = 1;
 
-        void Awake() {
+        void Awake()
+        {
             StartPausible();
         }
 
@@ -37,6 +38,14 @@ namespace Nightmare
         void OnDestroy()
         {
             StopPausible();
+        }
+
+        public static float Calculatedamage(float initialDamage)
+        {
+            float damage = initialDamage;
+            damage += initialDamage * orbBuffMultiplier * orbBuffCount;
+            damage *= mobDebuff;
+            return damage;
         }
     }
 }
