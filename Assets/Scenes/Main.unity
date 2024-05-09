@@ -857,6 +857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 380706330}
   - component: {fileID: 380706331}
+  - component: {fileID: 380706332}
   m_Layer: 5
   m_Name: BGM
   m_TagString: Untagged
@@ -950,6 +951,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &380706332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380706329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df6c370379b533468a7c08a87ea3741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &461218463
 GameObject:
   m_ObjectHideFlags: 0
@@ -3726,6 +3739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2038099395}
   - component: {fileID: 2038099396}
+  - component: {fileID: 2038099397}
   m_Layer: 5
   m_Name: SFX
   m_TagString: Untagged
@@ -3819,6 +3833,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2038099397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038099394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd3a411e26af87c40a526ac1a60418cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2060555840
 GameObject:
   m_ObjectHideFlags: 0

@@ -1170,7 +1170,7 @@ RectTransform:
   m_Father: {fileID: 2091609648}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1512,7 +1512,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &449350876
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1660,6 +1660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 536747705}
   - component: {fileID: 536747706}
+  - component: {fileID: 536747707}
   m_Layer: 5
   m_Name: BGMSlider
   m_TagString: Untagged
@@ -1734,13 +1735,37 @@ MonoBehaviour:
   m_FillRect: {fileID: 847195020}
   m_HandleRect: {fileID: 1977637422}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: -10
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -10
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 864213766}
+        m_TargetAssemblyTypeName: MixLevels, Assembly-CSharp
+        m_MethodName: SetMusicLvl
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &536747707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536747704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df6c370379b533468a7c08a87ea3741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &560317883
 GameObject:
   m_ObjectHideFlags: 0
@@ -3292,7 +3317,7 @@ RectTransform:
   m_Father: {fileID: 1075411520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3486,7 +3511,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &864213763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5149,8 +5174,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1599409553}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6479,6 +6504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1836615932}
   - component: {fileID: 1836615933}
+  - component: {fileID: 1836615934}
   m_Layer: 5
   m_Name: SFXSlider
   m_TagString: Untagged
@@ -6553,13 +6579,37 @@ MonoBehaviour:
   m_FillRect: {fileID: 323987745}
   m_HandleRect: {fileID: 1419136448}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: -10
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -10
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 864213766}
+        m_TargetAssemblyTypeName: MixLevels, Assembly-CSharp
+        m_MethodName: SetSfxLvl
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1836615934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836615931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd3a411e26af87c40a526ac1a60418cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1862883807
 GameObject:
   m_ObjectHideFlags: 0
@@ -6934,8 +6984,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1737093137}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
