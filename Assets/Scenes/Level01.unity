@@ -696,6 +696,11 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
+--- !u!1 &910330680 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1150500654680675556, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+  m_PrefabInstance: {fileID: 8715603967102173174}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &933997769
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,6 +736,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4152487034167244, guid: 1df3c9e3c99fce14cb9c1f900f8859cc, type: 3}
   m_PrefabInstance: {fileID: 377498641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &968361777 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8113757676840766450, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+  m_PrefabInstance: {fileID: 8715603967102173174}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &995843136
 PrefabInstance:
@@ -1278,6 +1288,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1df3c9e3c99fce14cb9c1f900f8859cc, type: 3}
+--- !u!1 &1833080329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5074153801109854682, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+  m_PrefabInstance: {fileID: 8715603967102173174}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2112317438 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4467320814775768, guid: 149d6dcc67e8d1240bbc0dd6ddf0c1bd, type: 3}
@@ -1291,6 +1306,70 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_PlayableAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: aa8eb3ba44254fe468ed061a8a9d6490, type: 2}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[7].key
+      value: 
+      objectReference: {fileID: 6461201108691424890, guid: 4084b407007d8e64f91388ccb60443a6, type: 2}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[8].key
+      value: 
+      objectReference: {fileID: -2915838662789290419, guid: aa8eb3ba44254fe468ed061a8a9d6490, type: 2}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[9].key
+      value: 
+      objectReference: {fileID: 6461201108691424890, guid: aa8eb3ba44254fe468ed061a8a9d6490, type: 2}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[10].key
+      value: 
+      objectReference: {fileID: -3148861223838348727, guid: aa8eb3ba44254fe468ed061a8a9d6490, type: 2}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[11].key
+      value: 
+      objectReference: {fileID: -1519804304419689328, guid: aa8eb3ba44254fe468ed061a8a9d6490, type: 2}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[12].key
+      value: 
+      objectReference: {fileID: 6100502711587290785, guid: aa8eb3ba44254fe468ed061a8a9d6490, type: 2}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[13].key
+      value: 
+      objectReference: {fileID: -3148861223838348727, guid: aa8eb3ba44254fe468ed061a8a9d6490, type: 2}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[14].key
+      value: 
+      objectReference: {fileID: -3148861223838348727, guid: aa8eb3ba44254fe468ed061a8a9d6490, type: 2}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[8].value
+      value: 
+      objectReference: {fileID: 1833080329}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[9].value
+      value: 
+      objectReference: {fileID: 910330680}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[10].value
+      value: 
+      objectReference: {fileID: 8715603967102173175}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[11].value
+      value: 
+      objectReference: {fileID: 8715603967102173176}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[12].value
+      value: 
+      objectReference: {fileID: 968361777}
+    - target: {fileID: 3196101554598557025, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+      propertyPath: m_SceneBindings.Array.data[13].value
+      value: 
+      objectReference: {fileID: 8715603967102173175}
     - target: {fileID: 5500365130034066383, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
       propertyPath: m_Name
       value: Cinematic
@@ -1340,6 +1419,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+--- !u!1 &8715603967102173175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2689935725938612460, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+  m_PrefabInstance: {fileID: 8715603967102173174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8715603967102173176 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4416783966581455298, guid: 4cf99e14144a1d443b2aee3ea62a83af, type: 3}
+  m_PrefabInstance: {fileID: 8715603967102173174}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
