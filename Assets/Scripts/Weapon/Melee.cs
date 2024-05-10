@@ -45,7 +45,7 @@ namespace Nightmare
 
         public void Attack()
         {
-            if (CanAttack())
+            if (gameObject.activeSelf && CanAttack())
             {
                 Debug.Log("Attack2");
                 timeSinceLastAttack = 0;

@@ -54,7 +54,7 @@ namespace Nightmare
 
         public void Shoot()
         {
-            if (gunData.currentAmmo > 0 && CanShoot())
+            if (gameObject.activeSelf && gunData.currentAmmo > 0 && CanShoot())
             {
                 Debug.Log("Shoot");
                 gunData.shooting = true;
