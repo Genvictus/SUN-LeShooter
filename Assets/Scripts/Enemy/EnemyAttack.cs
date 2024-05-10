@@ -31,7 +31,7 @@ namespace Nightmare
             anim = GetComponent <Animator> ();
 
             pet = GameObject.FindGameObjectWithTag("Pet");
-            if (pet is not null)
+            if (pet != null)
             {
                 petHealth = pet.GetComponent<PetHealth>();
             }
@@ -46,37 +46,6 @@ namespace Nightmare
             clearAction?.Invoke();
         }
 
-        void OnTriggerEnter (Collider other)
-        {
-            // If the entering collider is the player...
-            if(other.gameObject == player)
-            {
-                // ... the player is in range.
-                playerInRange = true;
-            }
-            // If the entering collider is pet...
-            if(other.gameObject == pet)
-            {
-                // ... the pet is in range.
-                petInRange = true;
-            }
-        }
-
-        void OnTriggerExit (Collider other)
-        {
-            // If the exiting collider is the player...
-            if(other.gameObject == player)
-            {
-                // ... the player is no longer in range.
-                playerInRange = false;
-            }
-            // If the entering collider is pet...
-            if(other.gameObject == pet)
-            {
-                // ... the pet is in range.
-                petInRange = false;
-            }
-        }
 
         protected void Update ()
         {
@@ -128,7 +97,7 @@ namespace Nightmare
             if(playerHealth.currentHealth > 0)
             {
                 // ... damage the player.
-                GetAttackAction()?.Invoke(player.transform);
+                GetAttackAction()?.Invoke(transform);
                 // playerHealth.TakeDamage (attackDamage);
             }
         }
@@ -141,7 +110,7 @@ namespace Nightmare
             if (petHealth.currentHealth > 0)
             {
                 // ... damage the pet.
-                GetAttackAction()?.Invoke(pet.transform);
+                GetAttackAction()?.Invoke(transform);
             }
         }
     }

@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Nightmare;
 using UnityEngine;
 
-public class PetHealth : MonoBehaviour, IPlayerDamageAble
+public class EnemyPetHealth : MonoBehaviour, IDamageAble
 {
     // Start is called before the first frame update
     public int maxHealth;
@@ -43,8 +42,9 @@ public class PetHealth : MonoBehaviour, IPlayerDamageAble
 
         damaged = true;
 
-        currentHealth -= amount * DifficultyManager.GetIncomingDamageRate();
+        currentHealth -= amount;
 
+        Debug.Log("enemy pet health: " + currentHealth);
         // healthSlider.value = currentHealth;
 
         petAudio.Play();

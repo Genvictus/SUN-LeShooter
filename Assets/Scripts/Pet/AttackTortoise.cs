@@ -40,6 +40,7 @@ namespace Nightmare
                 return;
 
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            
 
             List<GameObject> enemiesInRangePlayer = new List<GameObject>();
             foreach (var enemy in enemies)

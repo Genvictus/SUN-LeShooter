@@ -79,7 +79,7 @@ namespace Nightmare
             RaycastHit hit;
             if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, gunData.maxDistance))
             {
-                // Debug.Log("got hit: " + hit.transform.name);
+                Debug.Log("got hit: " + hit.transform.name);
                 IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
 
                 float damage = gunData.damage;
