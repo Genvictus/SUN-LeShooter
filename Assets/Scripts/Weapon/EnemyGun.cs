@@ -15,6 +15,7 @@ public class EnemyGun : MonoBehaviour
     [SerializeField] private float visualDuration = 0.2f;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private Light muzzleFlash;
+    Animator anim;
 
     [Header("Audio")]
     [SerializeField] private AudioSource shootSound;
@@ -34,6 +35,7 @@ public class EnemyGun : MonoBehaviour
         if (gunData.spread && lineRenderers.Count == 0){
             initLineRenders();
         }
+        anim = GetComponentInChildren<Animator>();
     }
 
      private void initLineRenders(){
@@ -90,6 +92,7 @@ public class EnemyGun : MonoBehaviour
             {
                 DefaultShoot(enemyTransform);
             }
+            anim.SetTrigger("Shoot");
         }
 
     }
