@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -54,6 +55,7 @@ public class MainMenu : MonoBehaviour
         // init game stats file if none exists
         if (!SavesManager.LoadPlayerStats(out stats))
         {
+            // TODO load player stats
             stats = new();
             Debug.LogError("Unable to load player stats!");
             stats.SetInitialPlayTime();
@@ -68,12 +70,17 @@ public class MainMenu : MonoBehaviour
         {
             if (tmp.name == "StatisticsValues")
             {
-                tmp.text = stats.totalshot.ToString() + "\n";
-                tmp.text += stats.Accuracy.ToString() + "\n";
-                tmp.text += stats.distanceTraveled.ToString() + "\n";
-                tmp.text += stats.PlayTime.ToString() + "\n";
-
-                // todo: update for new statistics 
+                tmp.text = string.Format(tmp.text,
+                    stats.totalShot,
+                    Math.Round(stats.Accuracy, 2),
+                    stats.kerocoKillCount,
+                    stats.kepalaKerocoKillCount,
+                    stats.jendralKillCount,
+                    stats.rajaKillCount,
+                    stats.increaseTortoiseKillCount,
+                    stats.distanceTraveled,
+                    stats.cheatUsed,
+                    stats.PlayTime);
             }
         }
     }

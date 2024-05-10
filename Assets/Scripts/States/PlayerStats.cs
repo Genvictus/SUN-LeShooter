@@ -4,35 +4,29 @@ using UnityEngine;
 public class PlayerStats : SaveData<PlayerStats>
 {
     // Accuracy  stat
-    public int totalshot;
-    public int shotHit;
-    public float Accuracy => totalshot == 0 ? 0 : shotHit / totalshot;
+    public int totalShot; // TODO
+    public int shotHit; // TODO
+    public float Accuracy => totalShot == 0 ? 0 : shotHit / totalShot;
+
+    // KIll count
+    public int kerocoKillCount; // TODO
+    public int kepalaKerocoKillCount; // TODO
+    public int jendralKillCount; // TODO
+    public int rajaKillCount; // TODO
+    public int increaseTortoiseKillCount; // TODO
+
+    // Cheat
+    public int cheatUsed; // TODO
 
     // DistanceTraveled
-    public float distanceTraveled;
+    public float distanceTraveled; // TODO
 
     // play duration
-    public string InitialPlayTime; // TODO update if needed/wanted
-    public TimeSpan PlayTime => CalculatePlayTime();
-
-    // TODO 3 more stats
+    public string InitialPlayTime;
+    public TimeSpan PlayTime;
 
     public void SetInitialPlayTime()
     {
-        var now = DateTimeOffset.Now;
-        InitialPlayTime ??= now.ToString();
-    }
-
-    private TimeSpan CalculatePlayTime()
-    {
-        if (InitialPlayTime is not null)
-        {
-            DateTimeOffset initialPlayTime = DateTimeOffset.Parse(InitialPlayTime);
-            return DateTimeOffset.Now - initialPlayTime;
-        }
-        else
-        {
-            return TimeSpan.Zero;
-        }
+        InitialPlayTime ??= DateTimeOffset.Now.ToString();
     }
 }
