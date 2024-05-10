@@ -23,8 +23,8 @@ public class ShopUI : MonoBehaviour
 
     private void Start()
     {
-        CreateItemButton("Healing Tortoise", 200, 0);
-        CreateItemButton("Attacking Tortoise", 200, 1);
+        CreateItemButton("Healing Tortoise", 50, 0);
+        CreateItemButton("Attacking Tortoise", 50, 1);
         Hide();
     }
 
