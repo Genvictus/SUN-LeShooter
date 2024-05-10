@@ -63,7 +63,7 @@ public class MainMenu : MonoBehaviour
             string savefileName = "savefile" + i.ToString();
             LevelState loadedSave;
             ProgressionState progressSave;
-            if (SavesManager.LoadLevelState(savefileName, out loadedSave) && SavesManager.LoadProgressionState(savefileName, out progressSave))
+            if (SavesHelper.LoadLevelState(savefileName, out loadedSave) && SavesHelper.LoadProgressionState(savefileName, out progressSave))
             {
                 item.interactable = true;
                 // item.GetComponentInChildren<TMP_Text>().text = "Save Slot 1";
@@ -89,7 +89,7 @@ public class MainMenu : MonoBehaviour
         {
             Debug.Log("New game overwrite save slot " + saveSlot.ToString());
 
-            if (SavesManager.CreateNewSave(savefileName))
+            if (SavesHelper.CreateNewSave(savefileName))
             {
                 Debug.Log("Success create new save file");
                 NewGame();
@@ -105,7 +105,7 @@ public class MainMenu : MonoBehaviour
 
             LevelState loadedSave;
             ProgressionState progressSave;
-            if (SavesManager.LoadLevelState(savefileName, out loadedSave) && SavesManager.LoadProgressionState(savefileName, out progressSave))
+            if (SavesHelper.LoadLevelState(savefileName, out loadedSave) && SavesHelper.LoadProgressionState(savefileName, out progressSave))
             {
                 Debug.Log("Success load progression and save");
                 // todo: continue to load level
@@ -139,7 +139,7 @@ public class MainMenu : MonoBehaviour
 
         PlayerStats stats;
         // init game stats file if none exists
-        if (!SavesManager.LoadPlayerStats(out stats))
+        if (!SavesHelper.LoadPlayerStats(out stats))
         {
             stats = new();
             Debug.LogError("Unable to load player stats!");
@@ -147,7 +147,7 @@ public class MainMenu : MonoBehaviour
             Debug.Log(stats.InitialPlayTime);
             Debug.Log(stats.PlayTime);
 
-            SavesManager.SavePlayerStats(stats);
+            SavesHelper.SavePlayerStats(stats);
         }
 
         // get text component for storing values on screen

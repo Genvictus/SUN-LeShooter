@@ -1,72 +1,64 @@
 using System;
 using UnityEngine;
 
-public class SavesManager
+public class SavesManager : MonoBehaviour
 {
-    private static string playerKey = "player";
-    public static string playerName => PlayerPrefs.HasKey(playerKey) ? PlayerPrefs.GetString(playerKey) : "Player";
-
-    private const string PROGRESSION = "progression";
-    private const string LEVEL = "level";
-    private const string PLAYERSTATS = "playerstats";
-
-    public static void SetPlayerName(string name)
+    private static SavesManager instance;
+    public static SavesManager Instance
     {
-        PlayerPrefs.SetString(playerKey, name);
-    }
-
-    public static bool LoadPlayerStats(out PlayerStats playerStats)
-    {
-        playerStats = new();
-
-        bool status = SaveFileManager.LoadFromFile(PLAYERSTATS, out string statsJSON);
-        if (!status) return false;
-
-        playerStats.LoadFromJson(statsJSON);
-        return true;
-    }
-
-    public static bool SavePlayerStats(PlayerStats playerStats)
-    {
-        string statsJSON = playerStats.ToJson();
-        return SaveFileManager.WriteToFile(PLAYERSTATS, statsJSON);
-    }
-
-    public static bool CreateNewSave(string saveName)
-    {
-        return SaveFileManager.CreateDirectory(saveName);
-    }
-
-    public static bool ChangeSaveName(string newSaveName, string oldSaveName)
-    {
-        if (SaveFileManager.RenameDirectory(oldSaveName, newSaveName))
+        get
         {
-            Debug.LogError($"Error renaming save!");
-            return false;
+            if (!instance)
+            {
+                instance = FindObjectOfType(typeof(SavesManager)) as SavesManager;
+            }
+            return instance;
         }
-        return true;
     }
 
-    public static bool LoadProgressionState(string saveName, out ProgressionState progression)
+    private LevelState levelState;
+    private ProgressionState progressionState;
+    private PlayerStats playerStats;
+
+    public LevelState LevelState => levelState;
+    public ProgressionState ProgressionState => progressionState;
+    public PlayerStats PlayerStats => playerStats;
+
+    private string SaveName;
+
+    public static void SelectSave(string saveName)
     {
-        progression = new();
-        return SaveManager<ProgressionState>.LoadSave(saveName, PROGRESSION, progression);
+        Instance.SaveName = saveName;
     }
 
-    public static bool SaveProgressionState(string saveName, ProgressionState progression)
+    public static bool LoadSaves()
     {
-        progression.UpdateSaveTime();
-        return SaveManager<ProgressionState>.Save(saveName, PROGRESSION, progression);
+        bool success = true;
+
+        success = success && SavesHelper.LoadLevelState(Instance.SaveName, out Instance.levelState);
+        success = success && SavesHelper.LoadProgressionState(Instance.SaveName, out Instance.progressionState);
+        success = success && SavesHelper.LoadPlayerStats(out Instance.playerStats);
+
+        return success;
     }
 
-    public static bool LoadLevelState(string saveName, out LevelState levelState)
+    public static bool UpdateSaves()
     {
-        levelState = new();
-        return SaveManager<LevelState>.LoadSave(saveName, LEVEL, levelState);
+        SavesHelper.CreateNewSave(Instance.SaveName);
+        bool success = true;
+
+        success = success && SavesHelper.SaveLevelState(Instance.SaveName, Instance.levelState);
+        success = success && SavesHelper.SaveProgressionState(Instance.SaveName, Instance.progressionState);
+        success = success && SavesHelper.SavePlayerStats(Instance.playerStats);
+
+        return success;
     }
 
-    public static bool SaveLevelState(string saveName, LevelState levelState)
+
+    void Start()
     {
-        return SaveManager<LevelState>.Save(saveName, LEVEL, levelState);
+        SelectSave("Save1");
+        LoadSaves();
+        UpdateSaves();
     }
 }
