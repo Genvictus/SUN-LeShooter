@@ -4,7 +4,8 @@ using UnityEngine;
 public class SavesManager
 {
     public string saveName;
-    public static string playerName = "Player";
+    private static string playerKey = "player";
+    public static string playerName => PlayerPrefs.HasKey(playerKey) ? PlayerPrefs.GetString(playerKey) : "Player";
 
     private const string PROGRESSION = "progression";
     private const string LEVEL = "level";
@@ -12,7 +13,7 @@ public class SavesManager
 
     public static void SetPlayerName(string name)
     {
-        playerName = name;
+        PlayerPrefs.SetString(playerKey, name);
     }
 
     public static bool LoadPlayerStats(out PlayerStats playerStats)

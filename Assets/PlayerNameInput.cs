@@ -15,7 +15,7 @@ public class PlayerNameInput : MonoBehaviour
 
     public void SetPlayerName(string name)
     {
-        SavesManager.playerName = name;
+        SavesManager.SetPlayerName(name);
         Debug.Log("Player Name : " + SavesManager.playerName);
     }
 }

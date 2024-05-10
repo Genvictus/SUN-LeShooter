@@ -5,11 +5,12 @@ namespace Nightmare
 {
   public class DifficultyManager : PausibleObject
   {
-    public static int difficulty = 1;
+    private static string key = "difficulty";
+    public static int difficulty => PlayerPrefs.HasKey(key) ? PlayerPrefs.GetInt(key) : 1;
 
     public static void SetDifficulty(int diff)
     {
-      difficulty = Math.Max(Math.Min(2, diff), 0);
+      PlayerPrefs.SetInt("difficulty", Math.Max(Math.Min(2, diff), 0));
       Debug.Log("Set Difficulty : " + difficulty.ToString());
     }
 
