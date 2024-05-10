@@ -18,6 +18,8 @@ public class EnemyMelee : MonoBehaviour
     [SerializeField] private AudioSource attackSound;
     float timeSinceLastAttack;
     bool effectActive;
+
+    public int buffCount = 0;
     private void Start()
     {
         EnemyStrike enemyStrike = GetComponentInParent<EnemyStrike>();
@@ -49,16 +51,21 @@ public class EnemyMelee : MonoBehaviour
 
         if (CanAttack())
         {
-            Debug.Log("Enemy Attack2");
+/*            Debug.Log("Enemy Attack2");*/
             timeSinceLastAttack = 0;
 
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, meleeData.maxDistance))
             {
+/*                Debug.Log("Enemy Hit2");
+                Debug.Log(hit.transform.name);*/
                 IPlayerDamageAble damageAble = hit.transform.GetComponent<IPlayerDamageAble>();
-                damageAble?.TakeDamage(meleeData.damage, hit.transform.position);
 
-                Debug.Log(hit.transform.name + " " + meleeData.damage);
+                Debug.Log("Damage before buff " + meleeData.damage);
+                float damage = meleeData.damage + (buffCount * 0.2f * meleeData.damage);
+                Debug.Log("Damage after buff " + damage);
+
+                damageAble?.TakeDamage(damage, hit.transform.position);
 
                 lineRenderer.SetPosition(0, transform.position);
                 lineRenderer.SetPosition(1, hit.point);

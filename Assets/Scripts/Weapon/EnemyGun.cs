@@ -21,7 +21,8 @@ public class EnemyGun : MonoBehaviour
     [SerializeField] private AudioSource shootSound;
 
     float timeSinceLastShot;
-    private int bulletsSpread = 5;
+    private int bulletsSpread = 3;
+    public int buffCount = 0;
     private List<LineRenderer> lineRenderers = new List<LineRenderer>();
 
     private void Start()
@@ -103,7 +104,10 @@ public class EnemyGun : MonoBehaviour
         {
             Debug.Log(hit.transform.name);
             IPlayerDamageAble damageAble = hit.transform.GetComponent<IPlayerDamageAble>();
-            damageAble?.TakeDamage((int)Math.Round(gunData.damage), hit.transform.position);
+
+            float adjustedDamage = gunData.damage + (gunData.damage * buffCount * 0.2f);
+            
+            damageAble?.TakeDamage(adjustedDamage, hit.transform.position);
 
             lineRenderer.SetPosition(0, muzzle.position);
             lineRenderer.SetPosition(1, hit.point);
@@ -130,6 +134,8 @@ public class EnemyGun : MonoBehaviour
 
                 float distance = Vector3.Distance(muzzle.position, hit.point);
                 float adjustedDamage = CalculateAdjustedDamage(distance);
+
+                adjustedDamage = adjustedDamage + (adjustedDamage * buffCount * 0.2f);
 
                 damageAble?.TakeDamage((int)adjustedDamage, hit.point);
                 if (damageAble != null)

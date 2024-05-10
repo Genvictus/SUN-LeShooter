@@ -14,7 +14,7 @@ namespace Nightmare
         public GameObject followTarget;
         public EnemyHealth followTargetHealth;
         EnemyPetHealth petHealth;
-        float scale = 0.1f;
+        float scale = 1f;
 
 
         void Start()
@@ -35,7 +35,6 @@ namespace Nightmare
         // Update is called once per frame
         void Update()
         {
-            SetFollowTargetHealth();
             if (followTargetHealth.IsDead())
             {
                 petHealth.Death();

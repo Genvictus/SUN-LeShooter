@@ -7,11 +7,20 @@ public class PlayerGold : MonoBehaviour, IShopCustomer
     // Start is called before the first frame update
     public int initialGold;
     public int goldAmount;
+    GameObject player;
+    GameObject petHolder;
+    [Header("References")]
+    [SerializeField] private Transform[] pets = new Transform[2];
     public bool godMode = false;
 
     void Start()
     {
+        petHolder = GameObject.FindGameObjectWithTag("PetHolder");
+        player = GameObject.FindGameObjectWithTag("Player");
         goldAmount = initialGold;
+
+        for (int i = 0; i < petHolder.transform.childCount; i++)
+            pets[i] = petHolder.transform.GetChild(i);
     }
 
     // Update is called once per frame
@@ -20,15 +29,41 @@ public class PlayerGold : MonoBehaviour, IShopCustomer
 
     }
 
-    public bool BuyItem(int amount)
+    public void BoughItem(int index)
     {
-        if (amount <= goldAmount)
+        Debug.Log("Buying item");
+
+        Debug.Log("membeli pet: " + pets[index].gameObject.name);
+        pets[index].gameObject.SetActive(true);
+        GameObject[] avaiablePet = GameObject.FindGameObjectsWithTag("Pet");
+        foreach(var temp in avaiablePet)
         {
-            Debug.Log("Buying item");
-            SpendGold(amount);
-            return true;
+            if(temp.name == pets[index].gameObject.name)
+            {
+                PetHealth health = temp.GetComponent<PetHealth>();
+                health.transform.position = new Vector3(0,0,0);
+                health.currentHealth = health.maxHealth;
+                health.isDead = false;
+                health.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+            }
         }
-        return false;
+
+        /*GameObject[] pets = GameObject.FindGameObjectsWithTag("Pet");
+        Debug.Log("jumlah pet: " + pets.Length);
+        foreach(var pet in pets)
+        {
+            Debug.Log("nama pet: " + pet.name);
+            if(pet.name == petName)
+            {
+                Debug.Log("set active: " + petName);
+                pet.SetActive(true);
+            }
+        }*/
+        /*var pet = Resources.Load(petName) as GameObject;
+        Debug.Log("nama pet: " + pet.name);
+        Instantiate(pet, player.transform.position, player.transform.rotation);*/
+
+        SpendGold(200);
     }
 
     public int GetGoldAmount()
