@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Threading;
 using UnityEngine;
 
 public class SurviveQuestStep : QuestStep
 {
-    private float timeToComplete = 60;
+    public float timeToComplete = 60;
     private Coroutine timer;
 
     private IEnumerator Wait()
