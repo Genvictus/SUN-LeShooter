@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IShopCustomer
 {
-    void BoughItem();
+    void BoughItem(int index);
 
     int getGoldAmount();
 

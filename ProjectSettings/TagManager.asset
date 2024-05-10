@@ -12,6 +12,7 @@ TagManager:
   - Shotgun
   - Sword
   - EnemyPet
+  - PetHolder
   layers:
   - Default
   - TransparentFX
