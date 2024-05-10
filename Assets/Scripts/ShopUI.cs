@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using CodeMonkey.Utils;
+using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour
 {
@@ -17,14 +18,14 @@ public class ShopUI : MonoBehaviour
         petItem = container.Find("petItem");
         goldAmount = container.Find("GoldAmount");
 
- /*       GameObject player = GameObject.FindGameObjectWithTag("player");
-        customer = player.GetComponent<IShopCustomer>();*/
     }
 
     private void Start()
     {
-        CreateItemButton("Healing Tortoise", 200, 0);
-        CreateItemButton("Attacking Tortoise", 200, 1);
+        // fill with pet prices
+        CreateItemButton("Healing Tortoise", 50, 0);
+        CreateItemButton("Attacking Tortoise", 50, 1);
+        petItem.gameObject.SetActive(false);
         Hide();
     }
 
@@ -39,16 +40,20 @@ public class ShopUI : MonoBehaviour
         petItemTransform.Find("Petname").GetComponent<TextMeshProUGUI>().SetText(itemName);
         petItemTransform.Find("Price").GetComponent<TextMeshProUGUI>().SetText(itemCost.ToString());
 
-        /*petItemTransform.GetComponent<Button_UI>().ClickFunc = () =>
+        petItemTransform.gameObject.GetComponent<Button>().onClick.AddListener(delegate
         {
-            TryBuyItem();
-        };*/
+            if (BuyItem(itemCost))
+            {
+                Debug.Log("Buy Item Successful");
+                goldAmount.gameObject.GetComponent<TextMeshProUGUI>().SetText(customer.GetGoldAmount().ToString());
+            }
+        });
     }
 
-    public void TryBuyItem()
+    public bool BuyItem(int price)
     {
-        Debug.LogError("masuk beli");
-        customer.BoughItem();
+        Debug.Log("Try Buying Item");
+        return customer.BuyItem(price);
     }
 
     public void Show(IShopCustomer customer)
@@ -56,7 +61,7 @@ public class ShopUI : MonoBehaviour
         CursorHandler.ShowCursor();
 
         this.customer = customer;
-        goldAmount.GetComponent<TextMeshProUGUI>().SetText(customer.getGoldAmount().ToString());
+        goldAmount.gameObject.GetComponent<TextMeshProUGUI>().SetText(customer.GetGoldAmount().ToString());
         gameObject.SetActive(true);
     }
 

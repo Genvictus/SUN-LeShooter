@@ -17,21 +17,26 @@ public class PlayerGold : MonoBehaviour, IShopCustomer
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void BoughItem()
+    public bool BuyItem(int amount)
     {
-        Debug.Log("Buying item");
-        spendGold(50);
+        if (amount <= goldAmount)
+        {
+            Debug.Log("Buying item");
+            SpendGold(amount);
+            return true;
+        }
+        return false;
     }
 
-    public int getGoldAmount()
+    public int GetGoldAmount()
     {
         return goldAmount;
     }
 
-    public void spendGold(int spend)
+    public void SpendGold(int spend)
     {
         goldAmount -= spend;
     }
