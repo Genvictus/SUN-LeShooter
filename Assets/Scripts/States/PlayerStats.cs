@@ -16,10 +16,10 @@ public class PlayerStats : SaveData<PlayerStats>
     public int increaseTortoiseKillCount;
 
     // Cheat
-    public int cheatUsed; // TODO
+    public int cheatUsed;
 
     // DistanceTraveled
-    public float distanceTraveled; // TODO
+    public float distanceTraveled;
 
     // play duration
     public string InitialPlayTime;

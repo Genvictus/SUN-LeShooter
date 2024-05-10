@@ -16,10 +16,7 @@ public class StatsManager : MonoBehaviour
     void Update()
     {
         playerStats.PlayTime += TimeSpan.FromSeconds(Time.deltaTime);
-        Debug.Log("PlayerStats kerocoKillCount: " + playerStats.kerocoKillCount);
-        Debug.Log("PlayerStats kepalaKerocoKillCount: " + playerStats.kepalaKerocoKillCount);
-        Debug.Log("PlayerStats jenderalKillCount: " + playerStats.jenderalKillCount);
-        Debug.Log("PlayerStats rajaKillCount: " + playerStats.rajaKillCount);
-        Debug.Log("PlayerStats increaseTortoiseKillCount: " + playerStats.increaseTortoiseKillCount);
+        Debug.Log("PlayerStats cheatUsed: " + playerStats.cheatUsed);
+        Debug.Log("PlayerStats distanceTraveled: " + playerStats.distanceTraveled);
     }
 }

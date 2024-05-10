@@ -78,7 +78,7 @@ public class MainMenu : MonoBehaviour
                     stats.jenderalKillCount,
                     stats.rajaKillCount,
                     stats.increaseTortoiseKillCount,
-                    stats.distanceTraveled,
+                    Math.Round(stats.distanceTraveled, 2),
                     stats.cheatUsed,
                     stats.PlayTime);
             }
