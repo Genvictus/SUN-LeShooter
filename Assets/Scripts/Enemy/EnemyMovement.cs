@@ -67,7 +67,6 @@ namespace Nightmare
                         LookForPet();
                     }
                     LookForPlayer();
-                } else if (enemyHealth.CurrentHealth() > 0){
                     WanderOrIdle();
                 }
                 else
