@@ -8,8 +8,8 @@ namespace Nightmare
     public class PlayerShooting : PausibleObject
     {
 
-        public static Action shootInput;
-        public static Action reloadInput;
+        public Action shootInput;
+        public Action reloadInput;
 
         [SerializeField] private KeyCode reloadKey = KeyCode.R;
         public static float orbBuffMultiplier = 0.1f;

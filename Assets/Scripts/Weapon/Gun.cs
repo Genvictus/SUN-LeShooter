@@ -23,13 +23,18 @@ namespace Nightmare
 
         private int bulletsSpread = 5;
 
-        private List<LineRenderer> lineRenderers = new List<LineRenderer>();
+        private List<LineRenderer> lineRenderers = new();
 
         float timeSinceLastShot;
+        PlayerShooting shooting;
         private void Start()
         {
-            PlayerShooting.shootInput += Shoot;
-            PlayerShooting.reloadInput += StartReload;
+            shooting = GetComponentInParent<PlayerShooting>();
+            if (shooting != null)
+            {
+                shooting.shootInput += Shoot;
+                shooting.reloadInput += StartReload;
+            }
             if (gunData.spread && lineRenderers.Count == 0)
             {
                 initLineRenders();
@@ -119,6 +124,7 @@ namespace Nightmare
                 lineRenderers.Add(newLineRenderer);
             }
         }
+
         private void SpreadShoot()
         {
             float spreadAngle = 20f;
@@ -168,7 +174,18 @@ namespace Nightmare
         }
 
 
-        private void DisableLineRenderers(List<LineRenderer> lineRenderers)
+        private void DisableLineRenderers()
+        {
+            foreach (LineRenderer renderer in lineRenderers)
+            {
+                if (renderer != null)
+                {
+                    renderer.enabled = false;
+                }
+            }
+        }
+
+        private void DeleteLinRenders()
         {
             foreach (LineRenderer renderer in lineRenderers)
             {
@@ -200,7 +217,7 @@ namespace Nightmare
             muzzleFlash.enabled = false;
             if (gunData.spread)
             {
-                DisableLineRenderers(lineRenderers);
+                DisableLineRenderers();
             }
         }
 
@@ -233,6 +250,13 @@ namespace Nightmare
             StopAllCoroutines();
             DisableEffects();
             gunData.reloading = false;
+        }
+
+        void OnDestroy()
+        {
+            shooting.shootInput -= Shoot;
+            shooting.reloadInput -= StartReload;
+            // DeleteLinRenders();
         }
     }
 }
