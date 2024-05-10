@@ -17,7 +17,7 @@ namespace Nightmare
             }
 
             PlayerMovement.speedBuffTimer = buffDuration * DifficultyManager.GetOrbBuffRate();
-            PlayerMovement.setSpeedDurationText(buffDuration);
+            PlayerMovement.setSpeedDurationText(buffDuration * DifficultyManager.GetOrbBuffRate());
         }
     }
 }
