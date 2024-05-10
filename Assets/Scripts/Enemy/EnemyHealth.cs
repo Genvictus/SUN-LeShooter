@@ -16,7 +16,6 @@ namespace Nightmare
         ParticleSystem hitParticles;
         CapsuleCollider capsuleCollider;
         EnemyMovement enemyMovement;
-        List<GameObject> orbPrefabs = new List<GameObject>();
         public float orbDropChance = 0.5f;
 
 
@@ -27,10 +26,6 @@ namespace Nightmare
             hitParticles = GetComponentInChildren <ParticleSystem> ();
             capsuleCollider = GetComponent <CapsuleCollider> ();
             enemyMovement = this.GetComponent<EnemyMovement>();
-            
-            orbPrefabs.Add(Resources.Load("HealOrb") as GameObject);
-            orbPrefabs.Add(Resources.Load("AttackOrb") as GameObject);
-            orbPrefabs.Add(Resources.Load("SpeedOrb") as GameObject);
         }
 
         void OnEnable()
@@ -93,8 +88,9 @@ namespace Nightmare
 
             float orbDropValue = Random.value;
             if (orbDropValue <= orbDropChance) {
-                int orbIndex = Random.Range(0, orbPrefabs.Count);
-                GameObject orb = orbPrefabs[orbIndex];
+                GameObject[] orbs = Orb.GetOrbs();
+                int orbIndex = Random.Range(0, orbs.Length);
+                GameObject orb = orbs[orbIndex];
                 Instantiate(orb, orbSpawnPosition, Quaternion.identity);
             }
 

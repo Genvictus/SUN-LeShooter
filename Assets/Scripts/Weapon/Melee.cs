@@ -52,23 +52,22 @@ namespace Nightmare
 
                 RaycastHit[] hits = Physics.RaycastAll(cameraTransform.position, cameraTransform.forward, meleeData.maxDistance);
 
-                if(hits.Length > 0)
+                if (hits.Length > 0)
                 {
                     foreach (RaycastHit hit in hits)
                     {
                         Debug.Log(hit.transform.name + meleeData.damage);
                         IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
 
-                        float damage = meleeData.damage;
-                        damage += meleeData.damage * PlayerShooting.orbBuffMultiplier * PlayerShooting.orbBuffCount;
-                        damage *= PlayerShooting.mobDebuff;
+                        float damage = PlayerShooting.Calculatedamage(meleeData.damage);
                         damageAble?.TakeDamage(damage, hit.point);
 
                         lineRenderer.SetPosition(0, transform.position);
                         lineRenderer.SetPosition(1, hit.point);
                     }
                 }
-                else{
+                else
+                {
                     lineRenderer.SetPosition(0, transform.position);
                     lineRenderer.SetPosition(1, transform.position + transform.forward * meleeData.maxDistance);
                 }
@@ -89,21 +88,13 @@ namespace Nightmare
             lineRenderer.enabled = false;
         }
 
-        public void DebuffAttack(float debuff)
+        public MeleeData GetMeleeData()
         {
-            meleeData.damage /= debuff;
-        }
-
-        public void BuffAttack(float buff)
-        {
-            meleeData.damage *= buff;
-        }
-
-        public MeleeData GetMeleeData() {
             return meleeData;
         }
 
-        public void ResetMelee() {
+        public void ResetMelee()
+        {
             StopAllCoroutines();
             DisableEffects();
         }

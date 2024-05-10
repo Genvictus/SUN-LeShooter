@@ -6,7 +6,8 @@ public class PlayerGold : MonoBehaviour, IShopCustomer
 {
     // Start is called before the first frame update
     public int initialGold;
-    private int goldAmount;
+    public int goldAmount;
+    public bool godMode = false;
 
     void Start()
     {

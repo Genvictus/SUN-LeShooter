@@ -82,10 +82,7 @@ namespace Nightmare
                 Debug.Log("got hit: " + hit.transform.name);
                 IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
 
-                float damage = gunData.damage;
-                damage += gunData.damage * PlayerShooting.orbBuffMultiplier * PlayerShooting.orbBuffCount;
-                damage *= PlayerShooting.mobDebuff;
-                damage *= DifficultyManager.GetOutgoingDamageRate() * DifficultyManager.GetOrbBuffRate();
+                float damage = PlayerShooting.Calculatedamage(gunData.damage);
                 Debug.Log("Deal damage: " + damage);
                 damageAble?.TakeDamage(damage, hit.transform.position);
 
@@ -128,7 +125,7 @@ namespace Nightmare
 
             for (int i = 0; i <= bulletsSpread; i++)
             {
-                Vector3 spreadDirection = Quaternion.Euler(UnityEngine.Random.Range(-spreadAngle, spreadAngle), UnityEngine.Random.Range(-spreadAngle, spreadAngle), 0) * cameraTransform.forward;
+                Vector3 spreadDirection = Quaternion.Euler(Random.Range(-spreadAngle, spreadAngle), Random.Range(-spreadAngle, spreadAngle), 0) * cameraTransform.forward;
 
                 LineRenderer newLineRenderer = lineRenderers[i];
 
@@ -138,9 +135,9 @@ namespace Nightmare
                     IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
 
                     float distance = Vector3.Distance(muzzle.position, hit.point);
-                    float adjustedDamage = CalculateAdjustedDamage(distance) * DifficultyManager.GetOutgoingDamageRate() * DifficultyManager.GetOrbBuffRate();
+                    float adjustedDamage = CalculateAdjustedDamage(distance);
 
-                    damageAble?.TakeDamage((int)adjustedDamage, hit.point);
+                    damageAble?.TakeDamage(adjustedDamage, hit.point);
 
                     newLineRenderer.SetPosition(0, muzzle.position);
                     newLineRenderer.SetPosition(1, hit.point);
@@ -156,11 +153,16 @@ namespace Nightmare
         private float CalculateAdjustedDamage(float distance)
         {
             float maxDistance = gunData.maxDistance;
-            float maxDamage = gunData.damage;
+            float maxDamage = PlayerShooting.Calculatedamage(gunData.damage);
             float minDamage = 1f;
 
             float t = distance / maxDistance;
             float adjustedDamage = Mathf.Lerp(maxDamage, minDamage, t);
+
+            if (PlayerShooting.godMode)
+            {
+                adjustedDamage = 6969.69f;
+            }
 
             return adjustedDamage;
         }
@@ -219,16 +221,6 @@ namespace Nightmare
             yield return new WaitForSeconds(gunData.reloadTime);
             gunData.currentAmmo = gunData.magSize;
             gunData.reloading = false;
-        }
-
-        public void DebuffAttack(float debuff)
-        {
-            gunData.damage /= debuff;
-        }
-
-        public void BuffAttack(float buff)
-        {
-            gunData.damage *= buff;
         }
 
         public GunData GetGunData()
