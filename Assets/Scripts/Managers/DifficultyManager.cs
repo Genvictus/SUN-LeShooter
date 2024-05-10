@@ -15,30 +15,42 @@ namespace Nightmare
 
     public static float GetIncomingDamageRate()
     {
-      // affects player and pet
-      return 1;
-      // todo: calculate based on difficulty;
+      switch (difficulty)
+      {
+        case 0: return 0.8f;
+        case 1: return 1f;
+        case 2: return 1.6f;
+        default: return 1f;
+      }
     }
     public static float GetOutgoingDamageRate()
     {
-      // affects player and pet
-      return 1;
-      // todo: calculate based on difficulty;
+      switch (difficulty)
+      {
+        case 0: return 1.75f;
+        case 1: return 1f;
+        case 2: return 0.75f;
+        default: return 1f;
+      }
     }
     public static float GetPetPrice()
     {
-      return 1;
-      // todo: calculate based on difficulty;
+      if (difficulty == 0)
+      {
+        return 0.75f;
+      }
+      else
+      {
+        return difficulty * 1f;
+      }
     }
     public static float GetOrbBuffRate()
     {
-      return 1;
-      // todo: calculate based on difficulty;
+      return 1f + (difficulty - 1) * 0.25f;
     }
     public static float GetEnemySpawnRate()
     {
-      return 1;
-      // todo: calculate based on difficulty;
+      return 1f + difficulty * 0.5f;
     }
   }
 }
