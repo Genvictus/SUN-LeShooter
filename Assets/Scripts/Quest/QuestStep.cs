@@ -13,6 +13,7 @@ public abstract class QuestStep: MonoBehaviour
     protected virtual void FinishQuestStep()
     {
         isFinished = true;
+        Debug.Log($"Quest step for {questId} completed!");
         QuestEvents.Instance.AdvanceQuest(questId);
         Destroy(gameObject);
     }

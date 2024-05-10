@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2166fd385e2e08744a0c0d89624a5246, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  displayName: 
+  displayName: Level 1
   questPrerequisites: []
   questStepPrefabs:
   - {fileID: 3708608138599182646, guid: 8e419ea9ab1b62445aa4d78b8abb55b2, type: 3}
