@@ -53,7 +53,7 @@ namespace Nightmare
             }
 
             if (enemiesInRangePlayer.Count == 0)
-            { 
+            {
                 pet.SetDestination(player.transform.position);
             }
             else
@@ -91,9 +91,9 @@ namespace Nightmare
 
         IEnumerator DamageEnemy()
         {
-            yield return new  WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             EnemyHealth health = target.GetComponent<EnemyHealth>();
-            health.TakeDamage(damage, transform.position);
+            health.TakeDamage(damage * DifficultyManager.GetOutgoingDamageRate(), transform.position);
             animator.SetBool("Attack", false);
         }
 

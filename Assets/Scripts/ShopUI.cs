@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using CodeMonkey.Utils;
+using UnityEngine.UI;
 
 public class ShopUI : MonoBehaviour
 {
@@ -10,8 +11,8 @@ public class ShopUI : MonoBehaviour
     private Transform container;
     private Transform goldAmount;
     private IShopCustomer customer;
-    private Transform havePet;
-    private Transform noMoney;
+    // private Transform havePet;
+    // private Transform noMoney;
     GameObject[] pets;
 
     private void Awake()
@@ -19,17 +20,17 @@ public class ShopUI : MonoBehaviour
         container = transform.Find("container");
         petItem = container.Find("petItem");
         goldAmount = container.Find("GoldAmount");
-        havePet = container.Find("havePet");
-        noMoney = container.Find("noMoney");
+        // havePet = container.Find("havePet");
+        // noMoney = container.Find("noMoney");
 
- /*       GameObject player = GameObject.FindGameObjectWithTag("player");
-        customer = player.GetComponent<IShopCustomer>();*/
     }
 
     private void Start()
     {
-        CreateItemButton("Healing Tortoise", 200, 0);
-        CreateItemButton("Attacking Tortoise", 200, 1);
+        // fill with pet prices
+        CreateItemButton("Healing Tortoise", 50, 0);
+        CreateItemButton("Attacking Tortoise", 50, 1);
+        petItem.gameObject.SetActive(false);
         Hide();
     }
 
@@ -44,7 +45,7 @@ public class ShopUI : MonoBehaviour
         petItemTransform.Find("Petname").GetComponent<TextMeshProUGUI>().SetText(itemName);
         petItemTransform.Find("Price").GetComponent<TextMeshProUGUI>().SetText(itemCost.ToString());
 
-        petItemTransform.GetComponent<Button_UI>().ClickFunc = () =>
+        petItemTransform.gameObject.GetComponent<Button>().onClick.AddListener(delegate
         {
             /*if(itemName == "Healing Tortoise")
             {
@@ -54,8 +55,7 @@ public class ShopUI : MonoBehaviour
                 TryBuyItem("AttackTortoise");
             }*/
             TryBuyItem(positionIndex);
-            
-        };
+        });
     }
 
     public void TryBuyItem(int index)
@@ -63,15 +63,15 @@ public class ShopUI : MonoBehaviour
         pets = GameObject.FindGameObjectsWithTag("Pet");
 
 
-        if(customer.getGoldAmount() < 200)
+        if(customer.GetGoldAmount() < 200)
         {
             Debug.Log("can't buy pet because money");
-            noMoney.gameObject.SetActive(true);
+            // noMoney.gameObject.SetActive(true);
             StartCoroutine(HideNoMoneyAfterDelay());
         }else if (IsPetAlreadyHas(index))
         {
             Debug.Log("can't buy pet because already has");
-            havePet.gameObject.SetActive(true);
+            // havePet.gameObject.SetActive(true);
             StartCoroutine(HideHavePetAfterDelay());
         }
         else
@@ -107,7 +107,7 @@ public class ShopUI : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         // Nonaktifkan noMoney game object
-        noMoney.gameObject.SetActive(false);
+        // noMoney.gameObject.SetActive(false);
     }
 
     private IEnumerator HideHavePetAfterDelay()
@@ -115,14 +115,14 @@ public class ShopUI : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         // Nonaktifkan noMoney game object
-        havePet.gameObject.SetActive(false);
+        // havePet.gameObject.SetActive(false);
     }
     public void Show(IShopCustomer customer)
     {
         CursorHandler.ShowCursor();
 
         this.customer = customer;
-        goldAmount.GetComponent<TextMeshProUGUI>().SetText(customer.getGoldAmount().ToString());
+        goldAmount.gameObject.GetComponent<TextMeshProUGUI>().SetText(customer.GetGoldAmount().ToString());
         gameObject.SetActive(true);
     }
 

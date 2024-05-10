@@ -6,7 +6,7 @@ public interface IShopCustomer
 {
     void BoughItem(int index);
 
-    int getGoldAmount();
+    int GetGoldAmount();
 
-    void spendGold(int spend);
+    void SpendGold(int spend);
 }

@@ -12,6 +12,7 @@ public class EnemyMelee : MonoBehaviour
     [Header("Visuals")]
     [SerializeField] private float visualDuration = 0.1f;
     [SerializeField] private LineRenderer lineRenderer;
+    Animator anim;
 
     [Header("Audio")]
     [SerializeField] private AudioSource attackSound;
@@ -27,6 +28,7 @@ public class EnemyMelee : MonoBehaviour
             enemyStrike.attackAction += Attack;
             enemyStrike.clearAction += DisableEffects;
         }
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -53,7 +55,7 @@ public class EnemyMelee : MonoBehaviour
             timeSinceLastAttack = 0;
 
             RaycastHit hit;
-            if (Physics.Raycast(enemyTransform.position, enemyTransform.forward, out hit, meleeData.maxDistance))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, meleeData.maxDistance))
             {
 /*                Debug.Log("Enemy Hit2");
                 Debug.Log(hit.transform.name);*/
@@ -73,6 +75,7 @@ public class EnemyMelee : MonoBehaviour
                 lineRenderer.SetPosition(1, transform.position + transform.forward * meleeData.maxDistance);
             }
             OnMeleeAttack();
+            anim.SetTrigger("Attack");
         }
     }
 

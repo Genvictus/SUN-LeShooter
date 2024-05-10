@@ -6,11 +6,12 @@ public class PlayerGold : MonoBehaviour, IShopCustomer
 {
     // Start is called before the first frame update
     public int initialGold;
-    private int goldAmount;
+    public int goldAmount;
     GameObject player;
     GameObject petHolder;
     [Header("References")]
     [SerializeField] private Transform[] pets = new Transform[2];
+    public bool godMode = false;
 
     void Start()
     {
@@ -25,7 +26,7 @@ public class PlayerGold : MonoBehaviour, IShopCustomer
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void BoughItem(int index)
@@ -62,15 +63,15 @@ public class PlayerGold : MonoBehaviour, IShopCustomer
         Debug.Log("nama pet: " + pet.name);
         Instantiate(pet, player.transform.position, player.transform.rotation);*/
 
-        spendGold(200);
+        SpendGold(200);
     }
 
-    public int getGoldAmount()
+    public int GetGoldAmount()
     {
         return goldAmount;
     }
 
-    public void spendGold(int spend)
+    public void SpendGold(int spend)
     {
         goldAmount -= spend;
     }

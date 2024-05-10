@@ -10,12 +10,12 @@ public class PlayerNameInput : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<TMP_InputField>().text = SavesManager.playerName;
+        GetComponent<TMP_InputField>().text = SavesHelper.playerName;
     }
 
     public void SetPlayerName(string name)
     {
-        SavesManager.playerName = name;
-        Debug.Log("Player Name : " + SavesManager.playerName);
+        SavesHelper.SetPlayerName(name);
+        Debug.Log("Player Name : " + SavesHelper.playerName);
     }
 }

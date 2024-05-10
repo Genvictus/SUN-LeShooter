@@ -55,6 +55,7 @@ public class PauseManager : MonoBehaviour
 	{
 		// toggles pause based on canvas enabled or not
 		canvas.enabled = !canvas.enabled;
+		GetComponent<CanvasGroup>().interactable = !GetComponent<CanvasGroup>().interactable;
 
 		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
 		Lowpass();

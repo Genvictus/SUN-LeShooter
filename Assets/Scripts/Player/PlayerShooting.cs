@@ -16,8 +16,10 @@ namespace Nightmare
         public static int orbBuffCount = 0;
         public static GameObject buffHUD = null;
         public static float mobDebuff = 1;
+        public static bool godMode = false;
 
-        void Awake() {
+        void Awake()
+        {
             StartPausible();
         }
 
@@ -37,6 +39,22 @@ namespace Nightmare
         void OnDestroy()
         {
             StopPausible();
+        }
+
+        public static float Calculatedamage(float initialDamage)
+        {
+            float damage = initialDamage;
+            if (godMode)
+            {
+                damage = 6969.69f;
+            }
+            else
+            {
+                damage += initialDamage * orbBuffMultiplier * orbBuffCount * DifficultyManager.GetOrbBuffRate();
+                damage *= mobDebuff;
+                damage *= DifficultyManager.GetOutgoingDamageRate();
+            }
+            return damage;
         }
     }
 }
