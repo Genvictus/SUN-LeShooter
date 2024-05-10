@@ -14,7 +14,7 @@ namespace Nightmare
         public GameObject followTarget;
         public EnemyHealth followTargetHealth;
         EnemyPetHealth petHealth;
-        float scale = 0.1f;
+        float scale = 1f;
 
 
         void Start()
