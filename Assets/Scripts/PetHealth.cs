@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Nightmare;
 using UnityEngine;
 
 public class PetHealth : MonoBehaviour, IPlayerDamageAble
@@ -42,7 +43,7 @@ public class PetHealth : MonoBehaviour, IPlayerDamageAble
 
         damaged = true;
 
-        currentHealth -= amount;
+        currentHealth -= amount * DifficultyManager.GetIncomingDamageRate();
 
         // healthSlider.value = currentHealth;
 

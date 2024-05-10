@@ -81,7 +81,7 @@ namespace Nightmare
             damaged = true;
 
             // Reduce the current health by the damage amount.
-            currentHealth -= amount;
+            currentHealth -= amount * DifficultyManager.GetIncomingDamageRate();
 
             // Set the health bar's value to the current health.
             healthSlider.value = currentHealth;
