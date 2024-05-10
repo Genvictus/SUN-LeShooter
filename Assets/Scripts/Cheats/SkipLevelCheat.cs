@@ -15,7 +15,8 @@ namespace Nightmare
 
         public override string ExecuteCheat()
         {
-            // TODO
+            LevelManager levelManager = GameObject.FindObjectOfType<LevelManager>();
+            levelManager.AdvanceLevel();
             return "Skip Level Cheat Activated";
         }
     }
