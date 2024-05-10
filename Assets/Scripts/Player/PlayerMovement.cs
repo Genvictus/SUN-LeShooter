@@ -16,6 +16,8 @@ namespace Nightmare
         public static float speedBuffTimer = 0f;
         public static GameObject buffHUD = null;
         public static float mobDebuff = 1f;
+        public float godBuffMultiplier = 2f;
+        public bool godMode = false;
 
         public float jumpPower = 7f;
         public float gravity = 10f;
@@ -90,20 +92,19 @@ namespace Nightmare
 
             // Press Left Shift to run
             bool isRunning = Input.GetKey(KeyCode.LeftShift);
-            float curSpeedX = speed * v * mobDebuff;
-            float curSpeedY = speed * h * mobDebuff;
-
+            float speedBuff = speed * mobDebuff;
+            
             if (speedBuffTimer > 0)
-            {
-                curSpeedX *= speedBuffMultiplier;
-                curSpeedY *= speedBuffMultiplier;
-            }
+                speedBuff *= speedBuffMultiplier;
 
             if (isRunning)
-            {
-                curSpeedX *= runningSpeedMultiplier;
-                curSpeedY *= runningSpeedMultiplier;
-            }
+                speedBuff *= runningSpeedMultiplier;
+
+            if (godMode)
+                speedBuff *= godBuffMultiplier;
+
+            float curSpeedX = v * speedBuff;
+            float curSpeedY = h * speedBuff;
 
             float movementDirectionY = moveDirection.y;
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
