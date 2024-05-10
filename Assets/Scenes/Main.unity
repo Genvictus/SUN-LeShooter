@@ -353,6 +353,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialGold: 100
   goldAmount: 0
+  pets:
+  - {fileID: 0}
+  - {fileID: 0}
   godMode: 0
 --- !u!1 &68121380
 GameObject:
@@ -2531,18 +2534,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 541529585}
-  - {fileID: 281168324}
+  - {fileID: 1679381434}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1282014651 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2179333230477547885, guid: 9cbafe2695fe2054f9b8929de0cdcd52, type: 3}
-  m_PrefabInstance: {fileID: 7034987538979245123}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &1282014652 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7548419096017415186, guid: 9cbafe2695fe2054f9b8929de0cdcd52, type: 3}
   m_PrefabInstance: {fileID: 7034987538979245123}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1282014653
@@ -3231,6 +3228,11 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!4 &1679381434 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8890119451169158386, guid: bada761e9f0fc4d4f8b7e15d1b71b4f8, type: 3}
+  m_PrefabInstance: {fileID: 1570583276}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1712414649
 GameObject:
   m_ObjectHideFlags: 0
@@ -3392,7 +3394,6 @@ GameObject:
   - component: {fileID: 1796129603}
   - component: {fileID: 1796129602}
   - component: {fileID: 1796129604}
-  - component: {fileID: 1796129605}
   - component: {fileID: 1796129606}
   m_Layer: 0
   m_Name: Managers
@@ -3444,24 +3445,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4742cb93abc9d864b95cf1642ab90771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1796129605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796129601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e8b0ee512cbdf947aa46e044aaada96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pools:
-  - key: Grenade
-    poolObject: {fileID: 1105787354104060, guid: 41a4c48eef428174cb5039adb608d30c, type: 3}
-    size: 10
-    parentingGroup: {fileID: 0}
-    expandable: 1
 --- !u!114 &1796129606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5019,13 +5002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7548419096017415186, guid: 9cbafe2695fe2054f9b8929de0cdcd52, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 458674525}
-    - targetCorrespondingSourceObject: {fileID: 7548419096017415186, guid: 9cbafe2695fe2054f9b8929de0cdcd52, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 74797686}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2380041232519895747, guid: 9cbafe2695fe2054f9b8929de0cdcd52, type: 3}
       insertIndex: -1
@@ -5039,9 +5016,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2179333230477547885, guid: 9cbafe2695fe2054f9b8929de0cdcd52, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1282014653}
-    - targetCorrespondingSourceObject: {fileID: 6615885247945877618, guid: 9cbafe2695fe2054f9b8929de0cdcd52, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 263824403}
   m_SourcePrefab: {fileID: 100100000, guid: 9cbafe2695fe2054f9b8929de0cdcd52, type: 3}
 --- !u!1 &8035512437868181505
 GameObject:
@@ -5085,3 +5059,4 @@ SceneRoots:
   - {fileID: 8590845575345054204}
   - {fileID: 1139190134}
   - {fileID: 68121383}
+  - {fileID: 1277615870}
