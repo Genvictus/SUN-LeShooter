@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Keroco Shotgun
   damage: 3
+  originalDamage: 3
   maxDistance: 5
   currentAmmo: 14
   magSize: 20

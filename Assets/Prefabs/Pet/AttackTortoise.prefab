@@ -172,6 +172,7 @@ MonoBehaviour:
   attackDist: 6
   damage: 100
   hitTime: 5
+  audio: {fileID: 0}
 --- !u!111 &4619371940855265585
 Animation:
   m_ObjectHideFlags: 0
@@ -196,7 +197,7 @@ AudioSource:
   m_GameObject: {fileID: 8598441468845612508}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300000, guid: 8434b04884c414ac6b468e10945685e6, type: 2}
   m_audioClip: {fileID: 8300000, guid: f6e0fe903fc766d4b8ad7a6bdc4fb580, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1

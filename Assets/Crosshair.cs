@@ -17,7 +17,7 @@ public class Crosshair : MonoBehaviour
 
     void UpdateCrosshair(Vector3 crosshairSelect)
     {
-        Debug.Log("Crosshair " + crosshairSelect.x);
+        // Debug.Log("Crosshair " + crosshairSelect.x);
         primary.enabled = crosshairSelect.x == 0;
         secondary.enabled = crosshairSelect.x == 1;
         melee.enabled = crosshairSelect.x == 2;

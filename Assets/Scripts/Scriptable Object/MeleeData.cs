@@ -8,6 +8,8 @@ public class MeleeData : ScriptableObject
 
     public new string name;
     public float damage;
+    public float originalDamage;
+
     public float maxDistance;
     public float fireRate;
 

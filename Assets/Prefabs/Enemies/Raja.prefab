@@ -50,7 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: d140789265358ff4e9b334e5aa25fb6c, type: 2}
   muzzle: {fileID: 3259589384202338426}
-  enemyTransform: {fileID: 8024368220074520741}
   visualDuration: 0.2
   lineRenderer: {fileID: 4126785181051533908}
   muzzleFlash: {fileID: 7474007433423746513}
@@ -168,7 +167,7 @@ AudioSource:
   m_GameObject: {fileID: 1028387216829845020}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300004, guid: 8434b04884c414ac6b468e10945685e6, type: 2}
   m_audioClip: {fileID: 8300000, guid: 7fefc8b6be78e1441aa7096d771d89ad, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.671
@@ -10570,6 +10569,7 @@ MonoBehaviour:
   sinkSpeed: 2.5
   scoreValue: 77
   deathClip: {fileID: 8300000, guid: 8c615fd0429f34edf85539d70279360d, type: 3}
+  orbDropChance: 0.5
 --- !u!114 &2987927241666484171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10595,8 +10595,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9771a3ea41f2ddc4d89df1370858d2ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDebuff: 1.42
-  moveDebuff: 1.42
+  attackDebuff: 1.25
+  moveDebuff: 1.25
   debuffRange: 6
   debuffRate: 1
 --- !u!114 &5834243644514365556
