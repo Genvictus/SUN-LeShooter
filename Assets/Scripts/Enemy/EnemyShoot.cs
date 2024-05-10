@@ -35,7 +35,7 @@ namespace Nightmare
 
         void CheckPetInRange()
         {
-            if (Vector3.Distance(pet.transform.position, transform.position) < gunData.maxDistance)
+            if (pet != null && Vector3.Distance(pet.transform.position, transform.position) < gunData.maxDistance)
             {
                 petInRange = true;
             }
