@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Raja Shotgun
   damage: 4
+  originalDamage: 4
   maxDistance: 5
   currentAmmo: 15
   magSize: 20

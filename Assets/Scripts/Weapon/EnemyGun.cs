@@ -29,6 +29,7 @@ public class EnemyGun : MonoBehaviour
         if (enemyShoot != null)
         {
             enemyShoot.attackAction += Shoot;
+            enemyShoot.clearAction += DisableEffects;
         }
         if (gunData.spread && lineRenderers.Count == 0){
             initLineRenders();

@@ -15,6 +15,7 @@ namespace Nightmare
         [SerializeField] private float visualDuration = 0.2f;
         [SerializeField] private LineRenderer lineRenderer;
         [SerializeField] private Light muzzleFlash;
+        private Animator anim;
 
         [Header("Audio")]
         [SerializeField] private AudioSource shootSound;
@@ -32,6 +33,7 @@ namespace Nightmare
             if (gunData.spread && lineRenderers.Count == 0){
                 initLineRenders();
             }
+            anim = GetComponentInChildren<Animator>();
         }
 
         void Update()
@@ -52,7 +54,7 @@ namespace Nightmare
 
         public void Shoot()
         {
-            if (gunData.currentAmmo > 0 && CanShoot())
+            if (gameObject.activeSelf && gunData.currentAmmo > 0 && CanShoot())
             {
                 Debug.Log("Shoot");
                 gunData.shooting = true;
@@ -67,6 +69,7 @@ namespace Nightmare
                 {
                     DefaultShoot();
                 }
+                anim.SetTrigger("Shoot");
             }
         }
 
@@ -197,6 +200,7 @@ namespace Nightmare
             if (!gunData.reloading && gameObject.activeSelf)
                 {
                     reloadSound.Play();
+                    anim.SetTrigger("Reload");
                     StartCoroutine(Reload());
                 }
         }

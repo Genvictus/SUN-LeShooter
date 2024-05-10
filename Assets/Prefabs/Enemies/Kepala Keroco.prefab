@@ -5336,6 +5336,7 @@ MonoBehaviour:
   sinkSpeed: 2.5
   scoreValue: 7
   deathClip: {fileID: 8300000, guid: 1d3bfb9269f136947bf8ac164cace1ff, type: 3}
+  orbDropChance: 0.5
 --- !u!114 &1803946061585099518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10586,7 +10587,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: c754613d5189090489b54ed47bb79cb1, type: 2}
   muzzle: {fileID: 9078089766985077089}
-  enemyTransform: {fileID: 3628588607948075137}
   visualDuration: 0.2
   lineRenderer: {fileID: 6370445251642863488}
   muzzleFlash: {fileID: 5238119947721226529}
@@ -10704,7 +10704,7 @@ AudioSource:
   m_GameObject: {fileID: 7432688134995427495}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300004, guid: 8434b04884c414ac6b468e10945685e6, type: 2}
   m_audioClip: {fileID: 8300000, guid: 7fefc8b6be78e1441aa7096d771d89ad, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.722

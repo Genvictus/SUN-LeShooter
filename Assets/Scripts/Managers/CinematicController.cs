@@ -23,9 +23,9 @@ namespace Nightmare
         // Use this for initialization
         void Start()
         {
-            cinematicTimeline = this.GetComponent<PlayableDirector>();
-            cineCam = this.GetComponentInChildren<Camera>();
-            videoPlayer = this.GetComponentInChildren<VideoPlayer>();
+            cinematicTimeline = GetComponent<PlayableDirector>();
+            cineCam = GetComponentInChildren<Camera>();
+            videoPlayer = GetComponentInChildren<VideoPlayer>();
 
             mainCam = Camera.main;
             videoPlayer.targetCamera = mainCam;
@@ -57,7 +57,7 @@ namespace Nightmare
                 return;
 
             currentCinematic = (int)type;
-            
+
             if (type == CinematicType.Realtime)
             {
                 EventManager.TriggerEvent("Pause", true);
@@ -72,7 +72,7 @@ namespace Nightmare
                 {
                     EventManager.TriggerEvent("Pause", true);
                     videoPlayer.Play();
-                }  
+                }
             }
         }
 
