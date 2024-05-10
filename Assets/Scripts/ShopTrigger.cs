@@ -8,7 +8,7 @@ public class ShopTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -17,10 +17,10 @@ public class ShopTrigger : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         IShopCustomer shopCustomer = other.GetComponent<IShopCustomer>();
-        if (shopCustomer != null)
+        if (shopCustomer != null && Input.GetKey(KeyCode.E))
         {
             shopUI.Show(shopCustomer);
         }
