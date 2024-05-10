@@ -20,7 +20,7 @@ public class EnemyGun : MonoBehaviour
     [SerializeField] private AudioSource shootSound;
 
     float timeSinceLastShot;
-    private int bulletsSpread = 3;
+    private int bulletsSpread = 5;
     private List<LineRenderer> lineRenderers = new List<LineRenderer>();
 
     private void Start()
@@ -96,7 +96,7 @@ public class EnemyGun : MonoBehaviour
 
     private void DefaultShoot(Transform enemyTransform){
         RaycastHit hit;
-        if (Physics.Raycast(enemyTransform.position, enemyTransform.forward, out hit, gunData.maxDistance))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, gunData.maxDistance))
         {
             Debug.Log(hit.transform.name);
             IPlayerDamageAble damageAble = hit.transform.GetComponent<IPlayerDamageAble>();
@@ -117,11 +117,11 @@ public class EnemyGun : MonoBehaviour
 
         for (int i = 0; i <= bulletsSpread; i++)
         {
-            Vector3 spreadDirection = Quaternion.Euler(UnityEngine.Random.Range(-spreadAngle, spreadAngle), UnityEngine.Random.Range(-spreadAngle, spreadAngle), 0) * muzzle.forward;
+            Vector3 spreadDirection = Quaternion.Euler(UnityEngine.Random.Range(-spreadAngle, spreadAngle), UnityEngine.Random.Range(-spreadAngle, spreadAngle), 0) * transform.forward;
 
             LineRenderer newLineRenderer = lineRenderers[i];
 
-            if (Physics.Raycast(muzzle.position, spreadDirection, out RaycastHit hit, gunData.maxDistance))
+            if (Physics.Raycast(transform.position, spreadDirection, out RaycastHit hit, gunData.maxDistance))
             {
                 IPlayerDamageAble damageAble = hit.transform.GetComponent<IPlayerDamageAble>();
 
@@ -129,6 +129,8 @@ public class EnemyGun : MonoBehaviour
                 float adjustedDamage = CalculateAdjustedDamage(distance);
 
                 damageAble?.TakeDamage((int)adjustedDamage, hit.point);
+                if (damageAble != null)
+                    Debug.Log(hit.transform.name + " " + adjustedDamage);
 
                 newLineRenderer.SetPosition(0, muzzle.position);
                 newLineRenderer.SetPosition(1, hit.point);

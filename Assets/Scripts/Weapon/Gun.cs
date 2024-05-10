@@ -77,13 +77,12 @@ namespace Nightmare
             RaycastHit hit;
             if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, gunData.maxDistance))
             {
-                // Debug.Log("got hit: " + hit.transform.name);
+                Debug.Log("got hit: " + hit.transform.name);
                 IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
 
                 float damage = gunData.damage;
                 damage += gunData.damage * PlayerShooting.orbBuffMultiplier * PlayerShooting.orbBuffCount;
                 damage *= PlayerShooting.mobDebuff;
-                Debug.Log("Deal damage: " + damage);
                 damageAble?.TakeDamage(damage, hit.transform.position);
 
                 lineRenderer.SetPosition(0, muzzle.position);

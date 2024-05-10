@@ -20,6 +20,8 @@ namespace Nightmare
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
         NavMeshAgent nav;
+        GameObject pet;
+        PetHealth petHealth;
         public float timer = 0f;
 
         void Awake ()
@@ -28,6 +30,12 @@ namespace Nightmare
             playerHealth = player.GetComponent <PlayerHealth> ();
             enemyHealth = GetComponent <EnemyHealth> ();
             nav = GetComponent<NavMeshAgent>();
+
+            pet = GameObject.FindGameObjectWithTag("Pet");
+            if (pet != null)
+            {
+                petHealth = pet.GetComponent<PetHealth>();
+            }
 
             StartPausible();
         }
@@ -55,7 +63,11 @@ namespace Nightmare
                 // If both the enemy and the player have health left...
                 if (enemyHealth.CurrentHealth() > 0 && playerHealth.currentHealth > 0)
                 {
+                    if (pet != null && petHealth.currentHealth > 0){
+                        LookForPet();
+                    }
                     LookForPlayer();
+                } else if (enemyHealth.CurrentHealth() > 0){
                     WanderOrIdle();
                 }
                 else
@@ -86,6 +98,10 @@ namespace Nightmare
         private void LookForPlayer()
         {
             TestSense(player.position, currentVision);
+        }
+
+        private void LookForPet(){
+            TestSense(pet.transform.position, currentVision);
         }
 
         private void HearPoint(Vector3 position)

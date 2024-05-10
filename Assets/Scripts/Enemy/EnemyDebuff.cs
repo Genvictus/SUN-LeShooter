@@ -73,8 +73,6 @@ namespace Nightmare
 
         void Debuff ()
         {
-            isDebuffed = true;
-
             // Reset the timer.
             timer = 0f;
             isDebuffed = true;
@@ -89,8 +87,6 @@ namespace Nightmare
 
         void Rebuff ()
         {
-            isDebuffed = false;
-
             // Reset the timer.
             timer = 0f;
             isDebuffed = false;
