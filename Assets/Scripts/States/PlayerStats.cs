@@ -4,8 +4,8 @@ using UnityEngine;
 public class PlayerStats : SaveData<PlayerStats>
 {
     // Accuracy  stat
-    public int totalShot; // TODO
-    public int shotHit; // TODO
+    public int totalShot;
+    public int shotHit;
     public float Accuracy => totalShot == 0 ? 0 : shotHit / totalShot;
 
     // KIll count

@@ -16,5 +16,7 @@ public class StatsManager : MonoBehaviour
     void Update()
     {
         playerStats.PlayTime += TimeSpan.FromSeconds(Time.deltaTime);
+        Debug.Log("PlayerStats totalShot: " + playerStats.totalShot);
+        Debug.Log("PlayerStats shotHit: " + playerStats.shotHit);
     }
 }
