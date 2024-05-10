@@ -15,7 +15,13 @@ namespace Nightmare
 
         public override string ExecuteCheat()
         {
-            // TODO
+            GameObject[] enemyPets = GameObject.FindGameObjectsWithTag("EnemyPet");
+            foreach (GameObject enemyPet in enemyPets)
+            {
+                EnemyPetHealth enemyPetHealth = enemyPet.GetComponent<EnemyPetHealth>();
+                enemyPetHealth.TakeDamage(enemyPetHealth.currentHealth, enemyPet.transform.position);
+            }
+            
             return "Kill Pet Cheat Activated";
         }
     }
