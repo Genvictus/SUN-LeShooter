@@ -13,18 +13,28 @@ namespace Nightmare
       Debug.Log("Set Difficulty : " + difficulty.ToString());
     }
 
-    public static int GetPlayerHealthCap()
+    public static float GetIncomingDamageRate()
+    {
+      // affects player and pet
+      return 1;
+      // todo: calculate based on difficulty;
+    }
+    public static float GetOutgoingDamageRate()
+    {
+      // affects player and pet
+      return 1;
+      // todo: calculate based on difficulty;
+    }
+    public static float GetPetPrice()
     {
       return 1;
       // todo: calculate based on difficulty;
     }
-
-    public static float GetEnemyFireRate()
+    public static float GetOrbBuffRate()
     {
       return 1;
       // todo: calculate based on difficulty;
     }
-
     public static float GetEnemySpawnRate()
     {
       return 1;
