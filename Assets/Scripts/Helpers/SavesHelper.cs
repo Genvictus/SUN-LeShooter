@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class SavesManager
+public class SavesHelper
 {
     private static string playerKey = "player";
     public static string playerName => PlayerPrefs.HasKey(playerKey) ? PlayerPrefs.GetString(playerKey) : "Player";
