@@ -9,11 +9,11 @@ public class PlayerStats : SaveData<PlayerStats>
     public float Accuracy => totalShot == 0 ? 0 : shotHit / totalShot;
 
     // KIll count
-    public int kerocoKillCount; // TODO
-    public int kepalaKerocoKillCount; // TODO
-    public int jendralKillCount; // TODO
-    public int rajaKillCount; // TODO
-    public int increaseTortoiseKillCount; // TODO
+    public int kerocoKillCount;
+    public int kepalaKerocoKillCount;
+    public int jenderalKillCount;
+    public int rajaKillCount;
+    public int increaseTortoiseKillCount;
 
     // Cheat
     public int cheatUsed; // TODO

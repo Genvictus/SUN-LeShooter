@@ -36,7 +36,7 @@ namespace Nightmare
         void Update()
         {
             SetFollowTargetHealth();
-            if (followTargetHealth.IsDead())
+            if (followTargetHealth.IsDead() && !petHealth.isDead)
             {
                 petHealth.Death();
             }

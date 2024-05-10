@@ -75,7 +75,7 @@ public class MainMenu : MonoBehaviour
                     Math.Round(stats.Accuracy, 2),
                     stats.kerocoKillCount,
                     stats.kepalaKerocoKillCount,
-                    stats.jendralKillCount,
+                    stats.jenderalKillCount,
                     stats.rajaKillCount,
                     stats.increaseTortoiseKillCount,
                     stats.distanceTraveled,

@@ -19,12 +19,12 @@ namespace Nightmare
         public float orbDropChance = 0.5f;
 
 
-        void Awake ()
+        void Awake()
         {
-            anim = GetComponent <Animator> ();
-            enemyAudio = GetComponent <AudioSource> ();
-            hitParticles = GetComponentInChildren <ParticleSystem> ();
-            capsuleCollider = GetComponent <CapsuleCollider> ();
+            anim = GetComponent<Animator>();
+            enemyAudio = GetComponent<AudioSource>();
+            hitParticles = GetComponentInChildren<ParticleSystem>();
+            capsuleCollider = GetComponent<CapsuleCollider>();
             enemyMovement = this.GetComponent<EnemyMovement>();
         }
 
@@ -40,11 +40,11 @@ namespace Nightmare
             capsuleCollider.attachedRigidbody.isKinematic = isKinematic;
         }
 
-        void Update ()
+        void Update()
         {
             if (IsDead())
             {
-                transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
+                transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
                 if (transform.position.y < -10f)
                 {
                     Destroy(this.gameObject);
@@ -57,7 +57,7 @@ namespace Nightmare
             return (currentHealth <= 0f);
         }
 
-        public void TakeDamage (float amount, Vector3 hitPoint)
+        public void TakeDamage(float amount, Vector3 hitPoint)
         {
             Debug.Log("Enemy take damage: " + amount);
             if (!IsDead())
@@ -74,20 +74,38 @@ namespace Nightmare
                     enemyMovement.GoToPlayer();
                 }
             }
-                
+
             hitParticles.transform.position = hitPoint;
             hitParticles.Play();
         }
 
-        void Death ()
+        void Death()
         {
+            if (name.StartsWith("Keroco"))
+            {
+                StatsManager.playerStats.kerocoKillCount++;
+            }
+            if (name.StartsWith("Kepala Keroco"))
+            {
+                StatsManager.playerStats.kepalaKerocoKillCount++;
+            }
+            if (name.StartsWith("Jenderal"))
+            {
+                StatsManager.playerStats.jenderalKillCount++;
+            }
+            if (name.StartsWith("Raja"))
+            {
+                StatsManager.playerStats.rajaKillCount++;
+            }
+
             EventManager.TriggerEvent("Sound", this.transform.position);
-            anim.SetTrigger ("Dead");
+            anim.SetTrigger("Dead");
             Vector3 orbSpawnPosition = transform.position;
             orbSpawnPosition.y += 0.5f;
 
             float orbDropValue = Random.value;
-            if (orbDropValue <= orbDropChance) {
+            if (orbDropValue <= orbDropChance)
+            {
                 GameObject[] orbs = Orb.GetOrbs();
                 int orbIndex = Random.Range(0, orbs.Length);
                 GameObject orb = orbs[orbIndex];
@@ -95,12 +113,12 @@ namespace Nightmare
             }
 
             enemyAudio.clip = deathClip;
-            enemyAudio.Play ();
+            enemyAudio.Play();
         }
 
-        public void StartSinking ()
+        public void StartSinking()
         {
-            GetComponent <UnityEngine.AI.NavMeshAgent> ().enabled = false;
+            GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
             SetKinematics(true);
 
             ScoreManager.score += scoreValue;
