@@ -50,8 +50,9 @@ namespace Nightmare
             }
             else
             {
-                damage += initialDamage * orbBuffMultiplier * orbBuffCount;
+                damage += initialDamage * orbBuffMultiplier * orbBuffCount * DifficultyManager.GetOrbBuffRate();
                 damage *= mobDebuff;
+                damage *= DifficultyManager.GetOutgoingDamageRate();
             }
             return damage;
         }
