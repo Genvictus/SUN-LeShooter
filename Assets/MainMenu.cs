@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class MainMenu : MonoBehaviour
 {
@@ -18,9 +19,103 @@ public class MainMenu : MonoBehaviour
     public GameObject statisticsMenu;
     public GameObject settingsMenu;
 
+    private bool overwriteSave = true;
+
+    void Start()
+    {
+        foreach (var item in savesMenu.gameObject.GetComponentsInChildren<UnityEngine.UI.Button>())
+        {
+            if (item.name.Equals("SaveSlot1"))
+            {
+                item.onClick.AddListener(delegate { StartSaveFile(1); });
+            }
+            else if (item.name.Equals("SaveSlot2"))
+            {
+                item.onClick.AddListener(delegate { StartSaveFile(2); });
+            }
+            else if (item.name.Equals("SaveSlot3"))
+            {
+                item.onClick.AddListener(delegate { StartSaveFile(3); });
+            }
+        }
+    }
+
     public void NewGame()
     {
         SceneManager.LoadSceneAsync("Main", LoadSceneMode.Single);
+    }
+
+    public void LoadGame(bool overwriteSave)
+    {
+        this.overwriteSave = overwriteSave;
+        DisableAllMenu();
+        savesMenu.gameObject.SetActive(true);
+        UpdateSaveSlotAvailability();
+    }
+
+    public void UpdateSaveSlotAvailability()
+    {
+        int i = 1;
+        foreach (var item in savesMenu.gameObject.GetComponentsInChildren<UnityEngine.UI.Button>())
+        {
+            if (item.name.Equals("Back")) break;
+
+            string savefileName = "savefile" + i.ToString();
+            LevelState loadedSave;
+            ProgressionState progressSave;
+            if (SavesManager.LoadLevelState(savefileName, out loadedSave) && SavesManager.LoadProgressionState(savefileName, out progressSave))
+            {
+                item.interactable = true;
+                // item.GetComponentInChildren<TMP_Text>().text = "Save Slot 1";
+                // todo: show save slot information?
+            }
+            else
+            {
+                item.interactable = false || overwriteSave;
+                item.GetComponentInChildren<TMP_Text>().text = "Save Slot Empty";
+            }
+        }
+    }
+
+    public void StartSaveFile(int saveSlot)
+    {
+        if (saveSlot < 1 || saveSlot > 3)
+        {
+            return;
+        }
+
+        string savefileName = "saveslot" + saveSlot.ToString();
+        if (overwriteSave)
+        {
+            Debug.Log("New game overwrite save slot " + saveSlot.ToString());
+
+            if (SavesManager.CreateNewSave(savefileName))
+            {
+                Debug.Log("Success create new save file");
+                NewGame();
+            }
+            else
+            {
+                Debug.LogError("Failed create save");
+            }
+        }
+        else
+        {
+            Debug.Log("Load existing save slot " + saveSlot.ToString());
+
+            LevelState loadedSave;
+            ProgressionState progressSave;
+            if (SavesManager.LoadLevelState(savefileName, out loadedSave) && SavesManager.LoadProgressionState(savefileName, out progressSave))
+            {
+                Debug.Log("Success load progression and save");
+                // todo: continue to load level
+            }
+            else
+            {
+                Debug.LogError("Failed loading save");
+            }
+        }
+
     }
 
     private void DisableAllMenu()
@@ -35,14 +130,6 @@ public class MainMenu : MonoBehaviour
     {
         DisableAllMenu();
         mainMenu.gameObject.SetActive(true);
-    }
-
-    public void LoadGame()
-    {
-        DisableAllMenu();
-        savesMenu.gameObject.SetActive(true);
-
-        // todo: load game
     }
 
     public void ViewStatistics()
