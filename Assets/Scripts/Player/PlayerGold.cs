@@ -23,47 +23,30 @@ public class PlayerGold : MonoBehaviour, IShopCustomer
             pets[i] = petHolder.transform.GetChild(i);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void BoughItem(int index)
+    public bool BuyItem(int index, int price)
     {
         Debug.Log("Buying item");
-
         Debug.Log("membeli pet: " + pets[index].gameObject.name);
+
+        if (!SpendGold(price)) return false;
+
         pets[index].gameObject.SetActive(true);
         GameObject[] avaiablePet = GameObject.FindGameObjectsWithTag("Pet");
-        foreach(var temp in avaiablePet)
+        foreach (var temp in avaiablePet)
         {
-            if(temp.name == pets[index].gameObject.name)
+            if (temp.name == pets[index].gameObject.name)
             {
                 PetHealth health = temp.GetComponent<PetHealth>();
-                health.transform.position = new Vector3(0,0,0);
+                health.transform.position = new Vector3(0, 0, 0);
                 health.currentHealth = health.maxHealth;
                 health.isDead = false;
                 health.GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                return true;
             }
         }
+        pets[index].gameObject.SetActive(false);
+        return false;
 
-        /*GameObject[] pets = GameObject.FindGameObjectsWithTag("Pet");
-        Debug.Log("jumlah pet: " + pets.Length);
-        foreach(var pet in pets)
-        {
-            Debug.Log("nama pet: " + pet.name);
-            if(pet.name == petName)
-            {
-                Debug.Log("set active: " + petName);
-                pet.SetActive(true);
-            }
-        }*/
-        /*var pet = Resources.Load(petName) as GameObject;
-        Debug.Log("nama pet: " + pet.name);
-        Instantiate(pet, player.transform.position, player.transform.rotation);*/
-
-        SpendGold(200);
     }
 
     public int GetGoldAmount()
@@ -71,8 +54,13 @@ public class PlayerGold : MonoBehaviour, IShopCustomer
         return goldAmount;
     }
 
-    public void SpendGold(int spend)
+    public bool SpendGold(int spend)
     {
-        goldAmount -= spend;
+        if (spend <= goldAmount)
+        {
+            goldAmount -= spend;
+            return true;
+        }
+        return false;
     }
 }

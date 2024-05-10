@@ -4,9 +4,9 @@ using UnityEngine;
 
 public interface IShopCustomer
 {
-    void BoughItem(int index);
+    bool BuyItem(int index, int price);
 
     int GetGoldAmount();
 
-    void SpendGold(int spend);
+    bool SpendGold(int spend);
 }

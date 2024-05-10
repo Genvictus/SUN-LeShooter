@@ -47,46 +47,47 @@ public class ShopUI : MonoBehaviour
 
         petItemTransform.gameObject.GetComponent<Button>().onClick.AddListener(delegate
         {
-            /*if(itemName == "Healing Tortoise")
+            if (TryBuyItem(positionIndex, itemCost))
             {
-                TryBuyItem("HealingTortoise");
-            }else if(itemName == "Attacking Tortoise")
-            {
-                TryBuyItem("AttackTortoise");
-            }*/
-            TryBuyItem(positionIndex);
+                Debug.Log("Buy item successful");
+                goldAmount.gameObject.GetComponent<TextMeshProUGUI>().SetText(customer.GetGoldAmount().ToString());
+            }
         });
     }
 
-    public void TryBuyItem(int index)
+    public bool TryBuyItem(int index, int price)
     {
         pets = GameObject.FindGameObjectsWithTag("Pet");
 
+        bool Success = customer.BuyItem(index, price);
 
-        if(customer.GetGoldAmount() < 200)
+
+        if (!Success)
         {
-            Debug.Log("can't buy pet because money");
-            // noMoney.gameObject.SetActive(true);
-            StartCoroutine(HideNoMoneyAfterDelay());
-        }else if (IsPetAlreadyHas(index))
-        {
-            Debug.Log("can't buy pet because already has");
-            // havePet.gameObject.SetActive(true);
-            StartCoroutine(HideHavePetAfterDelay());
+            if (customer.GetGoldAmount() < 200)
+            {
+                Debug.Log("can't buy pet because money");
+                // noMoney.gameObject.SetActive(true);
+                StartCoroutine(HideNoMoneyAfterDelay());
+            }
+            else if (IsPetAlreadyHas(index))
+            {
+                Debug.Log("can't buy pet because already has");
+                // havePet.gameObject.SetActive(true);
+                StartCoroutine(HideHavePetAfterDelay());
+            }
         }
-        else
-        {
-            customer.BoughItem(index);
-        }
-        
+
+        return Success;
     }
 
     bool IsPetAlreadyHas(int index)
     {
-        if(index == 0)
+        if (index == 0)
         {
             name = "HealingTortoise";
-        }else if(index == 1)
+        }
+        else if (index == 1)
         {
             name = "AttackTortoise";
         }
@@ -94,7 +95,7 @@ public class ShopUI : MonoBehaviour
         foreach (var pet in pets)
         {
             Debug.Log("nama pet yg coba dibeli2: " + pet.name);
-            if(name == pet.name)
+            if (name == pet.name)
             {
                 return true;
             }
