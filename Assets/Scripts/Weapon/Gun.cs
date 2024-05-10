@@ -85,7 +85,7 @@ namespace Nightmare
                 float damage = gunData.damage;
                 damage += gunData.damage * PlayerShooting.orbBuffMultiplier * PlayerShooting.orbBuffCount;
                 damage *= PlayerShooting.mobDebuff;
-                damage *= DifficultyManager.GetOutgoingDamageRate();
+                damage *= DifficultyManager.GetOutgoingDamageRate() * DifficultyManager.GetOrbBuffRate();
                 Debug.Log("Deal damage: " + damage);
                 damageAble?.TakeDamage(damage, hit.transform.position);
 
@@ -138,7 +138,7 @@ namespace Nightmare
                     IDamageAble damageAble = hit.transform.GetComponent<IDamageAble>();
 
                     float distance = Vector3.Distance(muzzle.position, hit.point);
-                    float adjustedDamage = CalculateAdjustedDamage(distance) * DifficultyManager.GetOutgoingDamageRate();
+                    float adjustedDamage = CalculateAdjustedDamage(distance) * DifficultyManager.GetOutgoingDamageRate() * DifficultyManager.GetOrbBuffRate();
 
                     damageAble?.TakeDamage((int)adjustedDamage, hit.point);
 

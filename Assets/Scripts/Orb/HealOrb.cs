@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Nightmare {
+namespace Nightmare
+{
     public class HealOrb : Orb
     {
         public float healPercentage = 0.2f;
@@ -10,7 +11,7 @@ namespace Nightmare {
         {
             Debug.Log("Player got heal orb");
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            float healAmount = playerHealth.maxHealth * healPercentage;
+            float healAmount = playerHealth.maxHealth * healPercentage * DifficultyManager.GetOrbBuffRate();
             playerHealth.Heal(healAmount);
         }
     }
