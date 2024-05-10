@@ -30,7 +30,8 @@ namespace Nightmare
         {
             PlayerShooting.shootInput += Shoot;
             PlayerShooting.reloadInput += StartReload;
-            if (gunData.spread && lineRenderers.Count == 0){
+            if (gunData.spread && lineRenderers.Count == 0)
+            {
                 initLineRenders();
             }
             anim = GetComponentInChildren<Animator>();
@@ -73,7 +74,8 @@ namespace Nightmare
             }
         }
 
-        private void DefaultShoot(){
+        private void DefaultShoot()
+        {
             RaycastHit hit;
             if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, gunData.maxDistance))
             {
@@ -95,7 +97,8 @@ namespace Nightmare
 
         }
 
-        private void initLineRenders(){
+        private void initLineRenders()
+        {
             Material originalMaterial = lineRenderer.sharedMaterial;
             float originalStartWidth = lineRenderer.startWidth;
             float originalEndWidth = lineRenderer.endWidth;
@@ -122,7 +125,7 @@ namespace Nightmare
 
             for (int i = 0; i <= bulletsSpread; i++)
             {
-                Vector3 spreadDirection = Quaternion.Euler(UnityEngine.Random.Range(-spreadAngle, spreadAngle), UnityEngine.Random.Range(-spreadAngle, spreadAngle), 0) * cameraTransform.forward;
+                Vector3 spreadDirection = Quaternion.Euler(Random.Range(-spreadAngle, spreadAngle), Random.Range(-spreadAngle, spreadAngle), 0) * cameraTransform.forward;
 
                 LineRenderer newLineRenderer = lineRenderers[i];
 
@@ -134,11 +137,13 @@ namespace Nightmare
                     float distance = Vector3.Distance(muzzle.position, hit.point);
                     float adjustedDamage = CalculateAdjustedDamage(distance);
 
-                    damageAble?.TakeDamage((int)adjustedDamage, hit.point);
+                    damageAble?.TakeDamage(adjustedDamage, hit.point);
 
                     newLineRenderer.SetPosition(0, muzzle.position);
                     newLineRenderer.SetPosition(1, hit.point);
-                } else {
+                }
+                else
+                {
                     newLineRenderer.SetPosition(0, muzzle.position);
                     newLineRenderer.SetPosition(1, muzzle.position + spreadDirection * gunData.maxDistance);
                 }
@@ -148,17 +153,22 @@ namespace Nightmare
         private float CalculateAdjustedDamage(float distance)
         {
             float maxDistance = gunData.maxDistance;
-            float maxDamage = gunData.damage;
+            float maxDamage = PlayerShooting.Calculatedamage(gunData.damage);
             float minDamage = 1f;
 
             float t = distance / maxDistance;
             float adjustedDamage = Mathf.Lerp(maxDamage, minDamage, t);
 
+            if (PlayerShooting.godMode)
+            {
+                adjustedDamage = 6969.69f;
+            }
+
             return adjustedDamage;
         }
 
 
-        private void DisableLineRenderers (List<LineRenderer> lineRenderers)
+        private void DisableLineRenderers(List<LineRenderer> lineRenderers)
         {
             foreach (LineRenderer renderer in lineRenderers)
             {
@@ -175,7 +185,8 @@ namespace Nightmare
             muzzleFlash.enabled = true;
             shootSound.Play();
 
-            if (gunData.spread){
+            if (gunData.spread)
+            {
                 foreach (LineRenderer renderer in lineRenderers)
                 {
                     renderer.enabled = true;
@@ -187,7 +198,8 @@ namespace Nightmare
         {
             lineRenderer.enabled = false;
             muzzleFlash.enabled = false;
-            if (gunData.spread){
+            if (gunData.spread)
+            {
                 DisableLineRenderers(lineRenderers);
             }
         }
@@ -196,11 +208,11 @@ namespace Nightmare
         {
             Debug.Log("Reload");
             if (!gunData.reloading && gameObject.activeSelf)
-                {
-                    reloadSound.Play();
-                    anim.SetTrigger("Reload");
-                    StartCoroutine(Reload());
-                }
+            {
+                reloadSound.Play();
+                anim.SetTrigger("Reload");
+                StartCoroutine(Reload());
+            }
         }
 
         private IEnumerator Reload()
@@ -211,21 +223,13 @@ namespace Nightmare
             gunData.reloading = false;
         }
 
-        public void DebuffAttack(float debuff)
+        public GunData GetGunData()
         {
-            gunData.damage /= debuff;
-        }
-
-        public void BuffAttack(float buff)
-        {
-            gunData.damage *= buff;
-        }
-
-        public GunData GetGunData() {
             return gunData;
         }
 
-        public void ResetGun(){
+        public void ResetGun()
+        {
             StopAllCoroutines();
             DisableEffects();
             gunData.reloading = false;
