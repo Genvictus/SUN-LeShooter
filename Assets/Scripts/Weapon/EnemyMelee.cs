@@ -63,6 +63,7 @@ public class EnemyMelee : MonoBehaviour
 
                 Debug.Log("Damage before buff " + meleeData.damage);
                 float damage = meleeData.damage + (buffCount * 0.2f * meleeData.damage);
+                Debug.Log("Buff count: " + buffCount);
                 Debug.Log("Damage after buff " + damage);
 
                 damageAble?.TakeDamage(damage, hit.transform.position);
