@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Nightmare
@@ -19,7 +20,6 @@ namespace Nightmare
             levelThreshhold = LEVEL_INCREASE;
 
             EventManager.StartListening("PlayerEarnScore", UpdateScore);
-            EventManager.StartListening("LoadPlayerScore", SetScore);
         }
 
         void OnDestroy()
@@ -29,7 +29,7 @@ namespace Nightmare
 
         public static void SetScore(int score)
         {
-            score = (int)ProgressionManager.progressionState.score;
+            ScoreManager.score = score;
         }
 
         void UpdateScore(int score)
