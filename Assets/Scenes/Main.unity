@@ -681,6 +681,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 309311106}
   m_CullTransparentMesh: 1
+--- !u!1 &342075662 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2632717048477473255, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
+  m_PrefabInstance: {fileID: 1249550831950513008}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &380706329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,6 +1137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 506286815}
+  - component: {fileID: 506286816}
   m_Layer: 5
   m_Name: HealthUI
   m_TagString: Untagged
@@ -1160,6 +1166,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 75, y: 60}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &506286816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506286814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b0fea0f6bc7ae45912504c22071ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 342075662}
+  damageImage: {fileID: 1394906873}
+  healthSlider: {fileID: 1837071937}
+  flashColour: {r: 1, g: 0, b: 0, a: 0.1}
+  healthyColour: {r: 0.2, g: 1, b: 0.2, a: 1}
+  unhealthyColour: {r: 1, g: 1, b: 0, a: 1}
+  dyingColour: {r: 1, g: 0, b: 0, a: 1}
+  flashSpeed: 5
 --- !u!1 &509788241
 GameObject:
   m_ObjectHideFlags: 0
