@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +13,7 @@ namespace Nightmare
         private Scene currentScene;
         private PlayerMovement playerMove;
         private Vector3 playerRespawn;
-        private CinematicController cinema;
+        private CinematicController[] cinema;
         private PauseManager pm;
 
         void OnEnable()
@@ -23,15 +24,14 @@ namespace Nightmare
 
         void Start()
         {
-            cinema = FindObjectOfType<CinematicController>();
-            SceneManager.LoadSceneAsync(levels[0], LoadSceneMode.Additive);
-            playerMove = FindObjectOfType<PlayerMovement>();
-            playerRespawn = playerMove.transform.position;
-            pm = FindObjectOfType<PauseManager>();
+            cinema = FindObjectsOfType<CinematicController>().OrderBy(obj => obj.name).ToArray();
 
-            // order or setting pause matters for cursor lock
-            pm.SetGameOverPause(false);
-            pm.SetPause(false);
+            foreach (var item in cinema)
+            {
+                Debug.Log(item.name);
+            }
+
+            LoadInitialLevel();
         }
 
         public void AdvanceLevel()
@@ -58,9 +58,8 @@ namespace Nightmare
             pm.SetGameOverPause(false);
             pm.SetPause(false);
 
-            //Load next level in background
             string loadingScene = levels[level % levels.Length];
-            SceneManager.LoadSceneAsync(loadingScene, LoadSceneMode.Additive);
+            SceneManager.LoadScene(loadingScene, LoadSceneMode.Additive);
         }
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -75,8 +74,12 @@ namespace Nightmare
 
             currentScene = scene;
 
-            cinema.StartCinematic(CinematicController.CinematicType.Realtime);
-            // cinema.StartCinematic(CinematicController.CinematicType.PreRendered);
+            StartCutscene(0);
+        }
+
+        public void StartCutscene(int index)
+        {
+            cinema[index].StartCinematic(CinematicController.CinematicType.Realtime);
         }
 
         private void DisableOldScene()

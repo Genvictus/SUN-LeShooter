@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,6 +21,7 @@ public class MainMenu : MonoBehaviour
     public GameObject settingsMenu;
 
     private bool overwriteSave = true;
+    private const string SAVE_SLOT = "saveslot";
 
     void Start()
     {
@@ -55,18 +57,18 @@ public class MainMenu : MonoBehaviour
 
     public void UpdateSaveSlotAvailability()
     {
-        int i = 1;
         foreach (var item in savesMenu.gameObject.GetComponentsInChildren<UnityEngine.UI.Button>())
         {
-            if (item.name.Equals("Back")) break;
+            if (item.name.Equals("Back")) continue;
 
-            string savefileName = "savefile" + i.ToString();
+            int slotNum = int.Parse(item.name.Substring(item.name.Length - 1));
+            string saveSlotName = SAVE_SLOT + slotNum.ToString();
             LevelState loadedSave;
             ProgressionState progressSave;
-            if (SavesHelper.LoadLevelState(savefileName, out loadedSave) && SavesHelper.LoadProgressionState(savefileName, out progressSave))
+            if (SavesHelper.LoadLevelState(saveSlotName, out loadedSave) && SavesHelper.LoadProgressionState(saveSlotName, out progressSave))
             {
                 item.interactable = true;
-                // item.GetComponentInChildren<TMP_Text>().text = "Save Slot 1";
+                item.GetComponentInChildren<TMP_Text>().text = PlayerPrefs.HasKey(saveSlotName) ? PlayerPrefs.GetString(saveSlotName) : String.Format("Save Slot {0}", slotNum);
                 // todo: show save slot information?
             }
             else
@@ -84,7 +86,8 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
-        string savefileName = "saveslot" + saveSlot.ToString();
+        string savefileName = SAVE_SLOT + saveSlot.ToString();
+        string playerName = SavesHelper.playerName;
         if (overwriteSave)
         {
             Debug.Log("New game overwrite save slot " + saveSlot.ToString());
@@ -92,6 +95,7 @@ public class MainMenu : MonoBehaviour
             if (SavesHelper.CreateNewSave(savefileName))
             {
                 Debug.Log("Success create new save file");
+                PlayerPrefs.SetString(savefileName, playerName);
                 NewGame();
             }
             else
