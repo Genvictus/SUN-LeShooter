@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Nightmare
@@ -8,6 +9,7 @@ namespace Nightmare
         public float startingHealth = 100;
         public float sinkSpeed = 2.5f;
         public int scoreValue = 10;
+        public int coinValue = 10;
         public AudioClip deathClip;
 
         float currentHealth;
@@ -74,14 +76,13 @@ namespace Nightmare
                     enemyMovement.GoToPlayer();
                 }
             }
-                
             hitParticles.transform.position = hitPoint;
             hitParticles.Play();
         }
 
         void Death ()
         {
-            EventManager.TriggerEvent("Sound", this.transform.position);
+            TriggerEvents();
             anim.SetTrigger ("Dead");
             Vector3 orbSpawnPosition = transform.position;
             orbSpawnPosition.y += 0.5f;
@@ -104,6 +105,16 @@ namespace Nightmare
             SetKinematics(true);
 
             ScoreManager.score += scoreValue;
+        }
+
+        private void TriggerEvents()
+        {
+            EventManager.TriggerEvent("Sound", this.transform.position);
+
+            EventManager.TriggerEvent($"EnemyKilled");
+            EventManager.TriggerEvent($"{this.gameObject.name}Killed");
+            EventManager.TriggerEvent($"PlayerEarnScore", scoreValue);
+            EventManager.TriggerEvent($"PlayerEarnGold", coinValue);
         }
 
         public float CurrentHealth()

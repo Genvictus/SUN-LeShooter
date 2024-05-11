@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 namespace Nightmare
 {
@@ -18,8 +17,19 @@ namespace Nightmare
 
             score = 0;
             levelThreshhold = LEVEL_INCREASE;
+
+            EventManager.StartListening("PlayerEarnScore", UpdateScore);
         }
 
+        void OnDestroy()
+        {
+            EventManager.StopListening("PlayerEarnScore", UpdateScore);
+        }
+
+        void UpdateScore(int score)
+        {
+            ScoreManager.score += score;
+        }
 
         void Update ()
         {

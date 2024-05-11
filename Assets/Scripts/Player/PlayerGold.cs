@@ -18,9 +18,25 @@ public class PlayerGold : MonoBehaviour, IShopCustomer
         petHolder = GameObject.FindGameObjectWithTag("PetHolder");
         player = GameObject.FindGameObjectWithTag("Player");
         goldAmount = initialGold;
-
         for (int i = 0; i < petHolder.transform.childCount; i++)
             pets[i] = petHolder.transform.GetChild(i);
+        EventManager.StartListening("PlayerEarnGold", AddGold);
+    }
+
+    void OnDestroy()
+    {
+        EventManager.StopListening("PlayerEarnGold", AddGold);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void AddGold(int amount)
+    {
+        this.goldAmount += amount;
     }
 
     public bool BuyItem(int index, int price)

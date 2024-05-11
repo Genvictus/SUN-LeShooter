@@ -12,6 +12,7 @@ using UnityEditor;
 
 public class PauseManager : MonoBehaviour
 {
+	public const string PAUSE_EVENT = "Pause";
 
 	public AudioMixerSnapshot paused;
 	public AudioMixerSnapshot unpaused;
@@ -40,7 +41,7 @@ public class PauseManager : MonoBehaviour
 	public void SetPause(bool pauseValue = true)
 	{
 		Debug.Log("Set Pause to " + pauseValue.ToString());
-		EventManager.TriggerEvent("Pause", pauseValue);
+		EventManager.TriggerEvent(PAUSE_EVENT, pauseValue);
 
 
 		// if setting paused to false, unfreeze time 

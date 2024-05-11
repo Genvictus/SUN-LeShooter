@@ -10569,6 +10569,7 @@ MonoBehaviour:
   startingHealth: 300
   sinkSpeed: 2.5
   scoreValue: 77
+  coinValue: 40
   deathClip: {fileID: 8300000, guid: 8c615fd0429f34edf85539d70279360d, type: 3}
   orbDropChance: 0.5
 --- !u!114 &2987927241666484171
