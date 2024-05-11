@@ -11,6 +11,7 @@ public class ShopUI : MonoBehaviour
     private Transform container;
     private Transform goldAmount;
     private IShopCustomer customer;
+    private bool flag;
     // private Transform havePet;
     // private Transform noMoney;
     GameObject[] pets;
@@ -31,7 +32,19 @@ public class ShopUI : MonoBehaviour
         CreateItemButton("Healing Tortoise", 50, 0);
         CreateItemButton("Attacking Tortoise", 50, 1);
         petItem.gameObject.SetActive(false);
+
+        EventManager.StartListening("enableShop", SetFlag);
         Hide();
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.StopListening("enableShop", SetFlag);
+    }
+
+    public void SetFlag(bool isQuestClear)
+    {
+        flag = isQuestClear;
     }
 
     private void CreateItemButton(string itemName, int itemCost, int positionIndex)
@@ -120,6 +133,13 @@ public class ShopUI : MonoBehaviour
     }
     public void Show(IShopCustomer customer)
     {
+        if (!flag)
+        {
+            Debug.Log("can't show shop because quest isn't over");
+            return;
+        }
+            
+
         CursorHandler.ShowCursor();
 
         this.customer = customer;
