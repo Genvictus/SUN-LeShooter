@@ -7,6 +7,8 @@ namespace Nightmare
 {
     public class LevelManager : MonoBehaviour
     {
+        private static bool isNewGame = false;
+        private static string activeSaveName = "Save1";
         public string[] levels;
 
         private int currentLevel = 0;
@@ -32,6 +34,13 @@ namespace Nightmare
             }
 
             LoadInitialLevel();
+        }
+
+        public static void SetSaveMetadata(string activeSave, bool startNewGame)
+        {
+            activeSaveName = activeSave;
+            isNewGame = startNewGame;
+            Debug.Log("Set Level Metadata, " + activeSave + startNewGame.ToString());
         }
 
         public void AdvanceLevel()

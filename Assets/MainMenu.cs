@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Nightmare;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
@@ -107,37 +108,14 @@ public class MainMenu : MonoBehaviour
         string savefileName = ConstructSaveName(slotNum);
         string playerName = SavesHelper.playerName;
 
+        // set active save file and set whether to load game or start new game in LevelManager
+        LevelManager.SetSaveMetadata(savefileName, overwriteSave);
         if (overwriteSave)
         {
-            Debug.Log("New game overwrite save slot " + slotNum.ToString());
-
-            if (SavesHelper.CreateNewSave(savefileName))
-            {
-                SetSlotOwner(slotNum, playerName);
-                NewGame();
-            }
-            else
-            {
-                Debug.LogError("Failed create save");
-            }
+            // overwrite save slot name on UI, prepare folder for save
+            SetSlotOwner(slotNum, playerName);
         }
-        else
-        {
-            // TODO: revamp this load level section
-            Debug.Log("Load existing save slot " + slotNum.ToString());
-
-            LevelState loadedSave;
-            ProgressionState progressSave;
-            if (SavesHelper.LoadLevelState(savefileName, out loadedSave) && SavesHelper.LoadProgressionState(savefileName, out progressSave))
-            {
-                Debug.Log("Success load progression and save");
-                // todo: continue to load level
-            }
-            else
-            {
-                Debug.LogError("Failed loading save");
-            }
-        }
+        NewGame();
 
     }
 
