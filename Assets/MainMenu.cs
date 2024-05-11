@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
     public GameObject settingsMenu;
 
     private bool overwriteSave = true;
-    private const string SAVE_SLOT = "saveslot";
+    private const string SAVE_SLOT = "Save";
 
     void Start()
     {
@@ -55,6 +55,26 @@ public class MainMenu : MonoBehaviour
         UpdateSaveSlotAvailability();
     }
 
+    bool CheckSlotAvailability(int slotNum)
+    {
+        return PlayerPrefs.HasKey(ConstructSaveName(slotNum));
+    }
+
+    string GetSlotOwner(int slotNum)
+    {
+        return PlayerPrefs.GetString(ConstructSaveName(slotNum));
+    }
+
+    void SetSlotOwner(int slotNum, string playerName)
+    {
+        PlayerPrefs.SetString(ConstructSaveName(slotNum), playerName);
+    }
+
+    string ConstructSaveName(int slotNum)
+    {
+        return SAVE_SLOT + slotNum.ToString();
+    }
+
     public void UpdateSaveSlotAvailability()
     {
         foreach (var item in savesMenu.gameObject.GetComponentsInChildren<UnityEngine.UI.Button>())
@@ -62,14 +82,12 @@ public class MainMenu : MonoBehaviour
             if (item.name.Equals("Back")) continue;
 
             int slotNum = int.Parse(item.name.Substring(item.name.Length - 1));
-            string saveSlotName = SAVE_SLOT + slotNum.ToString();
-            LevelState loadedSave;
-            ProgressionState progressSave;
-            if (SavesHelper.LoadLevelState(saveSlotName, out loadedSave) && SavesHelper.LoadProgressionState(saveSlotName, out progressSave))
+
+            // Check button interactability based on saved player name on slot
+            if (CheckSlotAvailability(slotNum))
             {
                 item.interactable = true;
-                item.GetComponentInChildren<TMP_Text>().text = PlayerPrefs.HasKey(saveSlotName) ? PlayerPrefs.GetString(saveSlotName) : String.Format("Save Slot {0}", slotNum);
-                // todo: show save slot information?
+                item.GetComponentInChildren<TMP_Text>().text = GetSlotOwner(slotNum);
             }
             else
             {
@@ -79,23 +97,23 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void StartSaveFile(int saveSlot)
+    public void StartSaveFile(int slotNum)
     {
-        if (saveSlot < 1 || saveSlot > 3)
+        if (slotNum < 1 || slotNum > 3)
         {
             return;
         }
 
-        string savefileName = SAVE_SLOT + saveSlot.ToString();
+        string savefileName = ConstructSaveName(slotNum);
         string playerName = SavesHelper.playerName;
+
         if (overwriteSave)
         {
-            Debug.Log("New game overwrite save slot " + saveSlot.ToString());
+            Debug.Log("New game overwrite save slot " + slotNum.ToString());
 
             if (SavesHelper.CreateNewSave(savefileName))
             {
-                Debug.Log("Success create new save file");
-                PlayerPrefs.SetString(savefileName, playerName);
+                SetSlotOwner(slotNum, playerName);
                 NewGame();
             }
             else
@@ -105,7 +123,8 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            Debug.Log("Load existing save slot " + saveSlot.ToString());
+            // TODO: revamp this load level section
+            Debug.Log("Load existing save slot " + slotNum.ToString());
 
             LevelState loadedSave;
             ProgressionState progressSave;
