@@ -58,13 +58,13 @@ namespace Nightmare
             
             var instantiatedEnemy = Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
 
-            if (enemy.name == "Jenderal" || enemy.name == "Raja" || enemy.name == "Jenderal(Clone)" || enemy.name == "Raja(Clone)")
+            /*if (enemy.name == "Jenderal" || enemy.name == "Raja" || enemy.name == "Jenderal(Clone)" || enemy.name == "Raja(Clone)")
             {
                 var pet = Resources.Load("IncreaseTortoise") as GameObject;
                 var petObject = Instantiate(pet, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation) as GameObject;
                 var petScript = petObject.GetComponent<IncreaseTortoise>();
                 petScript.followTarget = instantiatedEnemy;
-            }
+            }*/
             return;
         }
     }
