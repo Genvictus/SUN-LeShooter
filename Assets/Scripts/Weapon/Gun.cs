@@ -27,6 +27,7 @@ namespace Nightmare
 
         float timeSinceLastShot;
         PlayerShooting shooting;
+
         private void Start()
         {
             shooting = GetComponentInParent<PlayerShooting>();
@@ -35,7 +36,7 @@ namespace Nightmare
                 shooting.shootInput += Shoot;
                 shooting.reloadInput += StartReload;
             }
-            if (gunData.spread && lineRenderers.Count == 0)
+            if (gunData.spread)
             {
                 initLineRenders();
             }
@@ -104,6 +105,8 @@ namespace Nightmare
 
         private void initLineRenders()
         {
+            DeleteLineRenders();
+
             Material originalMaterial = lineRenderer.sharedMaterial;
             float originalStartWidth = lineRenderer.startWidth;
             float originalEndWidth = lineRenderer.endWidth;
@@ -185,15 +188,28 @@ namespace Nightmare
             }
         }
 
-        private void DeleteLinRenders()
+        private void DeleteLineRenders()
         {
             foreach (LineRenderer renderer in lineRenderers)
             {
                 if (renderer != null)
                 {
-                    renderer.enabled = false;
+                    Destroy(renderer.gameObject);
                 }
             }
+            lineRenderers.Clear();
+        }
+
+        private bool LineRenersNull()
+        {
+            foreach (LineRenderer renderer in lineRenderers)
+            {
+                if (renderer == null)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void OnGunShot()
@@ -204,6 +220,10 @@ namespace Nightmare
 
             if (gunData.spread)
             {
+                if (LineRenersNull()) {
+                    initLineRenders();
+                }
+
                 foreach (LineRenderer renderer in lineRenderers)
                 {
                     renderer.enabled = true;
@@ -256,7 +276,7 @@ namespace Nightmare
         {
             shooting.shootInput -= Shoot;
             shooting.reloadInput -= StartReload;
-            // DeleteLinRenders();
+            DeleteLineRenders();
         }
     }
 }
