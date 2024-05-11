@@ -17,7 +17,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4cb1dd36087902e41a05fe27b7f5746f, type: 2}
   questStepPrefabs:
   - {fileID: 5045187089938416844, guid: 480aebfd40df6e74ab3d997a9e49a072, type: 3}
-  - {fileID: 7044402857851407214, guid: 0ef7a2e6033df734d825aee496e260a6, type: 3}
   automaticallyComplete: 1
   finishingEvent:
     m_PersistentCalls:
@@ -25,6 +24,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1440455008277454370, guid: 6f486bf969da11047a02791c88c3046d, type: 3}
         m_TargetAssemblyTypeName: PlayerQuest, Assembly-CSharp
         m_MethodName: AwardPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1890969696352494170, guid: eee86471dfd54b74f8fcb0e19b58eab9, type: 3}
+        m_TargetAssemblyTypeName: CustomEvents, Assembly-CSharp
+        m_MethodName: EnableShop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
