@@ -110,5 +110,10 @@ namespace Nightmare
         {
             return currentHealth;
         }
+
+        public float PercentageHealth()
+        {
+            return currentHealth / startingHealth;
+        }
     }
 }

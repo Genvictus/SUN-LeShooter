@@ -43,7 +43,7 @@ public class EnemyMelee : MonoBehaviour
 
     private bool CanAttack()
     {
-        return timeSinceLastAttack > meleeData.fireRate;
+        return true;
     }
 
     public void Attack(Transform enemyTransform)

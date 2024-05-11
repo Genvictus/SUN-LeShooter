@@ -54,6 +54,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 4126785181051533908}
   muzzleFlash: {fileID: 7474007433423746513}
   shootSound: {fileID: 8975147716731172155}
+  buffCount: 0
 --- !u!120 &4126785181051533908
 LineRenderer:
   serializedVersion: 2
@@ -10355,8 +10356,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6827248445979793188}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: b77f122f451a2394898a24191c26107c, type: 3}
-  m_Controller: {fileID: 22100000, guid: 19b1058b58d5e314bb115a937b9bcf48, type: 2}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 195ef6e6d57529c6ab06c2001e1ac13f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -10605,6 +10606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: d140789265358ff4e9b334e5aa25fb6c, type: 2}
+  rageAble: 0
 --- !u!114 &2128435097608600210
 MonoBehaviour:
   m_ObjectHideFlags: 0

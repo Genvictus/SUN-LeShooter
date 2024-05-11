@@ -7,6 +7,8 @@ namespace Nightmare
     public class EnemyShoot : EnemyAttack
     {
         public GunData gunData;
+        public bool rageAble = false;
+        bool rage;
 
         protected override void Awake()
         {
@@ -45,7 +47,6 @@ namespace Nightmare
             }
         }
 
-
         new void Update ()
         {
             if (isPaused)
@@ -60,6 +61,12 @@ namespace Nightmare
             // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
             if(timer >= timeBetweenAttacks && enemyHealth.CurrentHealth() > 0)
             {
+
+                if(enemyHealth.PercentageHealth() < 0.3f && rageAble && !rage)
+                {
+                    Rage();
+                }
+
                 // ... attack.
                 if (playerInRange)
                 {
@@ -83,6 +90,12 @@ namespace Nightmare
                 // ... tell the animator the player is dead.
                 anim.SetTrigger ("PlayerDead");
             }
+        }
+
+        private void Rage()
+        {
+            rage = true;
+            timeBetweenAttacks = gunData.fireRate / 2;
         }
     }
 }
