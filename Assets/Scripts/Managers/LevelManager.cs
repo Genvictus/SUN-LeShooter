@@ -34,7 +34,7 @@ namespace Nightmare
             }
 
             LoadInitialLevel();
-            
+
             EventManager.StartListening("AdvanceLevel", AdvanceLevel);
         }
 
@@ -53,6 +53,7 @@ namespace Nightmare
         public void AdvanceLevel()
         {
             LoadLevel(currentLevel + 1);
+            StartCutscene(currentLevel);
         }
 
         public void LoadInitialLevel()
@@ -81,10 +82,11 @@ namespace Nightmare
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             SavesManager.SelectSave(activeSaveName);
-            if (!isNewGame){
-            // TODO load ke manager game state dari player
+            if (!isNewGame)
+            {
+                // TODO load ke manager game state dari player
             }
-            
+
             if (mode != LoadSceneMode.Additive)
                 return;
 

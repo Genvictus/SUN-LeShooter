@@ -140,7 +140,7 @@ public class ShopUI : MonoBehaviour
             Debug.Log("can't show shop because quest isn't over");
             return;
         }
-            
+
 
         CursorHandler.ShowCursor();
 
@@ -152,6 +152,7 @@ public class ShopUI : MonoBehaviour
     public void ContinueGame()
     {
         CustomEvents.DisableShop();
+        EventManager.TriggerEvent("AdvanceLevel");
         Hide();
     }
 
