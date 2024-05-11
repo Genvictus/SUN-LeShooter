@@ -66,7 +66,11 @@ namespace Nightmare
                 Debug.Log("Shoot");
                 gunData.shooting = true;
                 timeSinceLastShot = 0;
-                gunData.currentAmmo--;
+                
+                if (!PlayerShooting.infiniteBulletMode) {
+                    gunData.currentAmmo--;
+                }
+                
                 OnGunShot();
                 if (gunData.spread)
                 {
