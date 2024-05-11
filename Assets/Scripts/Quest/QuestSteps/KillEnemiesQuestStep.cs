@@ -23,11 +23,13 @@ public class KillEnemiesQuestStep : QuestStep
     protected void IncrementKeroco()
     {
         kerocoCount--;
+        CheckComplete();
     }
 
     protected void IncrementJenderal()
     {
         jenderalCount--;
+        CheckComplete();
     }
 
     protected void CheckComplete()
