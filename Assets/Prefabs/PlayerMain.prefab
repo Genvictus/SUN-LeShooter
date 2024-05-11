@@ -576,7 +576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1415195231886265916}
-  speed: 6
+  speed: 7
   runningSpeedMultiplier: 2
   godBuffMultiplier: 2
   godMode: 0
@@ -600,15 +600,9 @@ MonoBehaviour:
   startingHealth: 100
   maxHealth: 100
   currentHealth: 0
-  healthSlider: {fileID: 0}
-  damageImage: {fileID: 0}
   deathClip: {fileID: 8300000, guid: d36a393bca4582043982db9089e1694f, type: 3}
-  flashSpeed: 5
-  flashColour: {r: 1, g: 0, b: 0, a: 0.1}
-  healthyColour: {r: 0.2, g: 1, b: 0.2, a: 1}
-  unhealthyColour: {r: 1, g: 1, b: 0, a: 1}
-  dyingColour: {r: 1, g: 0, b: 0, a: 1}
   godMode: 0
+  damaged: 0
 --- !u!114 &6238264098930380715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -648,6 +642,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialGold: 100
   goldAmount: 0
+  pets:
+  - {fileID: 0}
+  - {fileID: 0}
   godMode: 0
 --- !u!114 &1440455008277454370
 MonoBehaviour:
@@ -661,7 +658,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85d36ef22c1fea44a54d2e0657ddfeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentQuestId: 
 --- !u!1 &3047580053816800232
 GameObject:
   m_ObjectHideFlags: 0

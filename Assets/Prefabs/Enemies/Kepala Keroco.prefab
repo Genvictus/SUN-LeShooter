@@ -5342,6 +5342,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: c754613d5189090489b54ed47bb79cb1, type: 2}
+  rageAble: 0
+  rageSound: {fileID: 0}
 --- !u!114 &440748544797958610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5372,8 +5374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea9a6ed18654d14db02bf0076cfe488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  visionRange: 8
+  movementSpeed: 6
+  visionRange: 10
   hearingRange: 20
   wanderDistance: 40
   idleTimeRange: {x: 0.5, y: 2}
@@ -5501,8 +5503,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 8716174416900575860, guid: fb23b46b260fbc04193b46bdae79ed6e, type: 3}
   spawnTime: 25
+  unlimited: 0
+  maxSpawned: 20
+  resetTime: 150
   spawnPoints:
   - {fileID: 1925155063390361210}
+  enableSpawn: 1
 --- !u!1 &2106115910851369491
 GameObject:
   m_ObjectHideFlags: 0
@@ -10614,6 +10620,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 6370445251642863488}
   muzzleFlash: {fileID: 5238119947721226529}
   shootSound: {fileID: 6919614647197981739}
+  buffCount: 0
 --- !u!120 &6370445251642863488
 LineRenderer:
   serializedVersion: 2

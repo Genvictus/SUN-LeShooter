@@ -10547,7 +10547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea9a6ed18654d14db02bf0076cfe488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
+  movementSpeed: 5
   visionRange: 6
   hearingRange: 32
   wanderDistance: 20
@@ -10637,6 +10637,7 @@ MonoBehaviour:
   resetTime: 150
   spawnPoints:
   - {fileID: 7346743605301318592}
+  enableSpawn: 1
 --- !u!1 &8562380917924971965
 GameObject:
   m_ObjectHideFlags: 0
