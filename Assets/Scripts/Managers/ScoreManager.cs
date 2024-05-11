@@ -18,12 +18,12 @@ namespace Nightmare
             score = 0;
             levelThreshhold = LEVEL_INCREASE;
 
-            EventManager.StartListening("EnemyScore", UpdateScore);
+            EventManager.StartListening("PlayerEarnScore", UpdateScore);
         }
 
         void OnDestroy()
         {
-            EventManager.StopListening("EnemyScore", UpdateScore);
+            EventManager.StopListening("PlayerEarnScore", UpdateScore);
         }
 
         void UpdateScore(int score)

@@ -12,12 +12,12 @@ public class PlayerGold : MonoBehaviour, IShopCustomer
     void Start()
     {
         goldAmount = initialGold;
-        EventManager.StartListening("EnemyGold", AddGold);
+        EventManager.StartListening("PlayerEarnGold", AddGold);
     }
 
     void OnDestroy()
     {
-        EventManager.StopListening("EnemyGold", AddGold);
+        EventManager.StopListening("PlayerEarnGold", AddGold);
     }
 
     // Update is called once per frame

@@ -113,8 +113,8 @@ namespace Nightmare
 
             EventManager.TriggerEvent($"EnemyKilled");
             EventManager.TriggerEvent($"{this.gameObject.name}Killed");
-            EventManager.TriggerEvent($"EnemyScore", scoreValue);
-            EventManager.TriggerEvent($"EnemyGold", coinValue);
+            EventManager.TriggerEvent($"PlayerEarnScore", scoreValue);
+            EventManager.TriggerEvent($"PlayerEarnGold", coinValue);
         }
 
         public float CurrentHealth()

@@ -50,7 +50,10 @@ public class Quest
         return questStepPrefab;
     }
 
-
+    public void TriggerCompletion()
+    {
+        info.finishingEvent.Invoke();
+    }
 }
 
 public enum QuestState

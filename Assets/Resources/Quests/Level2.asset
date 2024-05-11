@@ -17,3 +17,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4cb1dd36087902e41a05fe27b7f5746f, type: 2}
   questStepPrefabs:
   - {fileID: 5045187089938416844, guid: 480aebfd40df6e74ab3d997a9e49a072, type: 3}
+  finishingEvent:
+    m_PersistentCalls:
+      m_Calls: []

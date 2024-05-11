@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class QuestManager : MonoBehaviour
 {
@@ -77,14 +78,29 @@ public class QuestManager : MonoBehaviour
         }
         else
         {
-            ChangeQuestState(id, QuestState.CanFinish);
+            // No more quest steps: quest can be finished
+            if(quest.info.automaticallyComplete)
+            {
+                FinishQuest(id);
+                if(quest.info.automaticallyComplete)
+                {
+                    foreach(var nextQuest in quest.info.questToStart)
+                    {
+                        StartQuest(nextQuest.ID);
+                    }
+                }
+            }
+            else
+            {
+                ChangeQuestState(id, QuestState.CanFinish);
+            }
         }
     }
 
     public void FinishQuest(string id)
     {
         Quest quest = GetQuestById(id);
-        ClaimRewards(quest);
+        quest.TriggerCompletion();
         ChangeQuestState(id, QuestState.Finished);
         foreach (Quest q in questMap.Values)
         {
@@ -98,10 +114,6 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    private void ClaimRewards(Quest quest)
-    {
-        // TODO: Implement
-    }
 
     public void RequirementsChange()
     {
