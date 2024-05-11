@@ -149,12 +149,15 @@ public class ShopUI : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    public void ContinueGame()
+    {
+        CustomEvents.DisableShop();
+        Hide();
+    }
+
     public void Hide()
     {
         CursorHandler.HideCursor();
-
-        CustomEvents.DisableShop();
-
         gameObject.SetActive(false);
     }
 }
