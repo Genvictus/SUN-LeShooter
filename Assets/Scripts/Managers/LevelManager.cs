@@ -34,6 +34,13 @@ namespace Nightmare
             }
 
             LoadInitialLevel();
+            
+            EventManager.StartListening("AdvanceLevel", AdvanceLevel);
+        }
+
+        void OnDestroy()
+        {
+            EventManager.StopListening("AdvanceLevel", AdvanceLevel);
         }
 
         public static void SetSaveMetadata(string activeSave, bool startNewGame)
@@ -73,6 +80,11 @@ namespace Nightmare
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            SavesManager.SelectSave(activeSaveName);
+            if (!isNewGame){
+            // TODO load ke manager game state dari player
+            }
+            
             if (mode != LoadSceneMode.Additive)
                 return;
 

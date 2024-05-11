@@ -6,7 +6,6 @@ public class ProgressionState : SaveData<ProgressionState>
 
     public int coins;
     public double score;
-    public int currentLevel;
 
     public void UpdateSaveTime(){
         var now = DateTimeOffset.Now;

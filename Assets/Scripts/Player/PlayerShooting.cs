@@ -17,6 +17,7 @@ namespace Nightmare
         public static GameObject buffHUD = null;
         public static float mobDebuff = 1;
         public static bool godMode = false;
+        public static bool infiniteBulletMode = false;
 
         void Awake()
         {
@@ -34,6 +35,7 @@ namespace Nightmare
             if (Input.GetKeyDown(reloadKey))
                 reloadInput?.Invoke();
 
+            LevelStateManager.levelState.buffs.damageBuffStack = orbBuffCount;
         }
 
         void OnDestroy()

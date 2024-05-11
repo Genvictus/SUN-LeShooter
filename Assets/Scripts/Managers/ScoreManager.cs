@@ -6,10 +6,10 @@ namespace Nightmare
     public class ScoreManager : MonoBehaviour
     {
         public static int score;
-        private int levelThreshhold;
+        private static int levelThreshhold;
         const int LEVEL_INCREASE = 300;
 
-        Text sText;
+        static Text sText;
 
         void Awake ()
         {
@@ -31,8 +31,13 @@ namespace Nightmare
             ScoreManager.score += score;
         }
 
+        public static void SetScore(int newScore) {
+            score = newScore;
+        }
+
         void Update ()
         {
+            ProgressionManager.progressionState.score = score;
             sText.text = "Score: " + score;
             if (score >= levelThreshhold)
             {
@@ -40,7 +45,12 @@ namespace Nightmare
             }
         }
 
-        private void AdvanceLevel()
+        public static void IncreaseScore(int newScore) {
+            StatsManager.playerStats.scoreEarned += newScore;
+            SetScore(score + newScore);
+        }
+
+        private static void AdvanceLevel()
         {
             levelThreshhold = score + LEVEL_INCREASE;
             LevelManager lm = FindObjectOfType<LevelManager>();

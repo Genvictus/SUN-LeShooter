@@ -10,6 +10,6 @@ public class LevelState : SaveData<LevelState>
 
 public struct Buffs
 {
-    public float damageBuff;
-    // public float speedBuff;
+    public int damageBuffStack;
+    public float speedBuffDuration;
 }

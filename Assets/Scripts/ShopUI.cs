@@ -11,7 +11,7 @@ public class ShopUI : MonoBehaviour
     private Transform container;
     private Transform goldAmount;
     private IShopCustomer customer;
-    private bool flag = true;
+    private bool flag = false;
     private Transform havePet;
     private Transform noMoney;
     GameObject[] pets;
@@ -45,6 +45,7 @@ public class ShopUI : MonoBehaviour
     public void SetFlag(bool isQuestClear)
     {
         flag = isQuestClear;
+        Debug.Log("flag: " + isQuestClear);
     }
 
     private void CreateItemButton(string itemName, int itemCost, int positionIndex)
@@ -148,10 +149,15 @@ public class ShopUI : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    public void ContinueGame()
+    {
+        CustomEvents.DisableShop();
+        Hide();
+    }
+
     public void Hide()
     {
         CursorHandler.HideCursor();
-
         gameObject.SetActive(false);
     }
 }

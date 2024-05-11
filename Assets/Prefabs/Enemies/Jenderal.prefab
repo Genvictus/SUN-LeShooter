@@ -5179,7 +5179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea9a6ed18654d14db02bf0076cfe488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 4
+  movementSpeed: 6
   visionRange: 10
   hearingRange: 16
   wanderDistance: 28
@@ -10484,6 +10484,7 @@ MonoBehaviour:
   visualDuration: 0.1
   lineRenderer: {fileID: 3572860348638601013}
   attackSound: {fileID: 4143207219700431674}
+  buffCount: 0
 --- !u!120 &3572860348638601013
 LineRenderer:
   serializedVersion: 2

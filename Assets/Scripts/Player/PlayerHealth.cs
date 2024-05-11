@@ -35,7 +35,9 @@ namespace Nightmare
         {
             // Set the initial health of the player.
             currentHealth = startingHealth;
-
+            playerAudio.Stop();
+            playerAudio.clip = null;
+            playerAudio = GetComponent<AudioSource>();
             playerMovement.enabled = true;
             playerShooting.enabled = true;
 
@@ -87,6 +89,7 @@ namespace Nightmare
         {
             // Set the death flag so this function won't be called again.
             isDead = true;
+            StatsManager.playerStats.deathCount++;
 
             // Turn off any remaining shooting effects.
             // playerShooting.DisableEffects();
