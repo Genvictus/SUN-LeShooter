@@ -36,6 +36,7 @@ namespace Nightmare
                 new KillPetCheat(),
                 new GetAllOrbsCheat(),
                 new SkipLevelCheat(),
+                new InfiniteAmmoCheat(),
             };
 
             foreach (Cheat cheat in cheats)

@@ -17,6 +17,7 @@ namespace Nightmare
         public static GameObject buffHUD = null;
         public static float mobDebuff = 1;
         public static bool godMode = false;
+        public static bool infiniteBulletMode = false;
 
         void Awake()
         {
