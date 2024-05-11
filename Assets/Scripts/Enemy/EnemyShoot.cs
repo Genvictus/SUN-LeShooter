@@ -9,6 +9,7 @@ namespace Nightmare
         public GunData gunData;
         public bool rageAble = false;
         bool rage;
+        public AudioSource rageSound;
 
         protected override void Awake()
         {
@@ -99,7 +100,12 @@ namespace Nightmare
 
         private void Rage()
         {
+            Debug.Log("Rage");
             anim.SetTrigger("Rage");
+            if (rageSound == null){
+                Debug.LogError("Rage sound not found");
+            }
+            rageSound.Play();
             rage = true;
             timeBetweenAttacks = gunData.fireRate / 2;
         }
