@@ -7,15 +7,15 @@ namespace Nightmare
 {
     public class EnemyMovement : PausibleObject
     {
-        public float movementSpeed = 4f; 
+        public float movementSpeed = 4f;
         public float visionRange = 10f;
         public float hearingRange = 20f;
         public float wanderDistance = 10f;
         public Vector2 idleTimeRange;
-        [Range(0f,1f)]
+        [Range(0f, 1f)]
         public float psychicLevels = 0.2f;
 
-        float currentVision; 
+        float currentVision;
         Transform player;
         PlayerHealth playerHealth;
         EnemyHealth enemyHealth;
@@ -24,11 +24,11 @@ namespace Nightmare
         PetHealth petHealth;
         public float timer = 0f;
 
-        void Awake ()
+        void Awake()
         {
-            player = GameObject.FindGameObjectWithTag ("Player").transform;
-            playerHealth = player.GetComponent <PlayerHealth> ();
-            enemyHealth = GetComponent <EnemyHealth> ();
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+            playerHealth = player.GetComponent<PlayerHealth>();
+            enemyHealth = GetComponent<EnemyHealth>();
             nav = GetComponent<NavMeshAgent>();
 
             pet = GameObject.FindGameObjectWithTag("Pet");
@@ -56,14 +56,15 @@ namespace Nightmare
                 nav.ResetPath();
         }
 
-        void Update ()
+        void Update()
         {
             if (!isPaused)
             {
                 // If both the enemy and the player have health left...
                 if (enemyHealth.CurrentHealth() > 0 && playerHealth.currentHealth > 0)
                 {
-                    if (pet != null && petHealth.currentHealth > 0){
+                    if (pet != null && petHealth.currentHealth > 0)
+                    {
                         LookForPet();
                     }
                     LookForPlayer();
@@ -99,7 +100,8 @@ namespace Nightmare
             TestSense(player.position, currentVision);
         }
 
-        private void LookForPet(){
+        private void LookForPet()
+        {
             TestSense(pet.transform.position, currentVision);
         }
 
@@ -165,7 +167,7 @@ namespace Nightmare
 
         private Vector3 GetRandomPoint(float distance, int layermask)
         {
-            Vector3 randomPoint = UnityEngine.Random.insideUnitSphere * distance + this.transform.position;;
+            Vector3 randomPoint = UnityEngine.Random.insideUnitSphere * distance + this.transform.position; ;
 
             NavMeshHit navHit;
             NavMesh.SamplePosition(randomPoint, out navHit, distance, layermask);
