@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3708608138599182646
+--- !u!1 &6947970263156108450
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 965187890049481671}
-  - component: {fileID: 2689714670186649056}
+  - component: {fileID: 801822179023369040}
+  - component: {fileID: 1890969696352494170}
   m_Layer: 0
-  m_Name: SurviveQuestStep
+  m_Name: CustomEvents
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &965187890049481671
+--- !u!4 &801822179023369040
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3708608138599182646}
+  m_GameObject: {fileID: 6947970263156108450}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,16 +32,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2689714670186649056
+--- !u!114 &1890969696352494170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3708608138599182646}
+  m_GameObject: {fileID: 6947970263156108450}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5972f800a2d65d24bb9abde3d71f5f29, type: 3}
+  m_Script: {fileID: 11500000, guid: 043063b516715cd4aaee6f96cd106ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToComplete: 1

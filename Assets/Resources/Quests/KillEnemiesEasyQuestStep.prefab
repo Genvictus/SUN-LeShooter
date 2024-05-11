@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b1aea7bd0429f48ac3bd779f491c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kerocoCount: 10
-  jenderalCount: 2
+  kerocoCount: 1
+  jenderalCount: 0
