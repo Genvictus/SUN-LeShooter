@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - UI
+  - Enemy
+  - Logic
+  - Pet
+  - Default
+  - Shotgun
+  - Sword
+  - EnemyPet
+  - PetHolder
+  - notInShopUI
   layers:
   - Default
   - TransparentFX
@@ -11,8 +21,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - WhatIsGround
+  - WhatIsPlayer
   - 
   - 
   - 
