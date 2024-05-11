@@ -21,7 +21,7 @@ namespace Nightmare
         [SerializeField] private AudioSource shootSound;
         [SerializeField] private AudioSource reloadSound;
 
-        private int bulletsSpread = 5;
+        private int bulletsSpread = 8;
 
         private List<LineRenderer> lineRenderers = new();
 
@@ -130,7 +130,7 @@ namespace Nightmare
 
         private void SpreadShoot()
         {
-            float spreadAngle = 20f;
+            float spreadAngle = 15f;
 
             for (int i = 0; i <= bulletsSpread; i++)
             {
