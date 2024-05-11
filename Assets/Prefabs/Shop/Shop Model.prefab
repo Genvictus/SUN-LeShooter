@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopUI: {fileID: 0}
+  NotInShopUI: {fileID: 6788547253111670375, guid: a7203cfb46cdcdc478896b9cb30d680f, type: 3}
 --- !u!65 &3541465693225891973
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -234,7 +235,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.5, y: 2, z: 2.25}
+  m_Size: {x: 5, y: 4, z: 5}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7976506360566623010
 GameObject:
