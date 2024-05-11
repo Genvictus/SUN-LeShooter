@@ -7,10 +7,14 @@ namespace Nightmare
         private PlayerHealth playerHealth;
         public GameObject enemy;
         public float spawnTime = 3f;
+        public bool unlimited = false;
+        public int maxSpawned = 20;
+        public float resetTime = 150f;
         public Transform[] spawnPoints;
 
         private float timer;
         private int spawned = 0;
+        private float resetTimer;
 
         void Start()
         {
@@ -40,6 +44,13 @@ namespace Nightmare
                 spawned += 1;
                 timer = spawnTime / DifficultyManager.GetEnemySpawnRate();
             }
+
+            resetTimer += Time.deltaTime;
+            if(resetTimer >= resetTime)
+            {
+                spawned = 0;
+                resetTimer = 0;
+            }
         }
 
         void Spawn()
@@ -48,6 +59,11 @@ namespace Nightmare
             if (playerHealth.currentHealth <= 0f)
             {
                 // ... exit the function.
+                return;
+            }
+
+            if (!unlimited && spawned >= maxSpawned)
+            {
                 return;
             }
 
