@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Default
   m_EditorClassIdentifier: 
   name: Default Weapon
-  damage: 10
-  originalDamage: 10
+  damage: 5
+  originalDamage: 5
   maxDistance: 20
-  currentAmmo: 10
-  magSize: 10
+  currentAmmo: 20
+  magSize: 20
   reloadTime: 1
-  fireRate: 0.4
+  fireRate: 0.3
   spread: 0
   reloading: 0
   shooting: 0

@@ -154,8 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb4291fd5d37862448290bf2de777045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 153412, guid: 548c56f4bcf4db24b8aa057e9846a005, type: 3}
-  spawnTime: 5
+  enemy: {fileID: 944946789436414818, guid: 93f09bb28a87a7a4c814278668a9ca44, type: 3}
+  spawnTime: 7
+  unlimited: 0
+  maxSpawned: 20
+  resetTime: 150
   spawnPoints:
   - {fileID: 933997770}
 --- !u!114 &14871710
@@ -170,8 +173,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb4291fd5d37862448290bf2de777045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 100000, guid: ea3c2728ef33e3a4d99527a86cda6465, type: 3}
-  spawnTime: 4
+  enemy: {fileID: 2105370142014841287, guid: 03b82cdf0373d1c46bdd7e1cae9738f2, type: 3}
+  spawnTime: 5
+  unlimited: 0
+  maxSpawned: 20
+  resetTime: 120
   spawnPoints:
   - {fileID: 345275349}
 --- !u!114 &14871711
@@ -186,8 +192,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb4291fd5d37862448290bf2de777045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 100002, guid: e5171f72421770240bd7c3989fe351e3, type: 3}
+  enemy: {fileID: 8716174416900575860, guid: fb23b46b260fbc04193b46bdae79ed6e, type: 3}
   spawnTime: 3
+  unlimited: 0
+  maxSpawned: 40
+  resetTime: 100
   spawnPoints:
   - {fileID: 1725468539}
 --- !u!4 &14871712

@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 14871711}
   - component: {fileID: 14871710}
   - component: {fileID: 14871709}
-  - component: {fileID: 14871713}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
@@ -156,7 +155,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 944946789436414818, guid: 93f09bb28a87a7a4c814278668a9ca44, type: 3}
-  spawnTime: 10
+  spawnTime: 7
+  unlimited: 0
+  maxSpawned: 15
+  resetTime: 150
   spawnPoints:
   - {fileID: 345275349}
   - {fileID: 1725468539}
@@ -174,7 +176,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 2105370142014841287, guid: 03b82cdf0373d1c46bdd7e1cae9738f2, type: 3}
-  spawnTime: 4
+  spawnTime: 5
+  unlimited: 0
+  maxSpawned: 15
+  resetTime: 120
   spawnPoints:
   - {fileID: 345275349}
   - {fileID: 1725468539}
@@ -192,7 +197,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 8716174416900575860, guid: fb23b46b260fbc04193b46bdae79ed6e, type: 3}
-  spawnTime: 2
+  spawnTime: 3
+  unlimited: 0
+  maxSpawned: 30
+  resetTime: 100
   spawnPoints:
   - {fileID: 345275349}
   - {fileID: 1725468539}
@@ -212,24 +220,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1165414997}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &14871713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14871708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb4291fd5d37862448290bf2de777045, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 3898707690782904009, guid: e2be631584d2dd242a874b461775b9b6, type: 3}
-  spawnTime: 20
-  spawnPoints:
-  - {fileID: 345275349}
-  - {fileID: 1725468539}
-  - {fileID: 933997770}
 --- !u!1001 &178220267
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Jenderal Sword
   m_EditorClassIdentifier: 
   name: Jenderal Sword
-  damage: 10
-  originalDamage: 10
+  damage: 15
+  originalDamage: 15
   maxDistance: 2
   fireRate: 1
   attacking: 0

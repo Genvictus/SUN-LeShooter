@@ -10,23 +10,15 @@ namespace Nightmare
         public float startingHealth = 100;
         public float maxHealth = 100;
         public float currentHealth;
-        public Slider healthSlider;
-        public Image damageImage;
         public AudioClip deathClip;
-        public float flashSpeed = 5f;
-        public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
-
-        public Color healthyColour = new Color(0.2f, 1f, 0.2f, 1f);
-        public Color unhealthyColour = new Color(1f, 1f, 0f, 1f);
-        public Color dyingColour = new Color(1f, 0f, 0f, 1f);
         public bool godMode = false;
+        public bool damaged;
 
         Animator anim;
         AudioSource playerAudio;
         PlayerMovement playerMovement;
         PlayerShooting playerShooting;
         bool isDead;
-        bool damaged;
 
         void Awake()
         {
@@ -43,7 +35,9 @@ namespace Nightmare
         {
             // Set the initial health of the player.
             currentHealth = startingHealth;
-
+            playerAudio.Stop();
+            playerAudio.clip = null;
+            playerAudio = GetComponent<AudioSource>();
             playerMovement.enabled = true;
             playerShooting.enabled = true;
 
@@ -54,21 +48,6 @@ namespace Nightmare
 
         void Update()
         {
-            // If the player has just been damaged...
-            if (damaged || currentHealth <= 0.25 * maxHealth)
-            {
-                // ... set the colour of the damageImage to the flash colour.
-                damageImage.color = flashColour;
-            }
-            // Otherwise...
-            else
-            {
-                // ... transition the colour back to clear.
-                damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
-            }
-
-            // Reset the damaged flag.
-            damaged = false;
         }
 
 
@@ -82,24 +61,6 @@ namespace Nightmare
 
             // Reduce the current health by the damage amount.
             currentHealth -= amount * DifficultyManager.GetIncomingDamageRate();
-
-            // Set the health bar's value to the current health.
-            healthSlider.value = currentHealth;
-
-            // Set health bar colour
-            if (currentHealth >= 0.5 * maxHealth)
-            {
-                healthSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = healthyColour;
-            }
-            else if (currentHealth >= 0.25 * maxHealth)
-            {
-                healthSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = unhealthyColour;
-            }
-            else
-            {
-                healthSlider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = dyingColour;
-            }
-
 
             // Play the hurt sound effect.
             playerAudio.Play();
@@ -121,7 +82,6 @@ namespace Nightmare
                 {
                     currentHealth = maxHealth;
                 }
-                healthSlider.value = currentHealth;
             }
         }
 
@@ -129,6 +89,7 @@ namespace Nightmare
         {
             // Set the death flag so this function won't be called again.
             isDead = true;
+            StatsManager.playerStats.deathCount++;
 
             // Turn off any remaining shooting effects.
             // playerShooting.DisableEffects();

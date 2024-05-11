@@ -20,6 +20,7 @@ namespace Nightmare
         {
             if (other.CompareTag("Player"))
             {
+                StatsManager.playerStats.orbCollected++;
                 ApplyOrbEffect(other);
                 pickupAudio.Play();
                 gameObject.SetActive(false);

@@ -7,15 +7,28 @@ namespace Nightmare
         private PlayerHealth playerHealth;
         public GameObject enemy;
         public float spawnTime = 3f;
+        public bool unlimited = false;
+        public int maxSpawned = 20;
+        public float resetTime = 150f;
         public Transform[] spawnPoints;
+
+        public bool enableSpawn = true;
 
         private float timer;
         private int spawned = 0;
+        private float resetTimer;
 
         void Start()
         {
             timer = spawnTime;
             playerHealth = FindObjectOfType<PlayerHealth>();
+
+            EventManager.StartListening("SpawnEnemy", EnableSpawn);
+        }
+
+        void EnableSpawn(bool enable)
+        {
+            enableSpawn = enable;
         }
 
         void OnEnable()
@@ -25,6 +38,7 @@ namespace Nightmare
 
         void OnDestroy()
         {
+            EventManager.StopListening("SpawnEnemy", EnableSpawn);
             StopPausible();
         }
 
@@ -40,14 +54,27 @@ namespace Nightmare
                 spawned += 1;
                 timer = spawnTime / DifficultyManager.GetEnemySpawnRate();
             }
+
+            resetTimer += Time.deltaTime;
+            if(resetTimer >= resetTime)
+            {
+                spawned = 0;
+                resetTimer = 0;
+            }
         }
 
         void Spawn()
         {
             // If the player has no health left...
-            if (playerHealth.currentHealth <= 0f)
+            // or game is currently in safe zone (shopping time)
+            if (playerHealth.currentHealth <= 0f || !enableSpawn)
             {
                 // ... exit the function.
+                return;
+            }
+
+            if (!unlimited && spawned >= maxSpawned)
+            {
                 return;
             }
 

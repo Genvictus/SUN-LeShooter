@@ -35,7 +35,8 @@ namespace Nightmare
         // Update is called once per frame
         void Update()
         {
-            if (followTargetHealth.IsDead())
+            SetFollowTargetHealth();
+            if (followTargetHealth.IsDead() && !petHealth.isDead)
             {
                 petHealth.Death();
             }

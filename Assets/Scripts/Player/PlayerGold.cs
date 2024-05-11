@@ -31,7 +31,7 @@ public class PlayerGold : MonoBehaviour, IShopCustomer
     // Update is called once per frame
     void Update()
     {
-        
+        ProgressionManager.progressionState.coins = goldAmount;
     }
 
     public void AddGold(int amount)

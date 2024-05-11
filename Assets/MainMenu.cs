@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Nightmare;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
@@ -21,7 +22,7 @@ public class MainMenu : MonoBehaviour
     public GameObject settingsMenu;
 
     private bool overwriteSave = true;
-    private const string SAVE_SLOT = "saveslot";
+    private const string SAVE_SLOT = "Save";
 
     void Start()
     {
@@ -55,6 +56,26 @@ public class MainMenu : MonoBehaviour
         UpdateSaveSlotAvailability();
     }
 
+    bool CheckSlotAvailability(int slotNum)
+    {
+        return PlayerPrefs.HasKey(ConstructSaveName(slotNum));
+    }
+
+    string GetSlotOwner(int slotNum)
+    {
+        return PlayerPrefs.GetString(ConstructSaveName(slotNum));
+    }
+
+    void SetSlotOwner(int slotNum, string playerName)
+    {
+        PlayerPrefs.SetString(ConstructSaveName(slotNum), playerName);
+    }
+
+    string ConstructSaveName(int slotNum)
+    {
+        return SAVE_SLOT + slotNum.ToString();
+    }
+
     public void UpdateSaveSlotAvailability()
     {
         foreach (var item in savesMenu.gameObject.GetComponentsInChildren<UnityEngine.UI.Button>())
@@ -62,14 +83,12 @@ public class MainMenu : MonoBehaviour
             if (item.name.Equals("Back")) continue;
 
             int slotNum = int.Parse(item.name.Substring(item.name.Length - 1));
-            string saveSlotName = SAVE_SLOT + slotNum.ToString();
-            LevelState loadedSave;
-            ProgressionState progressSave;
-            if (SavesHelper.LoadLevelState(saveSlotName, out loadedSave) && SavesHelper.LoadProgressionState(saveSlotName, out progressSave))
+
+            // Check button interactability based on saved player name on slot
+            if (CheckSlotAvailability(slotNum))
             {
                 item.interactable = true;
-                item.GetComponentInChildren<TMP_Text>().text = PlayerPrefs.HasKey(saveSlotName) ? PlayerPrefs.GetString(saveSlotName) : String.Format("Save Slot {0}", slotNum);
-                // todo: show save slot information?
+                item.GetComponentInChildren<TMP_Text>().text = GetSlotOwner(slotNum);
             }
             else
             {
@@ -79,46 +98,24 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void StartSaveFile(int saveSlot)
+    public void StartSaveFile(int slotNum)
     {
-        if (saveSlot < 1 || saveSlot > 3)
+        if (slotNum < 1 || slotNum > 3)
         {
             return;
         }
 
-        string savefileName = SAVE_SLOT + saveSlot.ToString();
+        string savefileName = ConstructSaveName(slotNum);
         string playerName = SavesHelper.playerName;
+
+        // set active save file and set whether to load game or start new game in LevelManager
+        LevelManager.SetSaveMetadata(savefileName, overwriteSave);
         if (overwriteSave)
         {
-            Debug.Log("New game overwrite save slot " + saveSlot.ToString());
-
-            if (SavesHelper.CreateNewSave(savefileName))
-            {
-                Debug.Log("Success create new save file");
-                PlayerPrefs.SetString(savefileName, playerName);
-                NewGame();
-            }
-            else
-            {
-                Debug.LogError("Failed create save");
-            }
+            // overwrite save slot name on UI, prepare folder for save
+            SetSlotOwner(slotNum, playerName);
         }
-        else
-        {
-            Debug.Log("Load existing save slot " + saveSlot.ToString());
-
-            LevelState loadedSave;
-            ProgressionState progressSave;
-            if (SavesHelper.LoadLevelState(savefileName, out loadedSave) && SavesHelper.LoadProgressionState(savefileName, out progressSave))
-            {
-                Debug.Log("Success load progression and save");
-                // todo: continue to load level
-            }
-            else
-            {
-                Debug.LogError("Failed loading save");
-            }
-        }
+        NewGame();
 
     }
 
@@ -145,6 +142,7 @@ public class MainMenu : MonoBehaviour
         // init game stats file if none exists
         if (!SavesHelper.LoadPlayerStats(out stats))
         {
+            // TODO load player stats
             stats = new();
             Debug.LogError("Unable to load player stats!");
             stats.SetInitialPlayTime();
@@ -159,12 +157,21 @@ public class MainMenu : MonoBehaviour
         {
             if (tmp.name == "StatisticsValues")
             {
-                tmp.text = stats.totalshot.ToString() + "\n";
-                tmp.text += stats.Accuracy.ToString() + "\n";
-                tmp.text += stats.distanceTraveled.ToString() + "\n";
-                tmp.text += stats.PlayTime.ToString() + "\n";
-
-                // todo: update for new statistics 
+                tmp.text = string.Format(tmp.text,
+                    stats.totalShot,
+                    Math.Round(stats.Accuracy, 2),
+                    stats.kerocoKillCount,
+                    stats.kepalaKerocoKillCount,
+                    stats.jenderalKillCount,
+                    stats.rajaKillCount,
+                    stats.increaseTortoiseKillCount,
+                    stats.goldEarned,
+                    stats.scoreEarned,
+                    stats.orbCollected,
+                    Math.Round(stats.distanceTraveled, 2),
+                    stats.deathCount,
+                    stats.cheatUsed,
+                    stats.PlayTime);
             }
         }
     }

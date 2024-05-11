@@ -7,6 +7,8 @@ namespace Nightmare
 {
     public class LevelManager : MonoBehaviour
     {
+        private static bool isNewGame = false;
+        private static string activeSaveName = "Save1";
         public string[] levels;
 
         private int currentLevel = 0;
@@ -32,6 +34,20 @@ namespace Nightmare
             }
 
             LoadInitialLevel();
+            
+            EventManager.StartListening("AdvanceLevel", AdvanceLevel);
+        }
+
+        void OnDestroy()
+        {
+            EventManager.StopListening("AdvanceLevel", AdvanceLevel);
+        }
+
+        public static void SetSaveMetadata(string activeSave, bool startNewGame)
+        {
+            activeSaveName = activeSave;
+            isNewGame = startNewGame;
+            Debug.Log("Set Level Metadata, " + activeSave + startNewGame.ToString());
         }
 
         public void AdvanceLevel()
@@ -64,6 +80,11 @@ namespace Nightmare
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            SavesManager.SelectSave(activeSaveName);
+            if (!isNewGame){
+            // TODO load ke manager game state dari player
+            }
+            
             if (mode != LoadSceneMode.Additive)
                 return;
 

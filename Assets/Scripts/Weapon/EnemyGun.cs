@@ -21,7 +21,7 @@ public class EnemyGun : MonoBehaviour
     [SerializeField] private AudioSource shootSound;
 
     float timeSinceLastShot;
-    private int bulletsSpread = 3;
+    private int bulletsSpread = 5;
     public int buffCount = 0;
     private List<LineRenderer> lineRenderers = new List<LineRenderer>();
 
@@ -122,7 +122,7 @@ public class EnemyGun : MonoBehaviour
 
     private void SpreadShoot(Transform enemyTransform)
     {
-        float spreadAngle = 20f;
+        float spreadAngle = 15f;
 
         for (int i = 0; i <= bulletsSpread; i++)
         {

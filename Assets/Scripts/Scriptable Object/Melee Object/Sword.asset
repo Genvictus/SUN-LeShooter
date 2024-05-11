@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   name: Sword
-  damage: 20
-  originalDamage: 20
+  damage: 25
+  originalDamage: 25
   maxDistance: 2
-  fireRate: 0.6
+  fireRate: 0.5
   attacking: 0

@@ -10586,6 +10586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunData: {fileID: 11400000, guid: d140789265358ff4e9b334e5aa25fb6c, type: 2}
   rageAble: 1
+  rageSound: {fileID: 2001938941464594594}
 --- !u!114 &2128435097608600210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10598,9 +10599,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9771a3ea41f2ddc4d89df1370858d2ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDebuff: 1.25
+  attackDebuff: 2
   moveDebuff: 1.25
-  debuffRange: 6
+  debuffRange: 10
   debuffRate: 1
 --- !u!114 &5834243644514365556
 MonoBehaviour:
@@ -10614,9 +10615,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591203947b856ee409a18e4bebfcf3ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drainAmount: 1
+  drainAmount: 2
   drainRate: 1
-  drainRange: 5
+  drainRange: 10
 --- !u!114 &5291907509359889903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10631,6 +10632,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 8716174416900575860, guid: fb23b46b260fbc04193b46bdae79ed6e, type: 3}
   spawnTime: 15
+  unlimited: 0
+  maxSpawned: 20
+  resetTime: 150
   spawnPoints:
   - {fileID: 7346743605301318592}
 --- !u!1 &8562380917924971965
@@ -10806,10 +10810,114 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4135751999662913725}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3178554665991671092, guid: 3dba0e97180e6ac4fb6cf1f7f8e27861, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2001938941464594594}
     - targetCorrespondingSourceObject: {fileID: 3860033056429029106, guid: 3dba0e97180e6ac4fb6cf1f7f8e27861, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3879495512791182781}
   m_SourcePrefab: {fileID: 100100000, guid: 3dba0e97180e6ac4fb6cf1f7f8e27861, type: 3}
+--- !u!1 &7148299314849178230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3178554665991671092, guid: 3dba0e97180e6ac4fb6cf1f7f8e27861, type: 3}
+  m_PrefabInstance: {fileID: 5705958448673910594}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &2001938941464594594
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7148299314849178230}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 8434b04884c414ac6b468e10945685e6, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 813b29e8a64274a48a223b6fc3e8cecd, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &7602794078887605926 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2786934410812922340, guid: 3dba0e97180e6ac4fb6cf1f7f8e27861, type: 3}

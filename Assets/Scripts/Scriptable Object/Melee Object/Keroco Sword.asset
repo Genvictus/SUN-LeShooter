@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Keroco Sword
   m_EditorClassIdentifier: 
   name: Keroco Sword
-  damage: 5
-  originalDamage: 5
+  damage: 10
+  originalDamage: 10
   maxDistance: 2
   fireRate: 1
   attacking: 0
