@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,11 +24,13 @@ namespace Nightmare
 
         void Start()
         {
-            cinema = FindObjectsOfType<CinematicController>();
+            cinema = FindObjectsOfType<CinematicController>().OrderBy(obj => obj.name).ToArray();
+
             foreach (var item in cinema)
             {
                 Debug.Log(item.name);
             }
+
             LoadInitialLevel();
         }
 
