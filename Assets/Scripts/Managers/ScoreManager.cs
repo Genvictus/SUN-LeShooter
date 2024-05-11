@@ -34,7 +34,7 @@ namespace Nightmare
 
         void UpdateScore(int score)
         {
-            ScoreManager.score += score;
+            IncreaseScore(score);
         }
 
         void Update ()

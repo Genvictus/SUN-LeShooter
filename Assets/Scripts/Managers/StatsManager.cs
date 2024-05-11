@@ -15,10 +15,15 @@ public class StatsManager : MonoBehaviour
 
     void Update()
     {
-        playerStats.PlayTime += TimeSpan.FromSeconds(Time.deltaTime);
+        playerStats.PlayTime += Time.deltaTime;
         Debug.Log("PlayerStats goldEarned: " + playerStats.goldEarned);
         Debug.Log("PlayerStats scoreEarned: " + playerStats.scoreEarned);
         Debug.Log("PlayerStats orbCollected: " + playerStats.orbCollected);
         Debug.Log("PlayerStats deathCount: " + playerStats.deathCount);
+
+        Debug.Log("PlayerStats shotHit: " + playerStats.shotHit);
+        Debug.Log("PlayerStats totalShot: " + playerStats.totalShot);
+        Debug.Log("PlayerStats accuracy: " + playerStats.Accuracy);
+
     }
 }
