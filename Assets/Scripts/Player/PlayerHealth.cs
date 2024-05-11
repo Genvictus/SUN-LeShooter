@@ -129,6 +129,7 @@ namespace Nightmare
         {
             // Set the death flag so this function won't be called again.
             isDead = true;
+            StatsManager.playerStats.deathCount++;
 
             // Turn off any remaining shooting effects.
             // playerShooting.DisableEffects();

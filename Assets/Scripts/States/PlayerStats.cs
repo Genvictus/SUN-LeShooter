@@ -17,12 +17,12 @@ public class PlayerStats : SaveData<PlayerStats>
 
     // Earned
     public int goldEarned; // TODO
-    public int scoreEarned; // TODO
-    public int orbCollected; // TODO
+    public int scoreEarned;
+    public int orbCollected;
     public float distanceTraveled;
 
     // Count
-    public int deathCount; // TODO
+    public int deathCount;
     public int cheatUsed;
 
     // play duration

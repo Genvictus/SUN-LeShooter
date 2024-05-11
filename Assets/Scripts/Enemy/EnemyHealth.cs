@@ -121,7 +121,7 @@ namespace Nightmare
             GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
             SetKinematics(true);
 
-            ScoreManager.score += scoreValue;
+            ScoreManager.IncreaseScore(scoreValue);
         }
 
         public float CurrentHealth()
