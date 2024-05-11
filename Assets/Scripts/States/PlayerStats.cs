@@ -15,11 +15,15 @@ public class PlayerStats : SaveData<PlayerStats>
     public int rajaKillCount;
     public int increaseTortoiseKillCount;
 
-    // Cheat
-    public int cheatUsed;
-
-    // DistanceTraveled
+    // Earned
+    public int goldEarned; // TODO
+    public int scoreEarned; // TODO
+    public int orbCollected; // TODO
     public float distanceTraveled;
+
+    // Count
+    public int deathCount; // TODO
+    public int cheatUsed;
 
     // play duration
     public string InitialPlayTime;
