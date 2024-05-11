@@ -19,6 +19,11 @@ public class SurviveQuestStep : QuestStep
 
     protected override void OnDisable()
     {
+        QuestUI.RemoveDescription(questId);
         StopCoroutine(timer);
+    }
+
+    private void Start() {
+        QuestUI.AddDescription(questId, $"Survive for {timeToComplete} seconds");
     }
 }
