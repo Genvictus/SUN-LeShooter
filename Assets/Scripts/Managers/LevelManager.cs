@@ -83,8 +83,12 @@ namespace Nightmare
             SavesManager.SelectSave(activeSaveName);
             if (!isNewGame){
             // TODO load ke manager game state dari player
+                SavesManager.LoadSaves();
+
+                // call event to load states
+                EventManager.TriggerEvent("LoadPlayerScore");
             }
-            
+
             if (mode != LoadSceneMode.Additive)
                 return;
 

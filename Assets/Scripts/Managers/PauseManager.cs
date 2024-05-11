@@ -79,9 +79,11 @@ public class PauseManager : MonoBehaviour
 
 	public void Quit()
 	{
+		Debug.Log("quit and save");
 		SetPause(false);
 		SetGameOverPause(true);
 
+		SavesManager.UpdateSaves();
 		SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
 	}
 }

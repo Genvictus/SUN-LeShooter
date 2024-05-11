@@ -19,6 +19,7 @@ namespace Nightmare
             levelThreshhold = LEVEL_INCREASE;
 
             EventManager.StartListening("PlayerEarnScore", UpdateScore);
+            EventManager.StartListening("LoadPlayerScore", SetScore);
         }
 
         void OnDestroy()
@@ -26,13 +27,14 @@ namespace Nightmare
             EventManager.StopListening("PlayerEarnScore", UpdateScore);
         }
 
+        public static void SetScore(int score)
+        {
+            score = (int)ProgressionManager.progressionState.score;
+        }
+
         void UpdateScore(int score)
         {
             ScoreManager.score += score;
-        }
-
-        public static void SetScore(int newScore) {
-            score = newScore;
         }
 
         void Update ()
