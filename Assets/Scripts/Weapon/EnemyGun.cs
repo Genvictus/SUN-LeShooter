@@ -74,7 +74,7 @@ public class EnemyGun : MonoBehaviour
 
     private bool CanShoot()
     {
-        return !gunData.reloading && timeSinceLastShot > gunData.fireRate;
+        return !gunData.reloading;
     }
 
     public void Shoot(Transform enemyTransform)

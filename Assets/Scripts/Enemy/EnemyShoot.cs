@@ -7,6 +7,8 @@ namespace Nightmare
     public class EnemyShoot : EnemyAttack
     {
         public GunData gunData;
+        public bool rageAble = false;
+        bool rage;
 
         protected override void Awake()
         {
@@ -14,13 +16,17 @@ namespace Nightmare
             timeBetweenAttacks = gunData.fireRate;
             attackRange = gunData.maxDistance;
             base.Awake();
+            if (rageAble)
+            {
+                anim = GetComponentInChildren<Animator>();
+            }
         }
 
         void OnDestroy()
         {
             StopPausible();
         }
-        
+
         void CheckPlayerInRange()
         {
             if (Vector3.Distance(player.transform.position, transform.position) < gunData.maxDistance)
@@ -45,21 +51,26 @@ namespace Nightmare
             }
         }
 
-
-        new void Update ()
+        new void Update()
         {
             if (isPaused)
                 return;
 
             // Add the time since Update was last called to the timer.
             timer += Time.deltaTime;
-            
+
             CheckPlayerInRange();
             CheckPetInRange();
-            
+
             // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-            if(timer >= timeBetweenAttacks && enemyHealth.CurrentHealth() > 0)
+            if (timer >= timeBetweenAttacks && enemyHealth.CurrentHealth() > 0)
             {
+
+                if (enemyHealth.PercentageHealth() < 0.3f && rageAble && !rage)
+                {
+                    Rage();
+                }
+
                 // ... attack.
                 if (playerInRange)
                 {
@@ -73,7 +84,8 @@ namespace Nightmare
                 }
             }
 
-            if (timer >= 0.1f){
+            if (timer >= 0.1f)
+            {
                 clearAction?.Invoke();
             }
 
@@ -81,8 +93,15 @@ namespace Nightmare
             if (playerHealth.currentHealth <= 0)
             {
                 // ... tell the animator the player is dead.
-                anim.SetTrigger ("PlayerDead");
+                anim.SetTrigger("PlayerDead");
             }
+        }
+
+        private void Rage()
+        {
+            anim.SetTrigger("Rage");
+            rage = true;
+            timeBetweenAttacks = gunData.fireRate / 2;
         }
     }
 }
