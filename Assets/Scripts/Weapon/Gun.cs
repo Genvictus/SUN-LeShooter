@@ -23,14 +23,20 @@ namespace Nightmare
 
         private int bulletsSpread = 5;
 
-        private List<LineRenderer> lineRenderers = new List<LineRenderer>();
+        private List<LineRenderer> lineRenderers = new();
 
         float timeSinceLastShot;
+        PlayerShooting shooting;
+
         private void Start()
         {
-            PlayerShooting.shootInput += Shoot;
-            PlayerShooting.reloadInput += StartReload;
-            if (gunData.spread && lineRenderers.Count == 0)
+            shooting = GetComponentInParent<PlayerShooting>();
+            if (shooting != null)
+            {
+                shooting.shootInput += Shoot;
+                shooting.reloadInput += StartReload;
+            }
+            if (gunData.spread)
             {
                 initLineRenders();
             }
@@ -99,6 +105,8 @@ namespace Nightmare
 
         private void initLineRenders()
         {
+            DeleteLineRenders();
+
             Material originalMaterial = lineRenderer.sharedMaterial;
             float originalStartWidth = lineRenderer.startWidth;
             float originalEndWidth = lineRenderer.endWidth;
@@ -119,6 +127,7 @@ namespace Nightmare
                 lineRenderers.Add(newLineRenderer);
             }
         }
+
         private void SpreadShoot()
         {
             float spreadAngle = 20f;
@@ -168,7 +177,7 @@ namespace Nightmare
         }
 
 
-        private void DisableLineRenderers(List<LineRenderer> lineRenderers)
+        private void DisableLineRenderers()
         {
             foreach (LineRenderer renderer in lineRenderers)
             {
@@ -179,6 +188,30 @@ namespace Nightmare
             }
         }
 
+        private void DeleteLineRenders()
+        {
+            foreach (LineRenderer renderer in lineRenderers)
+            {
+                if (renderer != null)
+                {
+                    Destroy(renderer.gameObject);
+                }
+            }
+            lineRenderers.Clear();
+        }
+
+        private bool LineRenersNull()
+        {
+            foreach (LineRenderer renderer in lineRenderers)
+            {
+                if (renderer == null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private void OnGunShot()
         {
             lineRenderer.enabled = true;
@@ -187,6 +220,10 @@ namespace Nightmare
 
             if (gunData.spread)
             {
+                if (LineRenersNull()) {
+                    initLineRenders();
+                }
+
                 foreach (LineRenderer renderer in lineRenderers)
                 {
                     renderer.enabled = true;
@@ -200,7 +237,7 @@ namespace Nightmare
             muzzleFlash.enabled = false;
             if (gunData.spread)
             {
-                DisableLineRenderers(lineRenderers);
+                DisableLineRenderers();
             }
         }
 
@@ -233,6 +270,13 @@ namespace Nightmare
             StopAllCoroutines();
             DisableEffects();
             gunData.reloading = false;
+        }
+
+        void OnDestroy()
+        {
+            shooting.shootInput -= Shoot;
+            shooting.reloadInput -= StartReload;
+            DeleteLineRenders();
         }
     }
 }

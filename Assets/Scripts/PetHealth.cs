@@ -41,6 +41,7 @@ public class PetHealth : MonoBehaviour, IPlayerDamageAble
         if (godMode)
             return;
 
+        Debug.Log("pet kamu kena damage, nyawa sekarang: " + currentHealth);
         damaged = true;
 
         currentHealth -= amount * DifficultyManager.GetIncomingDamageRate();
@@ -89,7 +90,8 @@ public class PetHealth : MonoBehaviour, IPlayerDamageAble
             // Debug.Log(transform.position.y);
             if (transform.position.y < -10f)
             {
-                Destroy(this.gameObject);
+                this.gameObject.SetActive(false);
+                //Destroy(this.gameObject);
             }
         }
 

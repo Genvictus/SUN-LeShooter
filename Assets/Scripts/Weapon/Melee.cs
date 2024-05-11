@@ -21,9 +21,14 @@ namespace Nightmare
 
         float timeSinceLastAttack;
         bool effectActive;
+        PlayerAttack attack;
         private void Start()
         {
-            PlayerAttack.attackInput += Attack;
+            attack = GetComponentInParent<PlayerAttack>();
+            if (attack != null)
+            {
+                attack.attackInput += Attack;
+            }
             anim = GetComponentInChildren<Animator>();
         }
 
@@ -97,6 +102,11 @@ namespace Nightmare
         {
             StopAllCoroutines();
             DisableEffects();
+        }
+
+        void OnDestroy()
+        {
+            attack.attackInput -= Attack;
         }
     }
 

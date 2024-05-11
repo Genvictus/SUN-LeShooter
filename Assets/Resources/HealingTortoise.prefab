@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5885717227846019177
+--- !u!1001 &8890119451169287798
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -90,38 +90,38 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8240762720540091471}
+      addedObject: {fileID: 8782344962289468602}
     - targetCorrespondingSourceObject: {fileID: 100004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7917099673798412517}
+      addedObject: {fileID: 2212054719724475308}
     - targetCorrespondingSourceObject: {fileID: 100004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8559665294803580982}
+      addedObject: {fileID: 4663315915727581414}
     - targetCorrespondingSourceObject: {fileID: 100004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1822681531254148702}
+      addedObject: {fileID: 3495999806796728002}
     - targetCorrespondingSourceObject: {fileID: 100004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4552291133659292529}
+      addedObject: {fileID: 4706335413311148755}
     - targetCorrespondingSourceObject: {fileID: 100004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5182471855169835443}
+      addedObject: {fileID: 1917527074600692528}
     - targetCorrespondingSourceObject: {fileID: 100004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3661780288568567433}
+      addedObject: {fileID: 4850192683346795580}
   m_SourcePrefab: {fileID: 100100000, guid: 312893f539145244eb941380e62dd9e8, type: 3}
---- !u!1 &5885717227846053581 stripped
+--- !u!1 &8890119451169384658 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
-  m_PrefabInstance: {fileID: 5885717227846019177}
+  m_PrefabInstance: {fileID: 8890119451169287798}
   m_PrefabAsset: {fileID: 0}
---- !u!195 &8240762720540091471
+--- !u!195 &8782344962289468602
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5885717227846053581}
+  m_GameObject: {fileID: 8890119451169384658}
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
@@ -137,13 +137,13 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &7917099673798412517
+--- !u!54 &2212054719724475308
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5885717227846053581}
+  m_GameObject: {fileID: 8890119451169384658}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -164,31 +164,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8559665294803580982
+--- !u!114 &4663315915727581414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5885717227846053581}
+  m_GameObject: {fileID: 8890119451169384658}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05278bdd1f191174487956966f3640d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pet: {fileID: 8240762720540091471}
+  pet: {fileID: 8782344962289468602}
   target: {fileID: 0}
   player: {fileID: 0}
   health: {fileID: 0}
   healCooldown: 2
   healAmount: 10
---- !u!111 &1822681531254148702
+--- !u!111 &3495999806796728002
 Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5885717227846053581}
+  m_GameObject: {fileID: 8890119451169384658}
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 312893f539145244eb941380e62dd9e8, type: 3}
@@ -197,13 +197,13 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 1
   m_CullingType: 0
---- !u!82 &4552291133659292529
+--- !u!82 &4706335413311148755
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5885717227846053581}
+  m_GameObject: {fileID: 8890119451169384658}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300000, guid: 8434b04884c414ac6b468e10945685e6, type: 2}
@@ -293,31 +293,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5182471855169835443
+--- !u!114 &1917527074600692528
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5885717227846053581}
+  m_GameObject: {fileID: 8890119451169384658}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8d4e61473335eb4295b7f96604783c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 10
   deathClip: {fileID: 8300000, guid: f6e0fe903fc766d4b8ad7a6bdc4fb580, type: 3}
   godMode: 0
   sinkSpeed: 25
   currentHealth: 0
   isDead: 0
---- !u!136 &3661780288568567433
+--- !u!136 &4850192683346795580
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5885717227846053581}
+  m_GameObject: {fileID: 8890119451169384658}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

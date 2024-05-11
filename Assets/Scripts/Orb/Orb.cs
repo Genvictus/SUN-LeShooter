@@ -22,7 +22,7 @@ namespace Nightmare
             {
                 ApplyOrbEffect(other);
                 pickupAudio.Play();
-                enabled = false;
+                gameObject.SetActive(false);
                 Destroy(gameObject, pickupAudio.clip.length);
             }
         }

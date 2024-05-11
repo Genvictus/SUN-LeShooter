@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 3708608138599182646, guid: 8e419ea9ab1b62445aa4d78b8abb55b2, type: 3}
   - {fileID: 5045187089938416844, guid: 42fe2b9cebe488a4d8fe8039c6960d88, type: 3}
   - {fileID: 7044402857851407214, guid: 0ef7a2e6033df734d825aee496e260a6, type: 3}
+  automaticallyComplete: 1
   finishingEvent:
     m_PersistentCalls:
       m_Calls:
@@ -33,3 +34,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  automaticallyStartQuests: 1
+  questToStart:
+  - {fileID: 11400000, guid: 7c73a9a7a82960245a8e34a868ee8f48, type: 2}
