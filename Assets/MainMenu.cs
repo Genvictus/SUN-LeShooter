@@ -171,7 +171,7 @@ public class MainMenu : MonoBehaviour
                     Math.Round(stats.distanceTraveled, 2),
                     stats.deathCount,
                     stats.cheatUsed,
-                    stats.PlayTime);
+                    TimeSpan.FromSeconds(stats.PlayTime));
             }
         }
     }

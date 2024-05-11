@@ -3799,6 +3799,7 @@ GameObject:
   - component: {fileID: 1796129604}
   - component: {fileID: 1796129606}
   - component: {fileID: 1796129607}
+  - component: {fileID: 1796129608}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -3877,6 +3878,18 @@ MonoBehaviour:
   cheatCanvas: {fileID: 0}
   cheatText: {fileID: 0}
   cheatDisplayTime: 2
+--- !u!114 &1796129608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796129601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b2813d6226d058489f7502cf8526ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1804527073 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6950350324505304035, guid: 9cbafe2695fe2054f9b8929de0cdcd52, type: 3}

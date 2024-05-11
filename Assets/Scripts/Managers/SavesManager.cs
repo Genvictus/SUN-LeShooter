@@ -34,9 +34,14 @@ public class SavesManager : MonoBehaviour
     {
         bool success = true;
 
+
         success = success && SavesHelper.LoadLevelState(Instance.SaveName, out Instance.LevelState);
         success = success && SavesHelper.LoadProgressionState(Instance.SaveName, out Instance.ProgressionState);
         success = success && SavesHelper.LoadPlayerStats(out Instance.PlayerStats);
+
+        StatsManager.playerStats = Instance.PlayerStats;
+        ProgressionManager.progressionState = Instance.ProgressionState;
+        LevelStateManager.levelState = Instance.LevelState;
 
         return success;
     }

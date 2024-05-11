@@ -16,7 +16,7 @@ public class PlayerStats : SaveData<PlayerStats>
     public int increaseTortoiseKillCount;
 
     // Earned
-    public int goldEarned; // TODO
+    public int goldEarned;
     public int scoreEarned;
     public int orbCollected;
     public float distanceTraveled;
@@ -27,7 +27,7 @@ public class PlayerStats : SaveData<PlayerStats>
 
     // play duration
     public string InitialPlayTime;
-    public TimeSpan PlayTime;
+    public float PlayTime;
 
     public void SetInitialPlayTime()
     {

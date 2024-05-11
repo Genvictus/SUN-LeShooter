@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Nightmare
@@ -26,14 +27,14 @@ namespace Nightmare
             EventManager.StopListening("PlayerEarnScore", UpdateScore);
         }
 
-        void UpdateScore(int score)
+        public static void SetScore(int score)
         {
-            ScoreManager.score += score;
+            ScoreManager.score = score;
         }
 
-        public static void SetScore(int newScore)
+        void UpdateScore(int score)
         {
-            score = newScore;
+            IncreaseScore(score);
         }
 
         void Update()

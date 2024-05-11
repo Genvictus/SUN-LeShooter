@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class PlayerGold : MonoBehaviour, IShopCustomer
@@ -37,6 +38,7 @@ public class PlayerGold : MonoBehaviour, IShopCustomer
     public void AddGold(int amount)
     {
         this.goldAmount += amount;
+        StatsManager.playerStats.goldEarned += amount;
     }
 
     public bool BuyItem(int index, int price)

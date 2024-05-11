@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace Nightmare
 {
@@ -82,9 +83,12 @@ namespace Nightmare
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             SavesManager.SelectSave(activeSaveName);
-            if (!isNewGame)
-            {
-                // TODO load ke manager game state dari player
+            if (!isNewGame){
+            // TODO load ke manager game state dari player
+                SavesManager.LoadSaves();
+
+                // call event to load states
+                ScoreManager.SetScore((int)ProgressionManager.progressionState.score);
             }
 
             if (mode != LoadSceneMode.Additive)
