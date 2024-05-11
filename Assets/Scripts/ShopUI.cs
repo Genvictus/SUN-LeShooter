@@ -11,9 +11,9 @@ public class ShopUI : MonoBehaviour
     private Transform container;
     private Transform goldAmount;
     private IShopCustomer customer;
-    private bool flag;
-    // private Transform havePet;
-    // private Transform noMoney;
+    private bool flag = true;
+    private Transform havePet;
+    private Transform noMoney;
     GameObject[] pets;
 
     private void Awake()
@@ -21,8 +21,8 @@ public class ShopUI : MonoBehaviour
         container = transform.Find("container");
         petItem = container.Find("petItem");
         goldAmount = container.Find("GoldAmount");
-        // havePet = container.Find("havePet");
-        // noMoney = container.Find("noMoney");
+        havePet = container.Find("havePet");
+        noMoney = container.Find("noMoney");
 
     }
 
@@ -72,22 +72,23 @@ public class ShopUI : MonoBehaviour
     {
         pets = GameObject.FindGameObjectsWithTag("Pet");
 
-        bool Success = customer.BuyItem(index, price);
+        if (IsPetAlreadyHas(index))
+        {
+            Debug.Log("can't buy pet because already has");
+            havePet.gameObject.SetActive(true);
+            StartCoroutine(HideHavePetAfterDelay());
+            return false;
+        }
 
+        bool Success = customer.BuyItem(index, price);
 
         if (!Success)
         {
-            if (customer.GetGoldAmount() < 200)
+            if (customer.GetGoldAmount() < price)
             {
                 Debug.Log("can't buy pet because money");
-                // noMoney.gameObject.SetActive(true);
+                noMoney.gameObject.SetActive(true);
                 StartCoroutine(HideNoMoneyAfterDelay());
-            }
-            else if (IsPetAlreadyHas(index))
-            {
-                Debug.Log("can't buy pet because already has");
-                // havePet.gameObject.SetActive(true);
-                StartCoroutine(HideHavePetAfterDelay());
             }
         }
 
@@ -121,15 +122,15 @@ public class ShopUI : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         // Nonaktifkan noMoney game object
-        // noMoney.gameObject.SetActive(false);
+        noMoney.gameObject.SetActive(false);
     }
 
     private IEnumerator HideHavePetAfterDelay()
     {
         yield return new WaitForSeconds(1);
 
-        // Nonaktifkan noMoney game object
-        // havePet.gameObject.SetActive(false);
+        // Nonaktifkan havePet game object
+        havePet.gameObject.SetActive(false);
     }
     public void Show(IShopCustomer customer)
     {

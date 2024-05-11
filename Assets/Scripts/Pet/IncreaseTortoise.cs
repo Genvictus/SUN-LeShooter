@@ -89,7 +89,7 @@ namespace Nightmare
 
         void EscapePlayer()
         {
-            Debug.Log("Escaping player");
+            /*Debug.Log("Escaping player");*/
             float gradient = (transform.position.x - player.transform.position.x) - (transform.position.z - player.transform.position.z);
 
             float y = transform.position.y;

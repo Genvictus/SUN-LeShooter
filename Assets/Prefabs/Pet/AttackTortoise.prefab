@@ -13,6 +13,10 @@ PrefabInstance:
       value: AttackTortoise
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 312893f539145244eb941380e62dd9e8, type: 3}
       propertyPath: m_TagString
       value: Pet
       objectReference: {fileID: 0}
@@ -172,7 +176,7 @@ MonoBehaviour:
   attackDist: 6
   damage: 100
   hitTime: 5
-  audio: {fileID: 0}
+  audio: {fileID: 5941707877463929567}
 --- !u!111 &4619371940855265585
 Animation:
   m_ObjectHideFlags: 0
@@ -198,7 +202,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300000, guid: 8434b04884c414ac6b468e10945685e6, type: 2}
-  m_audioClip: {fileID: 8300000, guid: f6e0fe903fc766d4b8ad7a6bdc4fb580, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f4599d87167bc164495fa5caced6fd7a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
