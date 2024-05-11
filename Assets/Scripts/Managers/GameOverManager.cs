@@ -53,6 +53,7 @@ namespace Nightmare
         void ExitToMainMenu()
         {
             Debug.Log("Return to main menu from game over");
+            SavesManager.UpdateSaves();
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
 
