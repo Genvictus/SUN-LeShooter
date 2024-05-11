@@ -80,6 +80,8 @@ namespace Nightmare
             float h = Input.GetAxis("Horizontal");
             float v = Input.GetAxis("Vertical");
 
+            LevelStateManager.levelState.buffs.speedBuffDuration = speedBuffTimer;
+
             Move(h, v);
             Animating(h, v);
         }

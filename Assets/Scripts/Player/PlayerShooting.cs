@@ -35,6 +35,7 @@ namespace Nightmare
             if (Input.GetKeyDown(reloadKey))
                 reloadInput?.Invoke();
 
+            LevelStateManager.levelState.buffs.damageBuffStack = orbBuffCount;
         }
 
         void OnDestroy()

@@ -37,6 +37,7 @@ namespace Nightmare
 
         void Update ()
         {
+            ProgressionManager.progressionState.score = score;
             sText.text = "Score: " + score;
             if (score >= levelThreshhold)
             {

@@ -80,6 +80,11 @@ namespace Nightmare
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            SavesManager.SelectSave(activeSaveName);
+            if (!isNewGame){
+            // TODO load ke manager game state dari player
+            }
+            
             if (mode != LoadSceneMode.Additive)
                 return;
 

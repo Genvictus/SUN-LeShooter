@@ -21,6 +21,8 @@ public class SavesManager : MonoBehaviour
     public ProgressionState ProgressionState;
     public PlayerStats PlayerStats;
 
+    private PlayerGold playerGold;
+
     private string SaveName;
 
     public static void SelectSave(string saveName)
@@ -39,8 +41,12 @@ public class SavesManager : MonoBehaviour
         return success;
     }
 
-    public static bool UpdateSaves()
+    public static void UpdateSaves()
     {
+        Instance.PlayerStats = StatsManager.playerStats;
+        Instance.ProgressionState = ProgressionManager.progressionState;
+        Instance.LevelState = LevelStateManager.levelState;
+
         SavesHelper.CreateNewSave(Instance.SaveName);
         bool success = true;
 
@@ -48,7 +54,10 @@ public class SavesManager : MonoBehaviour
         success = success && SavesHelper.SaveProgressionState(Instance.SaveName, Instance.ProgressionState);
         success = success && SavesHelper.SavePlayerStats(Instance.PlayerStats);
 
-        return success;
+        if (!success) 
+        {
+            Debug.LogError("Failed to save all player states");
+        }
     }
 
 
@@ -57,5 +66,8 @@ public class SavesManager : MonoBehaviour
         SelectSave("Save1");
         LoadSaves();
         UpdateSaves();
+
+        var player = GameObject.FindGameObjectWithTag("Player");
+        EventManager.StartListening("SaveGameCompleted", UpdateSaves);
     }
 }
