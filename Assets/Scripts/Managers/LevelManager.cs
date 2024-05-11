@@ -34,6 +34,13 @@ namespace Nightmare
             }
 
             LoadInitialLevel();
+            
+            EventManager.StartListening("AdvanceLevel", AdvanceLevel);
+        }
+
+        void OnDestroy()
+        {
+            EventManager.StopListening("AdvanceLevel", AdvanceLevel);
         }
 
         public static void SetSaveMetadata(string activeSave, bool startNewGame)

@@ -83,6 +83,7 @@ namespace Nightmare
         private void DefaultShoot()
         {
             RaycastHit hit;
+            StatsManager.playerStats.totalShot++;
             if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, gunData.maxDistance))
             {
                 Debug.Log("got hit: " + hit.transform.name);
@@ -91,6 +92,9 @@ namespace Nightmare
                 float damage = PlayerShooting.Calculatedamage(gunData.damage);
                 Debug.Log("Deal damage: " + damage);
                 damageAble?.TakeDamage(damage, hit.transform.position);
+                if (damageAble != null) {
+                    StatsManager.playerStats.shotHit++;
+                }
 
                 lineRenderer.SetPosition(0, muzzle.position);
                 lineRenderer.SetPosition(1, hit.point);

@@ -61,6 +61,11 @@ public class EnemyPetHealth : MonoBehaviour, IDamageAble
     {
         Debug.Log("pet is dead :(");
         isDead = true;
+        
+        if (name.StartsWith("IncreaseTortoise"))
+        {
+            StatsManager.playerStats.increaseTortoiseKillCount++;
+        }
 
         StartSinking();
         // Set the audiosource to play the death clip and play it (this will stop the hurt sound from playing).

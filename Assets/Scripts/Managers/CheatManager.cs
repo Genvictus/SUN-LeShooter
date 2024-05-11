@@ -53,6 +53,7 @@ namespace Nightmare
                 if (cheatDFA.currentNode.isTerminal)
                 {
                     Debug.Log("Cheat Activated: " + cheatDFA.currentNode.cheat.cheatName);
+                    StatsManager.playerStats.cheatUsed++;
                     
                     string cheatMessage = cheatDFA.currentNode.cheat.ExecuteCheat();
                     Debug.Log(cheatMessage);

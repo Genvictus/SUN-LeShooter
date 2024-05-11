@@ -129,7 +129,11 @@ namespace Nightmare
             #endregion
 
             #region Handles Rotation
+            Vector3 prevPosition = transform.position;
             characterController.Move(moveDirection * Time.deltaTime);
+            Vector3 currentPosition = characterController.transform.position;
+            float distanceTraveled = Vector3.Distance(prevPosition, currentPosition);
+            StatsManager.playerStats.distanceTraveled += distanceTraveled;
 
             if (canMove)
             {

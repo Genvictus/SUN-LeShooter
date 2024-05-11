@@ -68,7 +68,7 @@ namespace Nightmare
 
             StopCountdown();
 
-            ScoreManager.score = 0;
+            ScoreManager.SetScore(0);
             LevelManager lm = FindObjectOfType<LevelManager>();
             lm.LoadInitialLevel();
             anim.SetBool("GameOver", false);
