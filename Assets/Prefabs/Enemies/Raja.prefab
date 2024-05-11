@@ -10599,9 +10599,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9771a3ea41f2ddc4d89df1370858d2ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDebuff: 1.25
+  attackDebuff: 2
   moveDebuff: 1.25
-  debuffRange: 6
+  debuffRange: 10
   debuffRate: 1
 --- !u!114 &5834243644514365556
 MonoBehaviour:
@@ -10615,9 +10615,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591203947b856ee409a18e4bebfcf3ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drainAmount: 1
+  drainAmount: 2
   drainRate: 1
-  drainRange: 5
+  drainRange: 10
 --- !u!114 &5291907509359889903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10632,6 +10632,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 8716174416900575860, guid: fb23b46b260fbc04193b46bdae79ed6e, type: 3}
   spawnTime: 15
+  unlimited: 0
+  maxSpawned: 20
+  resetTime: 150
   spawnPoints:
   - {fileID: 7346743605301318592}
 --- !u!1 &8562380917924971965
