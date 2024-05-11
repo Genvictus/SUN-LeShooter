@@ -55,7 +55,7 @@ namespace Nightmare
         {
             if (type < 0)
                 return;
-
+            Debug.Log("StartCinematic");
             currentCinematic = (int)type;
 
             if (type == CinematicType.Realtime)
