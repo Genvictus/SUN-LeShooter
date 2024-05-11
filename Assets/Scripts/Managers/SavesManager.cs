@@ -16,13 +16,10 @@ public class SavesManager : MonoBehaviour
         }
     }
 
-    private LevelState levelState;
-    private ProgressionState progressionState;
-    private PlayerStats playerStats;
 
-    public LevelState LevelState => levelState;
-    public ProgressionState ProgressionState => progressionState;
-    public PlayerStats PlayerStats => playerStats;
+    public LevelState LevelState;
+    public ProgressionState ProgressionState;
+    public PlayerStats PlayerStats;
 
     private string SaveName;
 
@@ -35,9 +32,9 @@ public class SavesManager : MonoBehaviour
     {
         bool success = true;
 
-        success = success && SavesHelper.LoadLevelState(Instance.SaveName, out Instance.levelState);
-        success = success && SavesHelper.LoadProgressionState(Instance.SaveName, out Instance.progressionState);
-        success = success && SavesHelper.LoadPlayerStats(out Instance.playerStats);
+        success = success && SavesHelper.LoadLevelState(Instance.SaveName, out Instance.LevelState);
+        success = success && SavesHelper.LoadProgressionState(Instance.SaveName, out Instance.ProgressionState);
+        success = success && SavesHelper.LoadPlayerStats(out Instance.PlayerStats);
 
         return success;
     }
@@ -47,9 +44,9 @@ public class SavesManager : MonoBehaviour
         SavesHelper.CreateNewSave(Instance.SaveName);
         bool success = true;
 
-        success = success && SavesHelper.SaveLevelState(Instance.SaveName, Instance.levelState);
-        success = success && SavesHelper.SaveProgressionState(Instance.SaveName, Instance.progressionState);
-        success = success && SavesHelper.SavePlayerStats(Instance.playerStats);
+        success = success && SavesHelper.SaveLevelState(Instance.SaveName, Instance.LevelState);
+        success = success && SavesHelper.SaveProgressionState(Instance.SaveName, Instance.ProgressionState);
+        success = success && SavesHelper.SavePlayerStats(Instance.PlayerStats);
 
         return success;
     }
