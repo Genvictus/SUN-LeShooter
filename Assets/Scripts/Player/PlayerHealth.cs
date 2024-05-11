@@ -35,7 +35,9 @@ namespace Nightmare
         {
             // Set the initial health of the player.
             currentHealth = startingHealth;
-
+            playerAudio.Stop();
+            playerAudio.clip = null;
+            playerAudio = GetComponent<AudioSource>();
             playerMovement.enabled = true;
             playerShooting.enabled = true;
 
