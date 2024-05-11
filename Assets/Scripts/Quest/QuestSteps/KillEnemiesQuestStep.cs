@@ -6,6 +6,7 @@ public class KillEnemiesQuestStep : QuestStep
     public int jenderalCount;
     protected override void OnDisable()
     {
+        QuestUI.RemoveDescription(questId);
         EventManager.StopListening("KerocoKilled", IncrementKeroco);
         EventManager.StopListening("Keroco(Clone)Killed", IncrementKeroco);
         EventManager.StopListening("JenderalKilled", IncrementJenderal);
@@ -18,6 +19,10 @@ public class KillEnemiesQuestStep : QuestStep
         EventManager.StartListening("Keroco(Clone)Killed", IncrementKeroco);
         EventManager.StartListening("JenderalKilled", IncrementJenderal);
         EventManager.StartListening("Jenderal(Clone)Killed", IncrementJenderal);
+    }
+
+    private void Start() {
+        QuestUI.AddDescription(questId, $"Kill {kerocoCount} kerocos and {jenderalCount} jenderals");
     }
 
     protected void IncrementKeroco()
@@ -34,9 +39,24 @@ public class KillEnemiesQuestStep : QuestStep
 
     protected void CheckComplete()
     {
+
         if (kerocoCount <= 0 && jenderalCount <= 0)
         {
             FinishQuestStep();
+        }
+        else
+        if (kerocoCount <= 0)
+        {
+            QuestUI.UpdateDescription(questId, $"Kill {jenderalCount} jenderals");
+        }
+        else
+        if (jenderalCount <= 0)
+        {
+            QuestUI.UpdateDescription(questId, $"Kill {kerocoCount} kerocos");
+        }
+        else
+        {
+            QuestUI.UpdateDescription(questId, $"Kill {kerocoCount} kerocos and {jenderalCount} jenderals");
         }
     }
 }

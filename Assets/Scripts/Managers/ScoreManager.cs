@@ -12,9 +12,9 @@ namespace Nightmare
 
         static Text sText;
 
-        void Awake ()
+        void Awake()
         {
-            sText = GetComponent <Text> ();
+            sText = GetComponent<Text>();
 
             score = 0;
             levelThreshhold = LEVEL_INCREASE;
@@ -37,26 +37,16 @@ namespace Nightmare
             IncreaseScore(score);
         }
 
-        void Update ()
+        void Update()
         {
             ProgressionManager.progressionState.score = score;
             sText.text = "Score: " + score;
-            if (score >= levelThreshhold)
-            {
-                AdvanceLevel();
-            }
         }
 
-        public static void IncreaseScore(int newScore) {
+        public static void IncreaseScore(int newScore)
+        {
             StatsManager.playerStats.scoreEarned += newScore;
             SetScore(score + newScore);
-        }
-
-        private static void AdvanceLevel()
-        {
-            levelThreshhold = score + LEVEL_INCREASE;
-            LevelManager lm = FindObjectOfType<LevelManager>();
-            lm.AdvanceLevel();
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Nightmare
             }
 
             LoadInitialLevel();
-            
+
             EventManager.StartListening("AdvanceLevel", AdvanceLevel);
         }
 
@@ -54,6 +54,7 @@ namespace Nightmare
         public void AdvanceLevel()
         {
             LoadLevel(currentLevel + 1);
+            StartCutscene(currentLevel);
         }
 
         public void LoadInitialLevel()
