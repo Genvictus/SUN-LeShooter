@@ -22,4 +22,4 @@
 | 13521110 | Yanuar Sano Nur Rasyid       | Mobs, Weapons                               | 69h        |
 | 13521122 | Ulung Adi Putra              | Shop Menu, Pet                              | 69h        |
 | 13521138 | Johann Christian Kandani     | Story Mode & Quest, Save Game State         | 69h        |
-| 13521173 | Dewana Gustavus Haraka Otang | Transactions CRUD, Randomize Transactions   | 69h        |
+| 13521173 | Dewana Gustavus Haraka Otang | Player, Orb, Statistics, Cheat              | 69h        |
